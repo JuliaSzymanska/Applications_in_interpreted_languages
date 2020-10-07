@@ -67,6 +67,7 @@ let updateJSONbin = function () {
     req.send(todoList);
 }
 
+//TODO: dodawane elementy są w odwrotnej kolejności
 let updateTodoList = function () {
     let todoListDiv =
         document.getElementById("todoListView");
@@ -83,10 +84,12 @@ let updateTodoList = function () {
     let thead = newElement.createTHead();
     let row = thead.insertRow();
     for (let key of Object.keys(todoList[0])) {
-        let th = document.createElement("th");
-        let text = document.createTextNode(key);
-        th.appendChild(text);
-        row.appendChild(th);
+        if (key === "title" || key === "description") {
+            let th = document.createElement("th");
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
     }
     let th = document.createElement("th");
     let text = document.createTextNode("delete");
@@ -101,9 +104,11 @@ let updateTodoList = function () {
         ) {
             let row = newElement.insertRow();
             for (let key in element) {
-                let cell = row.insertCell();
-                let text = document.createTextNode(element[key]);
-                cell.appendChild(text);
+                if(key === "title" || key === "description") {
+                    let cell = row.insertCell();
+                    let text = document.createTextNode(element[key]);
+                    cell.appendChild(text);
+                }
             }
             let cell = row.insertCell();
             let newDeleteButton = document.createElement("input");
@@ -111,7 +116,7 @@ let updateTodoList = function () {
             newDeleteButton.value = "x";
             newDeleteButton.addEventListener("click",
                 function () {
-                    deleteTodo(todo);
+                    deleteTodo(element);
                 });
             cell.appendChild(newDeleteButton);
         }
