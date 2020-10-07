@@ -1,0 +1,51 @@
+header {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding:40px;
+}
+
+body {
+    max-width: 960px;
+    margin: auto;
+    font-family: verdana;
+    border: 2px solid #eeeeee;
+    border-radius:3px;
+}
+
+nav {
+    text-align: center;
+    background-color: #eeeeee;
+    padding:5px;
+}
+
+footer {
+    text-align: center;
+    color: #444444;
+}
+
+img {
+    max-height: 180px;
+    padding: 10px;
+    opacity: 0.5;
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+    transition: opacity 1s;
+
+}
+
+section {
+    text-align: center;
+}
+
+article {
+    text-align: justify;
+    margin: 10px;
+}
+
+img:hover {
+    opacity: 1.0;
+}
+
+
+
