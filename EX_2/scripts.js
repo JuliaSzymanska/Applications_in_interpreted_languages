@@ -78,29 +78,45 @@ let updateTodoList = function () {
 
     //add all elements
     let filterInput = document.getElementById("inputSearch");
-    for (let todo in todoList) {
+
+    let newElement = document.createElement("table");
+    let thead = newElement.createTHead();
+    let row = thead.insertRow();
+    for (let key of Object.keys(todoList[0])) {
+        let th = document.createElement("th");
+        let text = document.createTextNode(key);
+        th.appendChild(text);
+        row.appendChild(th);
+    }
+    let th = document.createElement("th");
+    let text = document.createTextNode("delete");
+    th.appendChild(text);
+    row.appendChild(th);
+
+    for (let element of todoList) {
         if (
             (filterInput.value === "") ||
-            (todoList[todo].title.includes(filterInput.value)) ||
-            (todoList[todo].description.includes(filterInput.value))
+            (todoList[element].title.includes(filterInput.value)) ||
+            (todoList[element].description.includes(filterInput.value))
         ) {
-            let newElement = document.createElement("p");
-            let newContent = document.createTextNode(todoList[todo].title + " " +
-                todoList[todo].description);
+            let row = newElement.insertRow();
+            for (let key in element) {
+                let cell = row.insertCell();
+                let text = document.createTextNode(element[key]);
+                cell.appendChild(text);
+            }
+            let cell = row.insertCell();
             let newDeleteButton = document.createElement("input");
             newDeleteButton.type = "button";
             newDeleteButton.value = "x";
             newDeleteButton.addEventListener("click",
-                function() {
+                function () {
                     deleteTodo(todo);
                 });
-
-            newElement.appendChild(newContent);
-            newElement.appendChild(newDeleteButton);
-            todoListDiv.appendChild(newElement);
+            cell.appendChild(newDeleteButton);
         }
     }
-
+    todoListDiv.appendChild(newElement);
 }
 
 setInterval(updateTodoList, 1000);
