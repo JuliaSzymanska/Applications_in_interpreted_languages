@@ -129,6 +129,7 @@ setInterval(updateTodoList, 1000);
 
 let deleteTodo = function (index) {
     todoList.splice(index, 1);
+    updateTodoList();
     updateJSONbin();
 }
 
