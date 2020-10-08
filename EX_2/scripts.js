@@ -72,15 +72,11 @@ let updateTodoList = function () {
     let todoListDiv =
         document.getElementById("todoListView");
 
-    //remove all elements
     while (todoListDiv.firstChild) {
         todoListDiv.removeChild(todoListDiv.firstChild);
     }
 
-    //add all elements
     let filterInput = document.getElementById("inputSearch");
-
-    // let newElement = document.createElement("table");
     let newElement = document.createElement("table");
     let thead = newElement.createTHead();
     let row = thead.insertRow();
@@ -153,5 +149,6 @@ let addTodo = function () {
 
     todoList.push(newTodo);
     updateJSONbin();
+    alert(JSON.stringify(todoList));
     // window.localStorage.setItem("todos", JSON.stringify(todoList));
 }
