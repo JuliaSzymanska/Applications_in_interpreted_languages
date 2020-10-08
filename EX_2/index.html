@@ -17,49 +17,50 @@
 </head>
 
 <body>
-<h1>MyNotes</h1>
 
-<div class="form-row" id="search">
-    <div class="col-xs">
-        <label>Search</label>
+<h1 id="header">MyNotes</h1>
+
+<form>
+    <div class="form-row" id="search">
+        <div class="col-sm">
+            <label for="inputSearchTitle">Search</label>
+            <input type="text" id="inputSearchTitle" placeholder="Type title or description..." class="form-control"/>
+        </div>
+        <div class="col-xs">
+            <label for="inputSearchFirstDate">First date</label>
+            <input type="date" id="inputSearchFirstDate" class="form-control"/>
+        </div>
+        <div class="col-xs">
+            <label for="inputSearchLastDate">Last date</label>
+            <input type="date" id="inputSearchLastDate" class="form-control"/>
+        </div>
     </div>
-    <div class="col-xs">
-        <input type="text" id="inputSearch" placeholder="Type Your seach here..." class="form-control"/>
-    </div>
-</div>
+</form>
 
 <div id="todoListView" class="container"></div>
 
 <form id="forms">
     <div class="form-row">
         <div class="col-xs">
-            <label>Title</label>
-        </div>
-        <div class="col-xs">
+            <label for="inputTitle">Title</label>
             <input type="text" id="inputTitle" class="form-control"/>
         </div>
-        <div class="col-xs">
-            <label>Description</label>
-        </div>
         <div class="col-sm">
+            <label for="inputDescription">Description</label>
             <input type="text" id="inputDescription" class="form-control"/>
         </div>
         <div class="col-xs">
-            <label>Place</label>
-        </div>
-        <div class="col-xs">
+            <label for="inputPlace">Place</label>
             <input type="text" id="inputPlace" class="form-control"/>
         </div>
         <div class="col-xs">
-            <label>Due date</label>
-        </div>
-        <div class="col-xs">
+            <label for="inputDate">Due date</label>
             <input type="date" id="inputDate" class="form-control"/>
         </div>
     </div>
     <div class="form-row">
         <div class="col" id="addButton">
-            <input type="button" value="add" class="btn btn-dark"
+            <input id="tex" type="button" value="add" class="btn btn-dark"
                    onclick="addTodo()"/>
         </div>
     </div>

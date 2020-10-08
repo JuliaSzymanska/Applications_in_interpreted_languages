@@ -7,28 +7,38 @@
     margin-right: 10px;
 }
 
-#search, #search > * > * {
-    padding-right: 0;
-    padding-left: 25px;
+#header {
+    font-size: 80px;
+    text-align: center;
+    padding: 30px;
+    color: #363232;
 }
 
-#forms, #forms > * > * > * {
-    /*padding: 10px;*/
-    padding-right: 0;
-    padding-left: 25px;
+#search, #search > * > * {
+    padding: 20px;
+}
 
+#search {
+    background-color: lightgray;
+    border-radius: 10px;
+    margin: 30px;
 }
 
 #forms {
     margin: 30px;
-    padding: 10px;
-    background-color: antiquewhite;
+    padding: 20px;
+    background-color: lightgray;
     border-radius: 10px;
 }
 
 #addButton {
-
     padding: 25px;
     alignment: center;
     text-align: center;
+}
+
+#addButton > * {
+    alignment: center;
+    text-align: center;
+    padding-right: 15px;
 }
