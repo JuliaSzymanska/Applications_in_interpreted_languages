@@ -80,16 +80,16 @@ let updateTodoList = function () {
     let newElement = document.createElement("table");
     let thead = newElement.createTHead();
     let row = thead.insertRow();
-    for (let key of Object.keys(todoList[0])) {
-        if (key === "title" || key === "description") {
-            let th = document.createElement("th");
-            let text = document.createTextNode(key);
-            th.appendChild(text);
-            row.appendChild(th);
-        }
-    }
     let th = document.createElement("th");
-    let text = document.createTextNode("delete");
+    let text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].title));
+    th.appendChild(text);
+    row.appendChild(th);
+    th = document.createElement("th");
+    text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].description));
+    th.appendChild(text);
+    row.appendChild(th);
+    th = document.createElement("th");
+    text = document.createTextNode("delete");
     th.appendChild(text);
     row.appendChild(th);
 
@@ -100,14 +100,13 @@ let updateTodoList = function () {
             (todoList[element].description.includes(filterInput.value))
         ) {
             let row = newElement.insertRow();
-            for (let key in element) {
-                if (key === "title" || key === "description") {
-                    let cell = row.insertCell();
-                    let text = document.createTextNode(element[key]);
-                    cell.appendChild(text);
-                }
-            }
             let cell = row.insertCell();
+            let text = document.createTextNode(element.title);
+            cell.appendChild(text);
+            cell = row.insertCell();
+            text = document.createTextNode(element.description);
+            cell.appendChild(text);
+            cell = row.insertCell();
             let newDeleteButton = document.createElement("input");
             newDeleteButton.type = "button";
             newDeleteButton.value = "x";
