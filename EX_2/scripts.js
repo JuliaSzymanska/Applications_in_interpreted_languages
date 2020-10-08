@@ -78,10 +78,12 @@ let updateTodoList = function () {
 
     let filterInput = document.getElementById("inputSearch");
     let newElement = document.createElement("table");
+    newElement.id = "todoTable";
     let thead = newElement.createTHead();
-    let row = thead.insertRow();
+    let row = thead.insertRow()
     let th = document.createElement("th");
     let text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].title));
+    text.id = "text";
     th.appendChild(text);
     row.appendChild(th);
     th = document.createElement("th");

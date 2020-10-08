@@ -1,3 +1,7 @@
-#todoListView > * {
-    padding: 15px;
+#todoTable, #todoTable > * > * > * {
+    padding: 10px;
+    text-align: center;
+}
+[id^=input] {
+    margin-right: 10px;
 }
