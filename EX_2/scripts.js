@@ -38,36 +38,36 @@ $.ajax({
 
 // TODO: wczytywanie do JSON'a nadal nie działa
 let updateJSONbin = function () {
-    // $.ajax({
-    //     url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5',
-    //     type: 'PUT',
-    //     headers: {
-    //         'secret-key': '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe'
-    //     },
-    //     contentType: 'application/json',
-    //     data: JSON.stringify(todoList),
-    //     success: (data) => {
-    //         console.log(data);
-    //     },
-    //     error: (err) => {
-    //         console.log(err.responseJSON);
-    //     }
-    // });
-    let req = new XMLHttpRequest();
-
-    req.onreadystatechange = () => {
-        if (req.readyState === XMLHttpRequest.DONE) {
-            console.log(req.responseText);
+    $.ajax({
+        url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5',
+        type: 'PUT',
+        headers: {
+            'secret-key': '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe'
+        },
+        contentType: 'application/json',
+        data: JSON.stringify(todoList),
+        success: (data) => {
+            console.log(data);
+        },
+        error: (err) => {
+            console.log(err.responseJSON);
         }
-    };
-
-    req.open("PUT", "https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5", true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.setRequestHeader("secret-key", '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe');
-    req.send(todoList);
+    });
+    // let req = new XMLHttpRequest();
+    //
+    // req.onreadystatechange = () => {
+    //     if (req.readyState === XMLHttpRequest.DONE) {
+    //         console.log(req.responseText);
+    //     }
+    // };
+    //
+    // req.open("PUT", "https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5", true);
+    // req.setRequestHeader("Content-Type", "application/json");
+    // req.setRequestHeader("secret-key", '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe');
+    // req.send(todoList);
 }
 
-//TODO: dodawane elementy są w odwrotnej kolejności
+//TODO: dodawane elementy w tablicy są dodane prawidłowo, natomiast w tabelii pokazują się elementy w odwrotnej kolejności
 let updateTodoList = function () {
     let todoListDiv =
         document.getElementById("todoListView");
@@ -113,8 +113,6 @@ let updateTodoList = function () {
             newDeleteButton.value = "x";
             newDeleteButton.addEventListener("click",
                 function () {
-                    alert(JSON.stringify(element));
-                    alert(JSON.stringify(todoList.indexOf(element)));
                     deleteTodo(todoList.indexOf(element));
                 });
             cell.appendChild(newDeleteButton);
@@ -129,7 +127,7 @@ let deleteTodo = function (index) {
     todoList.splice(index, 1);
     updateTodoList();
     updateJSONbin();
-    alert(JSON.stringify(todoList));
+    // alert(JSON.stringify(todoList));
 }
 
 let addTodo = function () {
@@ -152,6 +150,4 @@ let addTodo = function () {
 
     todoList.push(newTodo);
     updateJSONbin();
-    alert(JSON.stringify(todoList));
-    // window.localStorage.setItem("todos", JSON.stringify(todoList));
 }
