@@ -57,32 +57,25 @@ let updateTodoList = function () {
     let filterInputTitle = $('#inputSearch')[0];
     let filterInputFirstDate = $('#inputSearchFirstDate')[0];
     let filterInputLastDate = $('#inputSearchLastDate')[0];
-    let newElement = document.createElement("table");
-    // let newElement = $('<table/>');
-    let tHead = document.createElement("thead");
-    newElement.className = "table table-striped table-bordered";
-    tHead.className = "thead-dark";
-    newElement.id = "todoTable";
-    let row = document.createElement("tr");
-    let th_title = document.createElement("th");
-    let text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].title));
-    th_title.scope = "col"
-    th_title.appendChild(text);
-    row.appendChild(th_title);
-    let th_desc = document.createElement("th");
+
+    let newElement = $('<table id="todoTable"/>').addClass("table table-striped table-bordered").appendTo(todoListDiv);
+    let tHead = $('<thead></thead>').addClass("thead-dark").appendTo(newElement);
+    let row = $('<tr></tr>').appendTo(tHead);
+
+    let text = Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].title);
+    let $th_title = $('<th></th>').appendTo(row).text(text);
+    $th_title.scope = "col";
+
+    text = Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].description);
+    let th_desc = $('<th></th>').appendTo(row).text(text);
     th_desc.className = "col-sm-2";
-    text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].description));
-    th_desc.appendChild(text);
-    row.appendChild(th_desc);
-    let th_del = document.createElement("th");
+
+    let th_del = $('<th></th>').appendTo(row).text("delete");
     th_del.className = "col-xs-4";
-    text = document.createTextNode("delete");
-    th_del.appendChild(text);
-    row.appendChild(th_del);
-    tHead.appendChild(row);
-    newElement.appendChild(tHead);
-    let tBody = document.createElement("tbody");
+
+    let tBody = $('<tbody></tbody>').appendTo(newElement);
     for (let element of todoList) {
+        //TODO: nowe elementy nie działaja na wyszukiwanie data
         if ((filterInputTitle.value === "" ||
             todoList[element].title.includes(filterInputTitle.value) ||
             todoList[element].description.includes(filterInputTitle.value)) &&
@@ -91,34 +84,19 @@ let updateTodoList = function () {
                 (filterInputFirstDate.value <= element.dueDate && !filterInputLastDate.value) ||
                 (filterInputFirstDate.value <= element.dueDate && element.dueDate <= filterInputLastDate.value))
         ) {
-            row = document.createElement("tr");
-            let td_title = document.createElement("td");
-            td_title.className = "col-xs-4";
-            text = document.createTextNode(element.title);
-            td_title.appendChild(text);
-            row.appendChild(td_title);
-            let td_desc = document.createElement("td");
-            text = document.createTextNode(element.description);
-            td_desc.className = "col-sm-2";
-            td_desc.appendChild(text);
-            row.appendChild(td_desc);
-            let td_del = document.createElement("td");
-            td_del.className = "col-xs-4";
-            let newDeleteButton = document.createElement("input");
-            newDeleteButton.type = "button";
-            newDeleteButton.className = "btn btn-dark";
-            newDeleteButton.value = "x";
-            newDeleteButton.addEventListener("click",
-                function () {
-                    deleteTodo(todoList.indexOf(element));
-                });
-            td_del.appendChild(newDeleteButton);
-            row.appendChild(td_del);
-            tBody.appendChild(row);
+            row = $('<tr></tr>').appendTo(tBody);
+            let td_title = $('<td></td>').appendTo(row).addClass("col-xs-4").text(element.title);
+
+            let td_desc = $('<td></td>').appendTo(row).addClass("col-sm-2").text(element.description);
+
+            let td_del = $('<td></td>').appendTo(row).addClass("col-xs-4");
+            let newDeleteButton = $('<input type="button" value="x"/>').appendTo(row).addClass("btn btn-dark").appendTo(td_del);
+            newDeleteButton.click(function(){
+                deleteTodo(todoList.indexOf(element));
+            });
         }
     }
-    newElement.appendChild(tBody);
-    todoListDiv.appendChild(newElement);
+    // todoListDiv.append(newElement);
 }
 
 setInterval(updateTodoList, 1000);
