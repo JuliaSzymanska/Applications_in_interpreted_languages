@@ -2,7 +2,7 @@
 let todoList = [];
 
 $.ajax({
-    url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5',
+    url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5/latest',
     type: 'GET',
     headers: {
         'secret-key': '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe'
@@ -15,7 +15,6 @@ $.ajax({
     }
 });
 
-// TODO: wczytywanie do JSON'a nadal nie działa
 let updateJSONbin = function () {
     $.ajax({
         url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5',
