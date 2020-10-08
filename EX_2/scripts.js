@@ -1,26 +1,5 @@
 "use strict"
 let todoList = [];
-//
-// let initList = function () {
-//     let savedList = window.localStorage.getItem("todos");
-//     if (savedList != null)
-//         todoList = JSON.parse(savedList);
-//     else
-//         todoList.push(
-//             {
-//                 title: "Learn JS",
-//                 description: "Create a demo application for my TODO's",
-//                 place: "445",
-//                 dueDate: new Date(2019, 10, 16)
-//             },
-//             {
-//                 title: "Lecture test",
-//                 description: "Quick test from the first three lectures",
-//                 place: "F6",
-//                 dueDate: new Date(2019, 10, 17)
-//             }
-//         );
-// }
 
 $.ajax({
     url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5',
@@ -69,26 +48,25 @@ let updateJSONbin = function () {
 
 //TODO: dodawane elementy w tablicy są dodane prawidłowo, natomiast w tabelii pokazują się elementy w odwrotnej kolejności
 let updateTodoList = function () {
-    let todoListDiv =
-        document.getElementById("todoListView");
+    let todoListDiv = $('#todoListView')[0];
 
     while (todoListDiv.firstChild) {
         todoListDiv.removeChild(todoListDiv.firstChild);
     }
 
-    let filterInput = document.getElementById("inputSearch");
+    let filterInputTitle = $('#inputSearch')[0];
+    let filterInputFirstDate = $('#inputSearchFirstDate')[0];
+    let filterInputLastDate = $('#inputSearchLastDate')[0];
     let newElement = document.createElement("table");
+    // let newElement = $('<table/>');
     let tHead = document.createElement("thead");
     newElement.className = "table table-striped table-bordered";
     tHead.className = "thead-dark";
     newElement.id = "todoTable";
-    // newElement.className = "thead-dark";
     let row = document.createElement("tr");
     let th_title = document.createElement("th");
     let text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].title));
-    // th.classList.add("col-sm");
-    // th_title.className = "col-xs-4";
-    th_title.scope="col"
+    th_title.scope = "col"
     th_title.appendChild(text);
     row.appendChild(th_title);
     let th_desc = document.createElement("th");
@@ -105,10 +83,13 @@ let updateTodoList = function () {
     newElement.appendChild(tHead);
     let tBody = document.createElement("tbody");
     for (let element of todoList) {
-        if (
-            (filterInput.value === "") ||
-            (todoList[element].title.includes(filterInput.value)) ||
-            (todoList[element].description.includes(filterInput.value))
+        if ((filterInputTitle.value === "" ||
+            todoList[element].title.includes(filterInputTitle.value) ||
+            todoList[element].description.includes(filterInputTitle.value)) &&
+            ((!filterInputFirstDate.value && !filterInputLastDate.value) ||
+                (!filterInputFirstDate.value && element.dueDate <= filterInputLastDate.value) ||
+                (filterInputFirstDate.value <= element.dueDate && !filterInputLastDate.value) ||
+                (filterInputFirstDate.value <= element.dueDate && element.dueDate <= filterInputLastDate.value))
         ) {
             row = document.createElement("tr");
             let td_title = document.createElement("td");
@@ -150,10 +131,10 @@ let deleteTodo = function (index) {
 }
 
 let addTodo = function () {
-    let inputTitle = document.getElementById("inputTitle");
-    let inputDescription = document.getElementById("inputDescription");
-    let inputPlace = document.getElementById("inputPlace");
-    let inputDate = document.getElementById("inputDate");
+    let inputTitle = $('#inputTitle')[0];
+    let inputDescription = $('#inputDescription')[0];
+    let inputPlace = $('#inputPlace')[0];
+    let inputDate = $('#inputDate')[0];
 
     let newTitle = inputTitle.value;
     let newDescription = inputDescription.value;
@@ -166,7 +147,6 @@ let addTodo = function () {
         place: newPlace,
         dueDate: newDate
     };
-
     todoList.push(newTodo);
     updateJSONbin();
 }
