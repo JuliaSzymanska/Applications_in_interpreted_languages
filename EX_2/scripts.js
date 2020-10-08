@@ -85,18 +85,17 @@ let updateTodoList = function () {
                 (filterInputFirstDate.value <= element.dueDate && element.dueDate <= filterInputLastDate.value))
         ) {
             row = $('<tr></tr>').appendTo(tBody);
-            let td_title = $('<td></td>').appendTo(row).addClass("col-xs-4").text(element.title);
 
-            let td_desc = $('<td></td>').appendTo(row).addClass("col-sm-2").text(element.description);
+            $('<td></td>').appendTo(row).addClass("col-xs-4").text(element.title);
+            $('<td></td>').appendTo(row).addClass("col-sm-2").text(element.description);
 
             let td_del = $('<td></td>').appendTo(row).addClass("col-xs-4");
             let newDeleteButton = $('<input type="button" value="x"/>').appendTo(row).addClass("btn btn-dark").appendTo(td_del);
-            newDeleteButton.click(function(){
+            newDeleteButton.click(function () {
                 deleteTodo(todoList.indexOf(element));
             });
         }
     }
-    // todoListDiv.append(newElement);
 }
 
 setInterval(updateTodoList, 1000);
