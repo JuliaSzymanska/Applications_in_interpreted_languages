@@ -113,7 +113,9 @@ let updateTodoList = function () {
             newDeleteButton.value = "x";
             newDeleteButton.addEventListener("click",
                 function () {
-                    deleteTodo(element);
+                    alert(JSON.stringify(element));
+                    alert(JSON.stringify(todoList.indexOf(element)));
+                    deleteTodo(todoList.indexOf(element));
                 });
             cell.appendChild(newDeleteButton);
         }
@@ -127,6 +129,7 @@ let deleteTodo = function (index) {
     todoList.splice(index, 1);
     updateTodoList();
     updateJSONbin();
+    alert(JSON.stringify(todoList));
 }
 
 let addTodo = function () {
