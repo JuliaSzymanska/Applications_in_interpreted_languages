@@ -80,6 +80,7 @@ let updateTodoList = function () {
     //add all elements
     let filterInput = document.getElementById("inputSearch");
 
+    // let newElement = document.createElement("table");
     let newElement = document.createElement("table");
     let thead = newElement.createTHead();
     let row = thead.insertRow();
@@ -104,7 +105,7 @@ let updateTodoList = function () {
         ) {
             let row = newElement.insertRow();
             for (let key in element) {
-                if(key === "title" || key === "description") {
+                if (key === "title" || key === "description") {
                     let cell = row.insertCell();
                     let text = document.createTextNode(element[key]);
                     cell.appendChild(text);
