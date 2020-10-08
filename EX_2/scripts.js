@@ -78,47 +78,65 @@ let updateTodoList = function () {
 
     let filterInput = document.getElementById("inputSearch");
     let newElement = document.createElement("table");
+    let tHead = document.createElement("thead");
+    newElement.className = "table table-striped table-bordered";
+    tHead.className = "thead-dark";
     newElement.id = "todoTable";
-    let thead = newElement.createTHead();
-    let row = thead.insertRow()
-    let th = document.createElement("th");
+    // newElement.className = "thead-dark";
+    let row = document.createElement("tr");
+    let th_title = document.createElement("th");
     let text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].title));
-    text.id = "text";
-    th.appendChild(text);
-    row.appendChild(th);
-    th = document.createElement("th");
+    // th.classList.add("col-sm");
+    // th_title.className = "col-xs-4";
+    th_title.scope="col"
+    th_title.appendChild(text);
+    row.appendChild(th_title);
+    let th_desc = document.createElement("th");
+    th_desc.className = "col-sm-2";
     text = document.createTextNode(Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].description));
-    th.appendChild(text);
-    row.appendChild(th);
-    th = document.createElement("th");
+    th_desc.appendChild(text);
+    row.appendChild(th_desc);
+    let th_del = document.createElement("th");
+    th_del.className = "col-xs-4";
     text = document.createTextNode("delete");
-    th.appendChild(text);
-    row.appendChild(th);
-
+    th_del.appendChild(text);
+    row.appendChild(th_del);
+    tHead.appendChild(row);
+    newElement.appendChild(tHead);
+    let tBody = document.createElement("tbody");
     for (let element of todoList) {
         if (
             (filterInput.value === "") ||
             (todoList[element].title.includes(filterInput.value)) ||
             (todoList[element].description.includes(filterInput.value))
         ) {
-            let row = newElement.insertRow();
-            let cell = row.insertCell();
-            let text = document.createTextNode(element.title);
-            cell.appendChild(text);
-            cell = row.insertCell();
+            row = document.createElement("tr");
+            let td_title = document.createElement("td");
+            td_title.className = "col-xs-4";
+            text = document.createTextNode(element.title);
+            td_title.appendChild(text);
+            row.appendChild(td_title);
+            let td_desc = document.createElement("td");
             text = document.createTextNode(element.description);
-            cell.appendChild(text);
-            cell = row.insertCell();
+            td_desc.className = "col-sm-2";
+            td_desc.appendChild(text);
+            row.appendChild(td_desc);
+            let td_del = document.createElement("td");
+            td_del.className = "col-xs-4";
             let newDeleteButton = document.createElement("input");
             newDeleteButton.type = "button";
+            newDeleteButton.className = "btn btn-dark";
             newDeleteButton.value = "x";
             newDeleteButton.addEventListener("click",
                 function () {
                     deleteTodo(todoList.indexOf(element));
                 });
-            cell.appendChild(newDeleteButton);
+            td_del.appendChild(newDeleteButton);
+            row.appendChild(td_del);
+            tBody.appendChild(row);
         }
     }
+    newElement.appendChild(tBody);
     todoListDiv.appendChild(newElement);
 }
 

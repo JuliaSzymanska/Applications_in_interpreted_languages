@@ -2,6 +2,33 @@
     padding: 10px;
     text-align: center;
 }
+
 [id^=input] {
     margin-right: 10px;
+}
+
+#search, #search > * > * {
+    padding-right: 0;
+    padding-left: 25px;
+}
+
+#forms, #forms > * > * > * {
+    /*padding: 10px;*/
+    padding-right: 0;
+    padding-left: 25px;
+
+}
+
+#forms {
+    margin: 30px;
+    padding: 10px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+#addButton {
+
+    padding: 25px;
+    alignment: center;
+    text-align: center;
 }
