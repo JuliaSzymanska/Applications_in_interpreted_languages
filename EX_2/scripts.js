@@ -55,18 +55,16 @@ let updateTodoList = function () {
     text = Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].description);
     let thDescription = $('<th></th>').appendTo(row).text(text);
     thDescription.className = "col-sm-2";
-    // alert(JSON.stringify(todoList));
     let thDelete = $('<th></th>').appendTo(row).text("delete");
     thDelete.className = "col-xs-4";
     let tBody = $('<tbody></tbody>').appendTo(table);
     for (let element of todoList) {
-        //TODO: nowe elementy nie działaja na wyszukiwanie data
         if ((filterInputTitle === "" ||
             element.title.includes(filterInputTitle) ||
             element.description.includes(filterInputTitle)) &&
             ((!filterInputFirstDate && !filterInputLastDate) ||
                 (!filterInputFirstDate && element.dueDate <= filterInputLastDate) ||
-                (filterInputFirstDate<= element.dueDate && !filterInputLastDate) ||
+                (filterInputFirstDate <= element.dueDate && !filterInputLastDate) ||
                 (filterInputFirstDate <= element.dueDate && element.dueDate <= filterInputLastDate))
         ) {
             row = $('<tr></tr>').appendTo(tBody);
