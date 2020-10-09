@@ -18,27 +18,24 @@
     padding: 20px;
 }
 
-#search {
-    background-color: lightgray;
-    border-radius: 10px;
-    margin: 30px;
+#forms {
+    padding: 20px;
 }
 
-#forms {
-    margin: 30px;
-    padding: 20px;
+#forms:hover, #search:hover {
+    opacity: 1.0;
+    transform: scale(1.01);
+}
+
+#forms, #search {
     background-color: lightgray;
+    transition: opacity 0.2s, transform .2s;
     border-radius: 10px;
+    opacity: 0.4;
+    margin: 30px;
 }
 
 #addButton {
     padding: 25px;
-    alignment: center;
     text-align: center;
-}
-
-#addButton > * {
-    alignment: center;
-    text-align: center;
-    padding-right: 15px;
 }
