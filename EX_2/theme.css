@@ -24,7 +24,7 @@
 
 #forms:hover, #search:hover {
     opacity: 1.0;
-    transform: scale(1.01);
+    transform: scale(1.005);
 }
 
 #forms, #search {
