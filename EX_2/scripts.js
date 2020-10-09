@@ -16,18 +16,21 @@ $.ajax({
 });
 
 let updateJSONbin = function () {
-    let req = new XMLHttpRequest();
-
-    req.onreadystatechange = () => {
-        if (req.readyState === XMLHttpRequest.DONE) {
-            console.log(req.responseText);
+    $.ajax({
+        url: 'https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5',
+        type: 'PUT',
+        headers: {
+            'secret-key': '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe'
+        },
+        contentType: 'application/json',
+        data: JSON.stringify(todoList),
+        success: (data) => {
+            console.log(data);
+        },
+        error: (err) => {
+            console.log(err.responseJSON);
         }
-    };
-
-    req.open("PUT", "https://api.jsonbin.io/b/5f7e132565b18913fc5c3ad5", true);
-    req.setRequestHeader("Content-Type", "application/json");
-    req.setRequestHeader("secret-key", '$2b$10$IV.mOVlzxoKQ8My.jMcEJO1.q8w7dn.DQ2rF85vjyyxScHLV.XuOe');
-    req.send(todoList);
+    });
 }
 
 let updateTodoList = function () {
@@ -37,9 +40,9 @@ let updateTodoList = function () {
         todoListDiv.removeChild(todoListDiv.firstChild);
     }
 
-    let filterInputTitle = $('#inputSearch')[0];
-    let filterInputFirstDate = $('#inputSearchFirstDate')[0];
-    let filterInputLastDate = $('#inputSearchLastDate')[0];
+    let filterInputTitle = $('#inputSearch').val();
+    let filterInputFirstDate = $('#inputSearchFirstDate').val();
+    let filterInputLastDate = $('#inputSearchLastDate').val();
 
     let table = $('<table id="todoTable"/>').addClass("table table-striped table-bordered").appendTo(todoListDiv);
     let tHead = $('<thead></thead>').addClass("thead-dark").appendTo(table);
@@ -52,20 +55,19 @@ let updateTodoList = function () {
     text = Object.keys(todoList[0]).find(key => todoList[0][key] === todoList[0].description);
     let thDescription = $('<th></th>').appendTo(row).text(text);
     thDescription.className = "col-sm-2";
-
+    // alert(JSON.stringify(todoList));
     let thDelete = $('<th></th>').appendTo(row).text("delete");
     thDelete.className = "col-xs-4";
-
     let tBody = $('<tbody></tbody>').appendTo(table);
     for (let element of todoList) {
         //TODO: nowe elementy nie działaja na wyszukiwanie data
-        if ((filterInputTitle.value === "" ||
-            todoList[element].title.includes(filterInputTitle.value) ||
-            todoList[element].description.includes(filterInputTitle.value)) &&
-            ((!filterInputFirstDate.value && !filterInputLastDate.value) ||
-                (!filterInputFirstDate.value && element.dueDate <= filterInputLastDate.value) ||
-                (filterInputFirstDate.value <= element.dueDate && !filterInputLastDate.value) ||
-                (filterInputFirstDate.value <= element.dueDate && element.dueDate <= filterInputLastDate.value))
+        if ((filterInputTitle === "" ||
+            element.title.includes(filterInputTitle) ||
+            element.description.includes(filterInputTitle)) &&
+            ((!filterInputFirstDate && !filterInputLastDate) ||
+                (!filterInputFirstDate && element.dueDate <= filterInputLastDate) ||
+                (filterInputFirstDate<= element.dueDate && !filterInputLastDate) ||
+                (filterInputFirstDate <= element.dueDate && element.dueDate <= filterInputLastDate))
         ) {
             row = $('<tr></tr>').appendTo(tBody);
 
