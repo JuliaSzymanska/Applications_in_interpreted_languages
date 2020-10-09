@@ -31,7 +31,7 @@
     background-color: lightgray;
     transition: opacity 0.2s, transform .2s;
     border-radius: 10px;
-    opacity: 0.4;
+    opacity: 0.8;
     margin: 30px;
 }
 
