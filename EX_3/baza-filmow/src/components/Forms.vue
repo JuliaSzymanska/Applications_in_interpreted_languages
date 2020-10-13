@@ -32,5 +32,6 @@ export default {
 <style scoped>
 #forms {
   padding: 20px;
+  margin: 20px;
 }
 </style>
