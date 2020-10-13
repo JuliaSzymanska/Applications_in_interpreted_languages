@@ -8,44 +8,16 @@
     <!--    <title><%= htmlWebpackPlugin.options.title %></title>-->
     <title>Baza filmów</title>
 </head>
-<body>
+<body style="max-width: 980px; margin: auto">
 <noscript>
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
 </noscript>
 
-<header><h1>Baza filmów</h1></header>
+<header><h1 style="font-size: 50px; font-family: Arial; text-align: center; color: #2c3e50">Baza filmów</h1></header>
 
 <div id="app">
-    <form id="forms">
-        <div class="col-xs">
-            <label for="inputTitle">Tytuł: </label>
-            <input v-model="inputTitle" id="inputTitle" class="form-control"
-                   placeholder="Podaj tytuł lub fragment tytułu filmu">
-                <p>Message: {{ inputTitle }}</p>
-        </div>
-        <div class="col-xm">
-            <label for="inputYearFrom">Rok produkcji od: </label>
-            <input v-model="inputYearFrom" id="inputYearFrom" class="form-control"
-                   placeholder="Liczba naturalna z przedziału 1900-2019">
-        </div>
-        <div class="col-xs">
-            <label for="inputYearTo">Rok produkcji do: </label>
-            <input v-model="inputYearTo" id="inputYearTo" class="form-control"
-                   placeholder="Liczba naturalna z przedziału 1900-2019"/>
-        </div>
-        <div class="col-xs">
-            <label for="inputCast">Obsada: </label>
-            <input v-model="inputCast" id="inputCast" class="form-control" placeholder="Imię i nazwisko"/>
-        </div>
-    </form>
-    <script src="https://unpkg.com/vue"></script>
-    <script>
-        new Vue({
-            el: '#forms',
-            data: { hello: 'Hello World!' }
-        })
-    </script>
+
 </div>
 
 </body>
