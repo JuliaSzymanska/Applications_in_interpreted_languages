@@ -35,10 +35,9 @@ export default {
   },
   computed: {
     searchevents: function () {
-      let result = films
+      // let result = films
       if (!Forms.inputTitle)
-        return result
-      // const filterValue = Forms.inputTitle.toLowerCase()
+        return films
       return _.filter(films, function (film) {
         return film.title.toLowerCase().includes(Forms.inputTitle)
       })
