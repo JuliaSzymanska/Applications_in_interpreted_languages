@@ -13,9 +13,10 @@
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
 </noscript>
-<header><h1>Baza filmów</h1></header>
-<div id="app">
 
+<header><h1>Baza filmów</h1></header>
+
+<div id="app">
     <form id="forms">
         <div class="col-xs">
             <label for="inputTitle">Tytuł: </label>
@@ -38,9 +39,14 @@
             <input v-model="inputCast" id="inputCast" class="form-control" placeholder="Imię i nazwisko"/>
         </div>
     </form>
-
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        new Vue({
+            el: '#forms',
+            data: { hello: 'Hello World!' }
+        })
+    </script>
 </div>
 
-<!-- built files will be auto injected -->
 </body>
 </html>
