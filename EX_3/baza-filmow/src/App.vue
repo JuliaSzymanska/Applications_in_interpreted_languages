@@ -3,15 +3,19 @@
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <Forms/>
+    <TableWithFilms/>
   </div>
 </template>
 
 <script>
 import Forms from './components/Forms'
+import TableWithFilms from './components/TableWithFilms'
+
 export default {
   name: 'app',
   components: {
-    Forms
+    Forms,
+    TableWithFilms
   }
 }
 </script>
