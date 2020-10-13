@@ -4,7 +4,7 @@
       <label for="inputTitle">Tytuł: </label>
       <input v-model="inputTitle" id="inputTitle" class="form-control"
              placeholder="Podaj tytuł lub fragment tytułu filmu">
-      <p>Message: {{ inputTitle }}</p>
+<!--      <p>Message: {{ inputTitle }}</p>-->
     </div>
     <div class="col-xm">
       <label for="inputYearFrom">Rok produkcji od: </label>

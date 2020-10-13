@@ -5,7 +5,7 @@
       <thead>
       <tr>
         <th scope="col">Title</th>
-        <th scope="col">Year</th>
+        <th scope="col">Production Year</th>
         <th scope="col">Cast</th>
         <th scope="col">Genres</th>
       </tr>
