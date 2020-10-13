@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+</noscript>
+<div id="app">
+
+    <form id="forms">
+        <div class="form-row">
+            <div class="col-xs">
+                <label for="inputTitle">Tytuł: </label>
+                <input v-model="message" id="inputTitle" class="form-control"
+                       placeholder="Podaj tytuł lub fragment tytułu filmu">
+            </div>
+            <div class="col-xm">
+                <label for="inputYearFrom">Rok produkcji od: </label>
+                <input v-model="message" id="inputYearFrom" class="form-control"
+                       placeholder="Liczba naturalna z przedziału 1900-2019">
+            </div>
+            <div class="col-xs">
+                <label for="inputYearTo">Rok produkcji do: </label>
+                <input v-model="message" id="inputYearTo" class="form-control"
+                       placeholder="Liczba naturalna z przedziału 1900-2019"/>
+            </div>
+            <div class="col-xs">
+                <label for="inputCast">Obsada: </label>
+                <input v-model="message" id="inputCast" class="form-control" placeholder="Imię i nazwisko"/>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<!-- built files will be auto injected -->
+</body>
+</html>
