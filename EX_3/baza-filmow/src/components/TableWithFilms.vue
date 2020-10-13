@@ -11,11 +11,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="film in Films" v-bind:key="film.title">
-        <th scope="row">{{film.title}}</th>
-        <td>{{film.year}}</td>
-        <td>{{film.cast}}</td>
-        <td>{{film.genres}}</td>
+      <tr v-for="film in searchevents" v-bind:key="film.title">
+        <th scope="row">{{ film.title }}</th>
+        <td>{{ film.year }}</td>
+        <td>{{ film.cast }}</td>
+        <td>{{ film.genres }}</td>
       </tr>
       </tbody>
     </table>
@@ -24,13 +24,26 @@
 
 <script>
 import films from '../films'
+import Forms from './Forms'
+import _ from 'lodash';
 export default {
   name: "TableWithFilms",
-  data(){
-    return{
+  data() {
+    return {
       Films: films
     }
   },
+  computed: {
+    searchevents: function () {
+      let result = films
+      if (!Forms.inputTitle)
+        return result
+      // const filterValue = Forms.inputTitle.toLowerCase()
+      return _.filter(films, function (film) {
+        return film.title.toLowerCase().includes(Forms.inputTitle)
+      })
+    }
+  }
 }
 </script>
 

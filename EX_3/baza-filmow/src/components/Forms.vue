@@ -25,7 +25,15 @@
 
 <script>
 export default {
-  name: "Forms"
+  name: "Forms",
+  data() {
+    return {
+      inputTitle: "",
+      inputYearFrom: "",
+      inputYearTo: "",
+      inputCast: ""
+    }
+  }
 }
 </script>
 
