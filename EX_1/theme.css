@@ -2,7 +2,7 @@ header {
     text-align: center;
     font-size: 30px;
     font-weight: bold;
-    padding:40px;
+    padding: 40px;
 }
 
 body {
@@ -10,13 +10,13 @@ body {
     margin: auto;
     font-family: verdana;
     border: 2px solid #eeeeee;
-    border-radius:3px;
+    border-radius: 3px;
 }
 
 nav {
     text-align: center;
     background-color: #eeeeee;
-    padding:5px;
+    padding: 5px;
 }
 
 footer {
