@@ -1,21 +1,21 @@
 <template>
   <div class="container">
     <h3>Films: </h3>
-    <table class="table">
-      <thead>
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
       <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Production Year</th>
-        <th scope="col">Cast</th>
-        <th scope="col">Genres</th>
+        <th class="col-sm-2" scope="col">Title</th>
+        <th class="col-sm-2" scope="col">Production Year</th>
+        <th class="col-sm-2" scope="col">Cast</th>
+        <th class="col-sm-2" scope="col">Genres</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="film in searchevents" v-bind:key="film.title">
-        <th scope="row">{{ film.title }}</th>
-        <td>{{ film.year }}</td>
-        <td>{{ film.cast }}</td>
-        <td>{{ film.genres }}</td>
+        <td class="col-sm-2" >{{ film.title }}</td>
+        <td class="col-sm-2">{{ film.year }}</td>
+        <td class="col-sm-2">{{ film.cast }}</td>
+        <td class="col-sm-2">{{ film.genres }}</td>
       </tr>
       </tbody>
     </table>

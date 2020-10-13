@@ -1,6 +1,6 @@
 <template>
   <form id="forms">
-    <div class="col-xs">
+    <div class="col-lg">
       <label for="inputTitle">Tytuł: </label>
       <input v-model="inputTitle" id="inputTitle" class="form-control"
              placeholder="Podaj tytuł lub fragment tytułu filmu">
@@ -16,7 +16,7 @@
       <input v-model="inputYearTo" id="inputYearTo" class="form-control"
              placeholder="Liczba naturalna z przedziału 1900-2019"/>
     </div>
-    <div class="col-xs">
+    <div class="col-lg">
       <label for="inputCast">Obsada: </label>
       <input v-model="inputCast" id="inputCast" class="form-control" placeholder="Imię i nazwisko"/>
     </div>
@@ -38,8 +38,15 @@ export default {
 </script>
 
 <style scoped>
-#forms {
-  padding: 20px;
+#forms > * > *{
+  padding: 10px;
   margin: 20px;
+  alignment: left;
+  align-items: end;
+  align-content: end;
 }
+/*.form-control {*/
+/*  padding: 20px;*/
+/*  margin: 20px;*/
+/*}*/
 </style>
