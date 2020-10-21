@@ -11,7 +11,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="film in searchevents" v-bind:key="film.title">
+      <tr v-for="film in this.limit" v-bind:key="film.title">
         <td class="col-md-4">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
         <td class="col-md-2">{{ film.cast }}</td>
@@ -19,6 +19,11 @@
       </tr>
       </tbody>
     </table>
+    <div>
+      <button type="button" class="btn btn-primary btn-lg btn-block" onclick="">
+        Więcej
+      </button>
+    </div>
   </div>
 </template>
 
@@ -31,10 +36,21 @@ export default {
   name: "TableWithFilms",
   data() {
     return {
-      Films: films
+      Films: films,
+      n: 10
     }
   },
   computed: {
+
+    limit: function () {
+      let limitedFilms = [];
+      for (let i = 0; i < this.n; i++) {
+        limitedFilms.push(this.searchevents()[i])
+      }
+      return limitedFilms
+    }
+  },
+  methods: {
     searchevents: function () {
       if (!Forms.inputTitle)
         return films
@@ -42,14 +58,6 @@ export default {
         return film.title.toLowerCase().includes(Forms.inputTitle)
       })
     },
-    limit: function (filmeee) {
-      var limitedFilms = [];
-      var i;
-      for (i = 0; i < 10; i++) {
-        limitedFilms.push(filmeee[i])
-      }
-      return limitedFilms
-    }
   }
 }
 </script>
