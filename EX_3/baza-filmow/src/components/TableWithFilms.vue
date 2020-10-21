@@ -14,8 +14,8 @@
       <tr v-for="film in this.limit()" v-bind:key="film.title">
         <td class="col-md-4">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
-        <td class="col-md-2">{{ film.cast }}</td>
-        <td class="col-md-2">{{ film.genres }}</td>
+        <td class="col-md-2" v-for="(ca, index) in film.cast" :key="index">{{ ca }}</td>
+        <td class="col-md-2" v-for="(ge, index) in film.genres" :key="index">{{ ge }}</td>
       </tr>
       </tbody>
     </table>
@@ -64,6 +64,7 @@ export default {
     searchevents: function () {
       if (!Forms.inputTitle)
         return this.Films
+      // todo: filtrowanie dziala dobrze jako filtrowanie, tera trzeba cos z tym zrobic
       return _.filter(this.Films, function (film) {
         return film.title.toLowerCase().includes(Forms.inputTitle)
       })
