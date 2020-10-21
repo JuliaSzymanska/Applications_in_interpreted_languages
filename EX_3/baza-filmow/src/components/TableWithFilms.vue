@@ -1,10 +1,9 @@
 <template>
   <div id="tableFilms" ref="table">
-    <!--    <h3>Films: </h3>-->
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
       <tr>
-        <th class="col-md-4" scope="col">Title</th>
+        <th class="col-md-2" scope="col">Title</th>
         <th class="col-md-2" scope="col">Production Year</th>
         <th class="col-md-2" scope="col">Cast</th>
         <th class="col-md-2" scope="col">Genres</th>
@@ -12,10 +11,10 @@
       </thead>
       <tbody>
       <tr v-for="film in this.limit()" v-bind:key="film.title">
-        <td class="col-md-4">{{ film.title }}</td>
+        <td class="col-md-2">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
-        <td class="col-md-2" v-for="(ca, index) in film.cast" :key="index">{{ ca }}</td>
-        <td class="col-md-2" v-for="(ge, index) in film.genres" :key="index">{{ ge }}</td>
+        <td class="col-md-2" v-for="(cast, index) in film.cast" :key="index">{{ cast }}</td>
+        <td class="col-md-2" v-for="(genre, index) in film.genres" :key="index">{{ genre }}</td>
       </tr>
       </tbody>
     </table>
