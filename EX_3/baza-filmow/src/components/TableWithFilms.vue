@@ -1,5 +1,5 @@
 <template>
-  <div id="tableFilms">
+  <div id="tableFilms" ref="table">
     <!--    <h3>Films: </h3>-->
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
@@ -20,7 +20,9 @@
       </tbody>
     </table>
     <div>
-      <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="this.increaseLimit()" id="wiecej">
+      <!-- TODO: onclick niby dziala, ale nwm jak odswiezyc tabelke -->
+      <!-- TODO: update wywolanie  moet nie dziala, ale pojedyncza instrukcja działa -->
+      <button type="button" class="btn btn-primary btn-lg btn-block" id="wiecej" onclick="this.increaseLimit()">
         Więcej
       </button>
     </div>
@@ -40,15 +42,24 @@ export default {
       n: 10
     }
   },
-  // computed: {
-  //   limit: function () {
-  //     let limitedFilms = [];
-  //     for (let i = 0; i < this.n; i++) {
-  //       limitedFilms.push(this.searchevents()[i])
-  //     }
-  //     return limitedFilms
-  //   }
-  // },
+  computed: {
+    // limit: function () {
+    //   let limitedFilms = [];
+    //   for (let i = 0; i < this.n; i++) {
+    //     limitedFilms.push(this.searchevents()[i])
+    //   }
+    //   return limitedFilms
+    // },
+    // increaseLimit: function () {
+    //   this.n += 10
+    //   this.$refs.table.reload()
+    // },
+    // increaseLimit: function () {
+    //   alert('Hello!')
+    //   this.n += 10
+    //   return
+    // },
+  },
   methods: {
     searchevents: function () {
       if (!Forms.inputTitle)
@@ -65,17 +76,19 @@ export default {
       return limitedFilms
     },
     increaseLimit: function () {
+      alert('Hello!')
       this.n += 10
-      this.$refs.table.refresh();
     },
   }
 }
 </script>
 
 <style scoped>
+
 #tableFilms {
   padding-top: 30px;
 }
+
 #wiecej {
   margin-bottom: 30px;
 }
