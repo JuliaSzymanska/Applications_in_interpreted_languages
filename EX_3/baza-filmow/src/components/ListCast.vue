@@ -1,6 +1,6 @@
 <template>
   <div>
-
+<!--TODO: trzbea skopiować będzie z ListGenres-->
   </div>
 </template>
 
