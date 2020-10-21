@@ -17,9 +17,6 @@ export default {
     Forms,
     TableWithFilms
   },
-  rules: {
-    "vue/no-use-v-if-with-v-for": "off"
-  }
 }
 </script>
 
