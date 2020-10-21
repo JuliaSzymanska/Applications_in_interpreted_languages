@@ -1,24 +1,35 @@
 <template>
   <form id="forms">
-    <div class="col-lg">
-      <label for="inputTitle">Tytuł: </label>
+    <div class="form-group row">
+      <label for="inputTitle" class="col-sm-2 col-form-label">Tytuł: </label>
+      <div class="col-sm-10">
       <input v-model="inputTitle" id="inputTitle" class="form-control"
              placeholder="Podaj tytuł lub fragment tytułu filmu">
+      </div>
 <!--      <p>Message: {{ inputTitle }}</p>-->
     </div>
-    <div class="col-xm">
-      <label for="inputYearFrom">Rok produkcji od: </label>
+    <div class="form-group row">
+      <label for="inputYearFrom" class="col-sm-2 col-form-label">Rok produkcji od: </label>
+      <div class="col-sm-4">
       <input v-model="inputYearFrom" id="inputYearFrom" class="form-control"
              placeholder="Liczba naturalna z przedziału 1900-2019">
-    </div>
-    <div class="col-xs">
-      <label for="inputYearTo">Rok produkcji do: </label>
+      </div>
+      <label for="inputYearTo" class="col-sm-2 col-form-label">Rok produkcji do: </label>
+      <div class="col-sm-4">
       <input v-model="inputYearTo" id="inputYearTo" class="form-control"
              placeholder="Liczba naturalna z przedziału 1900-2019"/>
+      </div>
     </div>
-    <div class="col-lg">
-      <label for="inputCast">Obsada: </label>
+    <div class="form-group row">
+      <label for="inputCast" class="col-sm-2 col-form-label">Obsada: </label>
+      <div class="col-sm-10">
       <input v-model="inputCast" id="inputCast" class="form-control" placeholder="Imię i nazwisko"/>
+      </div>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary btn-lg btn-block">
+        Szukaj
+      </button>
     </div>
   </form>
 </template>
@@ -38,15 +49,7 @@ export default {
 </script>
 
 <style scoped>
-#forms > * > *{
-  padding: 10px;
-  margin: 20px;
-  alignment: left;
-  align-items: end;
-  align-content: end;
+#forms {
+  padding-top: 30px;
 }
-/*.form-control {*/
-/*  padding: 20px;*/
-/*  margin: 20px;*/
-/*}*/
 </style>

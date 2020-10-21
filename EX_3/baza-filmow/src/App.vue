@@ -16,6 +16,9 @@ export default {
   components: {
     Forms,
     TableWithFilms
+  },
+  rules: {
+    "vue/no-use-v-if-with-v-for": "off"
   }
 }
 </script>
@@ -23,10 +26,9 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*-webkit-font-smoothing: antialiased;*/
+  /*-moz-osx-font-smoothing: grayscale;*/
+  text-align: left;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
