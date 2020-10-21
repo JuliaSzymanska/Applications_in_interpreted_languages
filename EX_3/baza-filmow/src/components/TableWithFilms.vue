@@ -11,7 +11,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="film in this.limit" v-bind:key="film.title">
+      <tr v-for="film in this.limit()" v-bind:key="film.title">
         <td class="col-md-4">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
         <td class="col-md-2">{{ film.cast }}</td>
@@ -20,7 +20,7 @@
       </tbody>
     </table>
     <div>
-      <button type="button" class="btn btn-primary btn-lg btn-block" onclick="">
+      <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="this.increaseLimit()" id="wiecej">
         Więcej
       </button>
     </div>
@@ -40,23 +40,33 @@ export default {
       n: 10
     }
   },
-  computed: {
-
+  // computed: {
+  //   limit: function () {
+  //     let limitedFilms = [];
+  //     for (let i = 0; i < this.n; i++) {
+  //       limitedFilms.push(this.searchevents()[i])
+  //     }
+  //     return limitedFilms
+  //   }
+  // },
+  methods: {
+    searchevents: function () {
+      if (!Forms.inputTitle)
+        return this.Films
+      return _.filter(this.Films, function (film) {
+        return film.title.toLowerCase().includes(Forms.inputTitle)
+      })
+    },
     limit: function () {
       let limitedFilms = [];
       for (let i = 0; i < this.n; i++) {
         limitedFilms.push(this.searchevents()[i])
       }
       return limitedFilms
-    }
-  },
-  methods: {
-    searchevents: function () {
-      if (!Forms.inputTitle)
-        return films
-      return _.filter(films, function (film) {
-        return film.title.toLowerCase().includes(Forms.inputTitle)
-      })
+    },
+    increaseLimit: function () {
+      this.n += 10
+      this.$refs.table.refresh();
     },
   }
 }
@@ -65,5 +75,8 @@ export default {
 <style scoped>
 #tableFilms {
   padding-top: 30px;
+}
+#wiecej {
+  margin-bottom: 30px;
 }
 </style>
