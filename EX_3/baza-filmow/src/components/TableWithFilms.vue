@@ -14,7 +14,7 @@
         <td class="col-md-2">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
         <td class="col-md-2">{{ film.cast.sort().join(', ') }}</td>
-        <td class="col-md-2" v-for="(genre, index) in film.genres" :key="index">{{ genre }}</td>
+        <td class="col-md-2">{{ film.genres.join(', ')}}</td>
       </tr>
       </tbody>
     </table>
