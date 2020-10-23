@@ -66,8 +66,8 @@ export default {
       this.inputYearFrom = dateFrom
       this.inputYearTo = dateTo
       this.inputCast = cast
-      // alert("halo")
-      this.limit()
+      alert("halo")
+      // this.limit()
     }
   }
 }

@@ -29,8 +29,8 @@ export default {
   data() {
     return {
       Films: films,
-      n: 10,
-      castArray: ["Paul Boyton", "Florence Lawrence", "George Gebhardt",]
+      n: 40,
+      castArray: ["Nicole Kidman", "Florence Lawrence", "Julia Roberts",]
     }
   },
   computed: {},
@@ -44,7 +44,7 @@ export default {
           }
         }
         return isInIt
-      }).slice(0, 10)
+      }).slice(0, this.n)
     },
   }
 }

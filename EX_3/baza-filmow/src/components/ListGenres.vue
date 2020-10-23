@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       Films: films,
-      n: 10,
+      n: 35,
       genresArray: ["Comedy", "Documentary", "Short",]
     }
   },
@@ -44,7 +44,7 @@ export default {
           }
         }
         return isInIt
-      }).slice(0, 10)
+      }).slice(0, this.n)
     },
   }
 }
