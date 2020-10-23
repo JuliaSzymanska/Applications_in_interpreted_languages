@@ -13,7 +13,7 @@
       <tr v-for="film in this.limit()" v-bind:key="film.title">
         <td class="col-md-2">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
-        <td class="col-md-2" v-for="(cast, index) in film.cast" :key="index">{{ cast }}</td>
+        <td class="col-md-2">{{ film.cast.sort().join(', ') }}</td>
         <td class="col-md-2" v-for="(genre, index) in film.genres" :key="index">{{ genre }}</td>
       </tr>
       </tbody>
@@ -36,7 +36,7 @@ export default {
     return {
       Films: films,
       n: 10,
-      inputTitle: "",
+      inputTitle: "After",
       inputYearFrom: "",
       inputYearTo: "",
       inputCast: ""
@@ -48,9 +48,8 @@ export default {
       let tit = this.inputTitle
       if (tit === "")
         return this.Films
-      alert("Zlapalo")
       return _.filter(this.Films, function (film) {
-        return film.title.toLowerCase().includes(tit)
+        return film.title.toLowerCase().includes(tit.toLowerCase())
       })
     },
 
@@ -67,6 +66,8 @@ export default {
       this.inputYearFrom = dateFrom
       this.inputYearTo = dateTo
       this.inputCast = cast
+      // alert("halo")
+      this.limit()
     }
   }
 }

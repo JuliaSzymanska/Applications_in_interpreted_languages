@@ -6,7 +6,6 @@
         <input v-model="inputTitle" id="inputTitle" class="form-control"
                placeholder="Podaj tytuł lub fragment tytułu filmu">
       </div>
-      <!--      <p>Message: {{ inputTitle }}</p>-->
     </div>
     <div class="form-group row">
       <label for="inputYearFrom" class="col-sm-2 col-form-label">Rok produkcji od: </label>
@@ -51,8 +50,6 @@ export default {
   methods: {
     search: function () {
       TableWithFilms.methods.setInputs(this.inputTitle, this.inputYearFrom, this.inputYearTo, this.inputCast)
-      // TableWithFilms.methods.searchevents()
-      // TableWithFilms.methods.limit()
     }
   }
 }
