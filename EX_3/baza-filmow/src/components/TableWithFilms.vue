@@ -19,8 +19,6 @@
       </tbody>
     </table>
     <div>
-      <!-- TODO: onclick niby dziala, ale nwm jak odswiezyc tabelke -->
-      <!-- TODO: update wywolanie  moet nie dziala, ale pojedyncza instrukcja działa -->
       <button type="button" class="btn btn-primary btn-lg btn-block" id="wiecej" @click="this.increaseLimit">
         Więcej
       </button>
@@ -30,7 +28,6 @@
 
 <script>
 import films from '../films'
-import Forms from './Forms'
 import _ from 'lodash';
 
 export default {
@@ -38,29 +35,39 @@ export default {
   data() {
     return {
       Films: films,
-      n: 10
+      n: 10,
+      inputTitle: "",
+      inputYearFrom: "",
+      inputYearTo: "",
+      inputCast: ""
     }
   },
   computed: {},
   methods: {
     searchevents: function () {
-      if (!Forms.inputTitle)
+      let tit = this.inputTitle
+      if (tit === "")
         return this.Films
-      // todo: filtrowanie dziala dobrze jako filtrowanie, tera trzeba cos z tym zrobic
+      alert("Zlapalo")
       return _.filter(this.Films, function (film) {
-        return film.title.toLowerCase().includes(Forms.inputTitle)
+        return film.title.toLowerCase().includes(tit)
       })
     },
+
     limit: function () {
-      let limitedFilms = [];
-      for (let i = 0; i < this.n; i++) {
-        limitedFilms.push(this.searchevents()[i])
-      }
-      return limitedFilms
+      return this.searchevents().slice(0, this.n)
     },
+
     increaseLimit: function () {
       this.n += 10
     },
+
+    setInputs(title, dateFrom, dateTo, cast) {
+      this.inputTitle = title
+      this.inputYearFrom = dateFrom
+      this.inputYearTo = dateTo
+      this.inputCast = cast
+    }
   }
 }
 </script>
