@@ -87,6 +87,7 @@ export default {
 
 #tableFilms {
   padding-top: 30px;
+  border-collapse: collapse;
 }
 
 #wiecej {

@@ -25,12 +25,15 @@ export default {
   computed: {},
   methods: {
     searchGenres: function () {
-      //TODO: jakos tak ale mi nie dziala przez to ze cast jest arrayem
       return _.filter(this.Films, function (film) {
-        _.filter(film.cast, function (casts) {
-          return casts === "Comedy"
+        let isInIt = false
+        for (let i = 0; i < film.cast.length; i++) {
+            if (film.genres[i] === "Comedy") {
+              isInIt = true
+            }
+        }
+        return isInIt
         })
-      })
     },
   }
 }
