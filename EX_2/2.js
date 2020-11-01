@@ -70,27 +70,29 @@ let updateTodoList = function () {
     for (let todo in todoList) {
         if ((filterInputDesc.value == "") ||
             (todoList[todo].title.includes(filterInputDesc.value)) ||
-            (todoList[todo].description.includes(filterInputDesc.value)) && (filterInputDate1.value == "") && (filterInputDate2.value == "")
-            || ((dateStart <= new Date(todoList[todo].dueDate)) && (filterInputDate2.value == ""))
-            || ((dateEnd >= new Date(todoList[todo].dueDate)) && (filterInputDate1.value == ""))
-            || ((dateEnd >= new Date(todoList[todo].dueDate)) && (dateStart <= new Date(todoList[todo].dueDate)))) {
-            let tr = $('<tr></tr>').appendTo(containing_table);
-            let newDeleteButton = $('<input></input>').attr({
-                type: 'button',
-                value: 'x',
-            });
-            let onClickFun = function () { deleteTodo(todoList.indexOf(todo)); };
-            newDeleteButton.click(onClickFun);
-            for (let item in todoList[todo]) {
-                if (Date.parse(todoList[todo][item])) {
-                    let date = new Date(todoList[todo][item]);
-                    $('<td></td>').appendTo(tr).text(date.toDateString());
+            (todoList[todo].description.includes(filterInputDesc.value))) {
+            if ((filterInputDate1.value == "") && (filterInputDate2.value == "")
+                || ((dateStart <= new Date(todoList[todo].dueDate)) && (filterInputDate2.value == ""))
+                || ((dateEnd >= new Date(todoList[todo].dueDate)) && (filterInputDate1.value == ""))
+                || ((dateEnd >= new Date(todoList[todo].dueDate)) && (dateStart <= new Date(todoList[todo].dueDate)))) {
+                let tr = $('<tr></tr>').appendTo(containing_table);
+                let newDeleteButton = $('<input></input>').attr({
+                    type: 'button',
+                    value: 'x',
+                });
+                let onClickFun = function () { deleteTodo(todoList.indexOf(todo)); };
+                newDeleteButton.click(onClickFun);
+                for (let item in todoList[todo]) {
+                    if (Date.parse(todoList[todo][item])) {
+                        let date = new Date(todoList[todo][item]);
+                        $('<td></td>').appendTo(tr).text(date.toDateString());
+                    }
+                    else {
+                        $('<td></td>').appendTo(tr).text(todoList[todo][item]);
+                    }
                 }
-                else {
-                    $('<td></td>').appendTo(tr).text(todoList[todo][item]);
-                }
+                $('<td></td>').appendTo(tr).append(newDeleteButton);
             }
-            $('<td></td>').appendTo(tr).append(newDeleteButton);
         }
     }
     if (todoList.length != 0)

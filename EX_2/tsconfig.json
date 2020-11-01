@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "watch": false,
+    "lib": ["DOM", "ES2017"],
+  },
+  "files": [
+    "scripts.ts"
+  ]
+}
