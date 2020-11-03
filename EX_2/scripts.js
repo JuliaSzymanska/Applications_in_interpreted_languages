@@ -68,12 +68,12 @@ let updateTodoList = function () {
         $('<th></th>').appendTo(tr).text("remove");
     }
     for (let todo in todoList) {
-        if ((filterInputDesc.value == "") ||
+        if (((filterInputDesc.value == "") ||
             (todoList[todo].title.includes(filterInputDesc.value)) ||
-            (todoList[todo].description.includes(filterInputDesc.value)) && (filterInputDate1.value == "") && (filterInputDate2.value == "")
+            (todoList[todo].description.includes(filterInputDesc.value))) && ((filterInputDate1.value == "") && (filterInputDate2.value == "")
             || ((dateStart <= new Date(todoList[todo].dueDate)) && (filterInputDate2.value == ""))
             || ((dateEnd >= new Date(todoList[todo].dueDate)) && (filterInputDate1.value == ""))
-            || ((dateEnd >= new Date(todoList[todo].dueDate)) && (dateStart <= new Date(todoList[todo].dueDate)))) {
+            || ((dateEnd >= new Date(todoList[todo].dueDate)) && (dateStart <= new Date(todoList[todo].dueDate))))) {
             let tr = $('<tr></tr>').appendTo(containing_table);
             let newDeleteButton = $('<input></input>').attr({
                 type: 'button',
