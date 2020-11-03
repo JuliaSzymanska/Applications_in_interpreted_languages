@@ -79,8 +79,7 @@ let updateTodoList = function () {
                 type: 'button',
                 value: 'x',
             });
-            let onClickFun = function () { deleteTodo(todoList.indexOf(todo)); };
-            newDeleteButton.click(onClickFun);
+            newDeleteButton.click(function () { deleteTodo(todoList.indexOf(todo)); });
             for (let item in todoList[todo]) {
                 if (Date.parse(todoList[todo][item])) {
                     let date = new Date(todoList[todo][item]);
