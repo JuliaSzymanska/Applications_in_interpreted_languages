@@ -79,9 +79,10 @@ let updateTodoList = function () {
                 type: 'button',
                 value: 'x',
             });
-            newDeleteButton.click(function () { deleteTodo(todoList.indexOf(todo)); });
+            let onClickFun = function () { deleteTodo(todo); };
+            newDeleteButton.click(onClickFun);
             for (let item in todoList[todo]) {
-                if (Date.parse(todoList[todo][item])) {
+                if (item == "dueDate") {
                     let date = new Date(todoList[todo][item]);
                     $('<td></td>').appendTo(tr).text(date.toDateString());
                 }
@@ -94,7 +95,6 @@ let updateTodoList = function () {
     }
     if (todoList.length != 0)
         containing_table.appendTo(todoListView);
-    // todoListView.appendChild(containing_table);
 };
 let addTodo = function () {
     let inputTitle = $("#inputTitle")[0].value;

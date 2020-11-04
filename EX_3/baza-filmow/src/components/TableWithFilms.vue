@@ -36,7 +36,7 @@ export default {
     return {
       Films: films,
       n: 10,
-      inputTitle: "After",
+      inputTitle: "",
       inputYearFrom: "",
       inputYearTo: "",
       inputCast: ""
@@ -46,6 +46,8 @@ export default {
   methods: {
     searchevents: function () {
       let tit = this.inputTitle
+      console.log(this.inputTitle)
+      console.log(this)
       if (tit === "")
         return this.Films
       return _.filter(this.Films, function (film) {
