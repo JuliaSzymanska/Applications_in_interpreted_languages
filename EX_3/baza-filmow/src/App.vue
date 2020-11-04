@@ -2,8 +2,8 @@
   <div id="app">
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <Forms/>
-    <TableWithFilms/>
+    <Forms v-bind:list="list"/>
+    <TableWithFilms v-bind:list="list"/>
     <ListGenres/>
     <ListCast/>
   </div>
@@ -23,6 +23,11 @@ export default {
     Forms,
     TableWithFilms
   },
+  data (){
+    return {
+      list:''
+    }
+  }
 }
 </script>
 

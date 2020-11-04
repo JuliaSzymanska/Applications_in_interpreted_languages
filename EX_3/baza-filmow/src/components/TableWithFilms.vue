@@ -14,7 +14,7 @@
         <td class="col-md-2">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
         <td class="col-md-2">{{ film.cast.sort().join(', ') }}</td>
-        <td class="col-md-2">{{ film.genres.join(', ')}}</td>
+        <td class="col-md-2">{{ film.genres.join(', ') }}</td>
       </tr>
       </tbody>
     </table>
@@ -28,7 +28,8 @@
 
 <script>
 import films from '../films'
-import _ from 'lodash';
+import { bus } from '../main';
+import _ from "lodash";
 
 export default {
   name: "TableWithFilms",
@@ -36,20 +37,23 @@ export default {
     return {
       Films: films,
       n: 10,
-      inputTitle: "",
-      inputYearFrom: "",
-      inputYearTo: "",
-      inputCast: ""
+    }
+  },
+  props: {
+    list: {
+      type: String
     }
   },
   computed: {},
   methods: {
     searchevents: function () {
-      let tit = this.inputTitle
-      console.log(this.inputTitle)
-      console.log(this)
-      if (tit === "")
-        return this.Films
+      // console.log(this.list)
+      // console.log(this)
+      let tit = this.list
+      // if (this.list.length === 0)
+      //   return this.Films
+      // else
+      //   return this.list
       return _.filter(this.Films, function (film) {
         return film.title.toLowerCase().includes(tit.toLowerCase())
       })
@@ -63,13 +67,12 @@ export default {
       this.n += 10
     },
 
-    setInputs(title, dateFrom, dateTo, cast) {
-      this.inputTitle = title
-      this.inputYearFrom = dateFrom
-      this.inputYearTo = dateTo
-      this.inputCast = cast
-      alert("halo")
-      // this.limit()
+    created() {
+      bus.$on('filteredList', (data) => {
+        this.list = data;
+        alert(this.list)
+      })
+
     }
   }
 }

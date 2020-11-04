@@ -33,23 +33,37 @@
   </form>
 </template>
 
+<!--https://blog.logrocket.com/using-event-bus-in-vue-js-to-pass-data-between-components/-->
+
 <script>
 
-import TableWithFilms from './TableWithFilms'
-
+import films from '../films'
+// import _ from "lodash";
+import { bus } from '../main'
 export default {
   name: "Forms",
   data() {
     return {
+      Films: films,
       inputTitle: "",
       inputYearFrom: "",
       inputYearTo: "",
       inputCast: ""
     }
   },
+  props: {
+    list: {
+      type: String
+    }
+  },
   methods: {
     search: function () {
-      TableWithFilms.methods.setInputs(this.inputTitle, this.inputYearFrom, this.inputYearTo, this.inputCast)
+      // let tit = this.inputTitle
+      // TableWithFilms.methods.setInputs(this.inputTitle, this.inputYearFrom, this.inputYearTo, this.inputCast)
+      // this.list = _.filter(this.Films, function (film) {
+      //   return film.title.includes('After')
+      // })
+      bus.$emit('filteredList', this.inputTitle);
     }
   }
 }
