@@ -1,9 +1,8 @@
 <template>
   <div id="app">
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <Forms v-bind:list="list"/>
-    <TableWithFilms v-bind:list="list"/>
+    <Forms @search-event="handleAppEvent"/>
+    <TableWithFilms :dataFromEvent='eventData' />
     <ListGenres/>
     <ListCast/>
   </div>
@@ -14,6 +13,7 @@ import Forms from './components/Forms'
 import TableWithFilms from './components/TableWithFilms'
 import ListCast from "@/components/ListCast";
 import ListGenres from "@/components/ListGenres";
+import films from '@/films'
 
 export default {
   name: 'app',
@@ -23,9 +23,14 @@ export default {
     Forms,
     TableWithFilms
   },
-  data (){
+  data: function(){
     return {
-      list:''
+      eventData: films
+    }
+  },
+  methods: {
+    handleAppEvent: function(data) {
+      this.eventData = data;
     }
   }
 }

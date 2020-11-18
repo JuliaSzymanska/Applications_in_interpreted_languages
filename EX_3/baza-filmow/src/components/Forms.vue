@@ -26,9 +26,10 @@
       </div>
     </div>
     <div>
-      <button type="button" class="btn btn-primary btn-lg btn-block" @click="this.search">
+      <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="search">
         Szukaj
       </button>
+      <!-- <input type="button" class="btn btn-primary btn-lg btn-block" v-on:click="search"> -->
     </div>
   </form>
 </template>
@@ -38,32 +39,41 @@
 <script>
 
 import films from '../films'
-// import _ from "lodash";
-import { bus } from '../main'
+import _ from "lodash";
 export default {
   name: "Forms",
-  data() {
+  data: function(){
     return {
       Films: films,
       inputTitle: "",
       inputYearFrom: "",
       inputYearTo: "",
-      inputCast: ""
-    }
-  },
-  props: {
-    list: {
-      type: String
+      inputCast: "",
+      listEmitted: films
     }
   },
   methods: {
     search: function () {
-      // let tit = this.inputTitle
-      // TableWithFilms.methods.setInputs(this.inputTitle, this.inputYearFrom, this.inputYearTo, this.inputCast)
-      // this.list = _.filter(this.Films, function (film) {
-      //   return film.title.includes('After')
-      // })
-      bus.$emit('filteredList', this.inputTitle);
+      let self = this;
+      this.listEmitted = _.filter(this.Films, function (film) {
+        let isCorrect = false
+          if ((film.title.toLowerCase().includes(self.inputTitle.toLowerCase()) || self.inputTitle==="") &&
+          (film.year >= self.inputYearFrom || self.inputYearFrom==="" ) &&
+          (film.year <= self.inputYearTo || self.inputYearTo==="" )) {
+            for (let i = 0; i < film.cast.length; i++) {
+              if (film.cast[i].toLowerCase() === self.inputCast.toLowerCase() || self.inputCast==="") {
+                isCorrect = true
+              }
+            }
+          }
+        return isCorrect
+        
+      // }
+
+
+        //  return film.title.toLowerCase().includes(self.inputTitle.toLowerCase())
+      })
+      this.$emit('search-event', self.listEmitted);
     }
   }
 }

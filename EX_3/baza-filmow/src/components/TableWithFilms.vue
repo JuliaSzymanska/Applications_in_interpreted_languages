@@ -28,8 +28,7 @@
 
 <script>
 import films from '../films'
-import { bus } from '../main';
-import _ from "lodash";
+// import _ from "lodash";
 
 export default {
   name: "TableWithFilms",
@@ -40,23 +39,24 @@ export default {
     }
   },
   props: {
-    list: {
-      type: String
-    }
+    dataFromEvent: Array
   },
   computed: {},
   methods: {
     searchevents: function () {
+      if(this.dataFromEvent === []){
+      this.dataFromEvent === films}
       // console.log(this.list)
       // console.log(this)
-      let tit = this.list
+      // let tit = this.dataFromEvent
       // if (this.list.length === 0)
       //   return this.Films
       // else
       //   return this.list
-      return _.filter(this.Films, function (film) {
-        return film.title.toLowerCase().includes(tit.toLowerCase())
-      })
+      // return _.filter(this.Films, function (film) {
+      //   return film.title.toLowerCase().includes(tit.toLowerCase())
+      // })
+      return this.dataFromEvent
     },
 
     limit: function () {
@@ -68,10 +68,6 @@ export default {
     },
 
     created() {
-      bus.$on('filteredList', (data) => {
-        this.list = data;
-        alert(this.list)
-      })
 
     }
   }
