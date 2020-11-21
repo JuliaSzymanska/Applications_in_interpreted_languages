@@ -4,7 +4,7 @@
       <h2>Filmy wg gatunku</h2>
       <ol>
         <template v-for="genre in genres">
-          <div v-for="(movie, index, key) in getMovies(genre)" :key="key">
+          <div v-for="(movie, index, key) in getMoviesByGenre(genre)" :key="key">
             <h3 v-if="index === 0">{{ genre }}</h3>
             {{ index + 1 }}. {{ movie.title }}
           </div>
