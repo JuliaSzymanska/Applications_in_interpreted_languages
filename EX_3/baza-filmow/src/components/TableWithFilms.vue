@@ -10,10 +10,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="film in this.limit()" v-bind:key="film.title">
+      <tr v-for="film in this.searchevents()" v-bind:key="film.title">
         <td class="col-md-2">{{ film.title }}</td>
         <td class="col-md-2">{{ film.year }}</td>
-        <td class="col-md-2">{{ film.cast.sort().join(', ') }}</td>
+        <td class="col-md-2">{{ film.cast.join(', ') }}</td>
         <td class="col-md-2">{{ film.genres.join(', ') }}</td>
       </tr>
       </tbody>
@@ -27,49 +27,29 @@
 </template>
 
 <script>
-import films from '../films'
-// import _ from "lodash";
 
 export default {
   name: "TableWithFilms",
   data() {
     return {
-      Films: films,
       n: 10,
+      numberOfMovies: 10,
     }
   },
+
   props: {
-    dataFromEvent: Array
+    dataFromEvent: Array,
   },
-  computed: {},
+  
   methods: {
     searchevents: function () {
-      if(this.dataFromEvent === []){
-      this.dataFromEvent === films}
-      // console.log(this.list)
-      // console.log(this)
-      // let tit = this.dataFromEvent
-      // if (this.list.length === 0)
-      //   return this.Films
-      // else
-      //   return this.list
-      // return _.filter(this.Films, function (film) {
-      //   return film.title.toLowerCase().includes(tit.toLowerCase())
-      // })
-      return this.dataFromEvent
-    },
-
-    limit: function () {
-      return this.searchevents().slice(0, this.n)
+      let filmy = this.dataFromEvent;
+      return filmy.slice(0, this.n);
     },
 
     increaseLimit: function () {
-      this.n += 10
+      this.n += this.numberOfMovies;
     },
-
-    created() {
-
-    }
   }
 }
 </script>

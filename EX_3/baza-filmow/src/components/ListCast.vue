@@ -1,53 +1,77 @@
 <template>
-  <div id="listCast">
+  <div class="my_list">
     <div class="col-md">
       <h2>Filmy wg obsady</h2>
-<!--  TODO: pewnie można to jakoś ładnie zrobić w JS za pomocą fora czy cos-->
-      <h3>{{ this.castArray[0] }}</h3>
       <ol>
-        <li v-for="film in this.searchGenres(this.castArray[0])" v-bind:key="film.title">{{ film.title }}</li>
-      </ol>
-      <h3>{{ this.castArray[1] }}</h3>
-      <ol>
-        <li v-for="film in this.searchGenres(this.castArray[1])" v-bind:key="film.title">{{ film.title }}</li>
-      </ol>
-      <h3>{{ this.castArray[2] }}</h3>
-      <ol>
-        <li v-for="film in this.searchGenres(this.castArray[2])" v-bind:key="film.title">{{ film.title }}</li>
+        <template v-for="genre in cast">
+          <div v-for="(movie, index, key) in getMovies(genre)" :key="key">
+            <h3 v-if="index === 0">{{ genre }}</h3>
+            {{ index + 1 }}. {{ movie.title }}
+          </div>
+        </template>
       </ol>
     </div>
   </div>
 </template>
 
 <script>
-
-import films from '../films'
-import _ from 'lodash';
+import films from "../films";
+import _ from "underscore";
 
 export default {
   name: "ListCast",
   data() {
     return {
-      Films: films,
-      n: 40,
-      castArray: ["Nicole Kidman", "Florence Lawrence", "Julia Roberts",]
-    }
+      movies: films,
+      movieCount: 100,
+      currentStartMovie: 0,
+      cast: [],
+    };
   },
-  computed: {},
   methods: {
-    searchGenres: function (cast) {
-      return _.filter(this.Films, function (film) {
-        let isInIt = false
-        for (let i = 0; i < film.cast.length; i++) {
-          if (film.cast[i] === cast) {
-            isInIt = true
+    getMovies: function (genre) {
+      let list = _.filter(this.movies, function (film) {
+        for (const g in film.cast) {
+          if (film.cast[g] === genre) {
+            return true;
           }
         }
-        return isInIt
-      }).slice(0, this.n)
+        return false;
+      });
+      return _.sortBy(list, function (film) {
+        return film.title;
+      }).slice(0, this.movieCount);
     },
-  }
-}
+
+    getCast: function () {
+      let list = [];
+      for (const c in this.movies) {
+        for (const g in this.movies[c].cast) {
+          if (!list.includes(this.movies[c].cast[g])) {
+            list.push(this.movies[c].cast[g]);
+          }
+        }
+      }
+      this.cast = list;
+    },
+
+    get100RandomMovies: function () {
+      let result = [];
+      for (let i = 0; i < this.movieCount; i++) {
+        result.push(
+          this.movies[Math.floor(Math.random() * this.movies.length)]
+        );
+      }
+      return result;
+    },
+  },
+
+  created() {
+    this.movies = this.get100RandomMovies();
+    this.getCast();
+  },
+  props: {},
+};
 </script>
 
 <style scoped>

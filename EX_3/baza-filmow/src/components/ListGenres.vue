@@ -1,53 +1,76 @@
 <template>
-  <div id="listGenres">
+  <div class="my_list">
     <div class="col-md">
       <h2>Filmy wg gatunku</h2>
-        <!-- TODO: pewnie można to jakoś ładnie zrobić w JS za pomocą fora czy cos -->
-        <h3>{{ this.genresArray[0] }}</h3>
-        <ol>
-          <li v-for="film in this.searchGenres(this.genresArray[0])" v-bind:key="film.title">{{ film.title }}</li>
-        </ol>
-        <h3>{{ this.genresArray[1] }}</h3>
-        <ol>
-          <li v-for="film in this.searchGenres(this.genresArray[1])" v-bind:key="film.title">{{ film.title }}</li>
-        </ol>
-        <h3>{{ this.genresArray[2] }}</h3>
-        <ol>
-          <li v-for="film in this.searchGenres(this.genresArray[2])" v-bind:key="film.title">{{ film.title }}</li>
-        </ol>
+      <ol>
+        <template v-for="genre in genres">
+          <div v-for="(movie, index, key) in getMovies(genre)" :key="key">
+            <h3 v-if="index === 0">{{ genre }}</h3>
+            {{ index + 1 }}. {{ movie.title }}
+          </div>
+        </template>
+      </ol>
     </div>
   </div>
 </template>
 
 <script>
-
-import films from '../films'
-import _ from 'lodash';
+import films from "../films";
+import _ from "underscore";
 
 export default {
   name: "ListGenres",
   data() {
     return {
-      Films: films,
-      n: 35,
-      genresArray: ["Comedy", "Documentary", "Short",]
-    }
+      movies: films,
+      movieCount: 100,
+      currentStartMovie: 0,
+      genres: [],
+    };
   },
-  computed: {},
   methods: {
-    searchGenres: function (genre) {
-      return _.filter(this.Films, function (film) {
-        let isInIt = false
-        for (let i = 0; i < film.genres.length; i++) {
-          if (film.genres[i] === genre) {
-            isInIt = true
+    getMoviesByGenre: function (genre) {
+      let list = this.movies;
+      list = _.filter(list, function (film) {
+        for (const gen in film.genres) {
+          if (film.genres[gen] === genre) {
+            return true;
           }
         }
-        return isInIt
-      }).slice(0, this.n)
+        return false;
+      });
+      list = _.sortBy(list, function (film) {
+        return film.title;
+      });
+      return list;
     },
-  }
-}
+    getGenres: function () {
+      let list = [];
+      for (const movie in this.movies) {
+        for (const genre in this.movies[movie].genres) {
+          if (!list.includes(this.movies[movie].genres[genre])) {
+            list.push(this.movies[movie].genres[genre]);
+          }
+        }
+      }
+      this.genres = list;
+    },
+    get100RandomMovies: function () {
+      let result = [];
+      for (let i = 0; i < this.movieCount; i++) {
+        result.push(
+          this.movies[Math.floor(Math.random() * this.movies.length)]
+        );
+      }
+      return result;
+    },
+  },
+  created() {
+    this.movies = this.get100RandomMovies();
+    this.getGenres();
+  },
+  props: {},
+};
 </script>
 
 <style scoped>
