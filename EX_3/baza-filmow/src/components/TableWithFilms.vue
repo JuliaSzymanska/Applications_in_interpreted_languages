@@ -20,7 +20,7 @@
     </table>
     <div>
       <button type="button" class="btn btn-primary btn-lg btn-block" id="wiecej" @click="this.increaseLimit">
-        Więcej
+        More
       </button>
     </div>
   </div>
@@ -43,8 +43,8 @@ export default {
   
   methods: {
     searchevents: function () {
-      let filmy = this.dataFromEvent;
-      return filmy.slice(0, this.n);
+      let films = this.dataFromEvent;
+      return films.slice(0, this.n);
     },
 
     increaseLimit: function () {
