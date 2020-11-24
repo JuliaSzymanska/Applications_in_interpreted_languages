@@ -1,48 +1,48 @@
 <template>
   <form id="forms">
     <div class="form-group row">
-      <label for="inputTitle" class="col-sm-2 col-form-label">Tytuł: </label>
+      <label for="inputTitle" class="col-sm-2 col-form-label">Title: </label>
       <div class="col-sm-10">
         <input
             v-model="inputTitle"
             id="inputTitle"
             class="form-control"
-            placeholder="Podaj tytuł lub fragment tytułu filmu"
+            placeholder="Enter a title or fragment of the movie title"
         />
       </div>
     </div>
     <div class="form-group row">
       <label for="inputYearFrom" class="col-sm-2 col-form-label"
-      >Rok produkcji od:
+      >Production year from:
       </label>
       <div class="col-sm-4">
         <input
             v-model="inputYearFrom"
             id="inputYearFrom"
             class="form-control"
-            placeholder="Liczba naturalna z przedziału 1900-2019"
+            placeholder="A natural number from the range 1900-2019"
         />
       </div>
       <label for="inputYearTo" class="col-sm-2 col-form-label"
-      >Rok produkcji do:
+      >Production year to:
       </label>
       <div class="col-sm-4">
         <input
             v-model="inputYearTo"
             id="inputYearTo"
             class="form-control"
-            placeholder="Liczba naturalna z przedziału 1900-2019"
+            placeholder="A natural number from the range 1900-2019"
         />
       </div>
     </div>
     <div class="form-group row">
-      <label for="inputCast" class="col-sm-2 col-form-label">Obsada: </label>
+      <label for="inputCast" class="col-sm-2 col-form-label">Cast: </label>
       <div class="col-sm-10">
         <input
             v-model="inputCast"
             id="inputCast"
             class="form-control"
-            placeholder="Imię i nazwisko"
+            placeholder="Name and surname"
         />
       </div>
     </div>
@@ -52,7 +52,7 @@
           class="btn btn-primary btn-lg btn-block"
           v-on:click="search"
       >
-        Szukaj
+        Search
       </button>
     </div>
   </form>

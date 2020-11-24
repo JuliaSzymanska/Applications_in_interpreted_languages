@@ -1,7 +1,7 @@
 <template>
   <div class="my_list">
     <div class="col-md">
-      <h2>Filmy wg gatunku</h2>
+      <h2>Movies by genre</h2>
       <ol>
         <template v-for="genre in genres">
           <div v-for="(movie, index, key) in getMoviesByGenre(genre)" :key="key">
