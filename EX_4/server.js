@@ -1,14 +1,8 @@
-const http = require('http');
-const express = require('express')
+const app = require('./app');
 
-const app = express()
-app.get('/', function(req, res) {
-    res.json({
-        'status': 'working'
-    })
+app.set('port', process.env.PORT || 3000);
+
+const server = app.listen(app.get('port'), () => {
+    console.log(`Product service is listening on
+    ${server.address().port}`);
 });
-
-
-app.listen(3000, function() {
-    console.log('Server working');
-})
