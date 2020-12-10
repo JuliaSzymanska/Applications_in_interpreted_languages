@@ -13,6 +13,7 @@ router.get('/products/:id', productsController.getById);
 router.post('/products', productsController.store);
 router.put('/products/:id', productsController.updateById);
 router.get('/greet/:greet/:name', fineController.greeting);
+router.get('/test', fineController.test);
 
 
 module.exports = router;
