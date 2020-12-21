@@ -16,6 +16,4 @@ router.get('/greet/:greet/:name', fineController.greeting);
 router.get('/test', fineController.test);
 
 
-module.exports = router;
-
-// sequelize
+module.exports = router

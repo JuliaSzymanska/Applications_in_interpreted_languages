@@ -1,0 +1,24 @@
+{
+    "development": {
+        "username": "loggin",
+        "password": "",
+        "database": "Shop",
+        "host": "localhost",
+        "dialect": "mssql"
+    },
+    "test": {
+        "username": "loggin",
+        "password": "",
+        "database": "Shop",
+        "host": "localhost",
+        "dialect": "mssql"
+    },
+    "production": {
+        "username": "loggin",
+        "password": "",
+        "database": "Shop",
+        "host": "localhost",
+        "dialect": "mssql"
+    }
+
+}

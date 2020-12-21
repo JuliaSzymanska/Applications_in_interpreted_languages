@@ -6,6 +6,8 @@ const routes = require('./routes/index');
 
 const app = express();
 
+require("./src/database/connection");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
