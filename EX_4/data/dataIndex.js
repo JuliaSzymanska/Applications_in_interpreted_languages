@@ -20,7 +20,7 @@ db.sequelize = sequelize;
 
 db.categories = require("./createTableCategories.js")(sequelize, Sequelize);
 db.products = require("./createTableProducts.js")(sequelize, Sequelize);
-db.products.belongsTo(db.categories, { foreignKey: 'category_id', allowNull: false });
+db.products.belongsTo(db.categories, { foreignKey: 'category_id' });
 db.states = require("./createTableStates.js")(sequelize, Sequelize);
 db.orders = require("./createTableOrders.js")(sequelize, Sequelize);
 db.orders.belongsTo(db.states, { foreignKey: 'status_id' });

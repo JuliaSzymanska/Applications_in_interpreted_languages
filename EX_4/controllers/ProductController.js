@@ -27,18 +27,21 @@ exports.findOneById = (req, res) => {
 };
 
 exports.create = (req, res) => {
-    if (!req.body.product_name) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+    // if (!req.body.product_name) {
+    //     res.status(400).send({
+    //         message: "Content can not be empty!"
+    //     });
+    //     return;
+    // }
+
+
 
     const product = {
         product_name: req.body.product_name,
         description: req.body.description,
         unit_price: req.body.unit_price,
         unit_weight: req.body.unit_weight,
+        category_id: req.body.category_id,
     };
 
     Products.create(product).then(data => {

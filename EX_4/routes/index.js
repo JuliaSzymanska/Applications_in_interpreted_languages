@@ -17,8 +17,8 @@ router.get('/', indexController.home);
 // router.get('/greet/:greet/:name', fineController.greeting);
 // router.get('/test', fineController.test);
 
-router.get('/products/getAll', productController.findAll);
+router.get('/products/findAll', productController.findAll);
 router.get('/products/:id', productController.findOneById);
-
+router.post('/products/create', productController.create);
 
 module.exports = router

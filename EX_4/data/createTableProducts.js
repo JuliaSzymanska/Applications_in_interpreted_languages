@@ -22,6 +22,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.FLOAT,
             allowNull: false,
         },
+        category_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+        }
     }, {
         timestamps: false
     });
