@@ -76,7 +76,7 @@ exports.update = (req, res) => {
 exports.create = (req, res) => {
     if (!req.body.buyer_login || !req.body.buyer_email || !req.body.status_id) {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Contents can not be empty!"
         });
         return;
     }
