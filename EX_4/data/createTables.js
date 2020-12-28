@@ -1,6 +1,6 @@
 const { seq } = require("async");
 const Sequelize = require("sequelize");
-const sequelize = require("../src/database/connection");
+const sequelize = require("../config/Sequelize");
 
 module.exports = sequelize.define("category", {
     category_id: {
