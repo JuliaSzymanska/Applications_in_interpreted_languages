@@ -25,6 +25,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         status_id: {
             type: Sequelize.STRING,
+            allowNull: false,
         }
     }, {
         timestamps: false

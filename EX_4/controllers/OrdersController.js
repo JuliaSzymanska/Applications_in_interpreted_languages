@@ -27,10 +27,10 @@ exports.findById = (req, res) => {
 };
 
 exports.findByName = (req, res) => {
-    const buyer_login = req.query.buyer_login;
+    const buyer_login = req.params.buyer_login;
     var condition = buyer_login ? {
         buyer_login: {
-            [Op.like]: buyer_login
+            [Op.is]: buyer_login
         }
     } : null;
 
@@ -49,7 +49,7 @@ exports.findByName = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-    Orders.update({ status_id: req.body.status_id }, {
+    Orders.update({ status_id: req.params.status }, {
             where: { order_id: id }
         })
         .then(num => {
@@ -67,6 +67,50 @@ exports.update = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: "Error updating Orders with id=" + id
+            });
+        });
+};
+
+exports.create = (req, res) => {
+    if (!req.body.buyer_login || !req.body.buyer_email || !req.body.status_id) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+
+    const order = {
+        approval_date: req.body.approval_date,
+        buyer_login: req.body.buyer_login,
+        buyer_email: req.body.buyer_email,
+        byuer_phone_number: req.body.byuer_phone_number,
+        status_id: req.body.status_id,
+    };
+
+    Orders.create(order).then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Error ocurred while creating the Category."
+        });
+    });
+};
+
+exports.findByStatus = (req, res) => {
+    const status = req.params.status;
+    var condition = status ? {
+        status_id: {
+            [Op.is]: status
+        }
+    } : null;
+
+    Orders.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tutorials."
             });
         });
 };
