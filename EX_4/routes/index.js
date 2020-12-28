@@ -23,6 +23,6 @@ router.post('/products', productController.create);
 // to nie dziala chyba
 router.put('/products/:id', productController.update);
 
-
+router.get('/categories', categoryController.findAll);
 
 module.exports = router
