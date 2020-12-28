@@ -1,5 +1,5 @@
-const { request } = require('../app');
-const products = require('../data/ProductData');
+const { request } = require('../../app');
+const products = require('../../data/ProductData');
 const _ = require('underscore');
 
 exports.getAll = (req, res) => {
