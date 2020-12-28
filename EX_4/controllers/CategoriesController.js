@@ -1,6 +1,5 @@
 const db = require("../data/dataIndex");
 const Category = db.categories;
-const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
 

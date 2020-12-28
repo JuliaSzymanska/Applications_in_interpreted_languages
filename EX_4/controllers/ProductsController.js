@@ -1,6 +1,5 @@
 const db = require("../data/dataIndex");
 const Products = db.products;
-const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
     Products.findAll().then(data => {
@@ -13,7 +12,7 @@ exports.findAll = (req, res) => {
 
 };
 
-exports.findOneById = (req, res) => {
+exports.findById = (req, res) => {
     const id = req.params.id;
     Products.findByPk(id)
         .then(data => {
@@ -51,6 +50,7 @@ exports.create = (req, res) => {
     });
 };
 
+//TODO: nie dziala chyba wiec poprawic
 exports.update = (req, res) => {
     const id = req.params.id;
 
