@@ -17,8 +17,12 @@ router.get('/', indexController.home);
 // router.get('/greet/:greet/:name', fineController.greeting);
 // router.get('/test', fineController.test);
 
-router.get('/products/findAll', productController.findAll);
+router.get('/products', productController.findAll);
 router.get('/products/:id', productController.findOneById);
-router.post('/products/create', productController.create);
+router.post('/products', productController.create);
+// to nie dziala chyba
+router.put('/products/:id', productController.update);
+
+
 
 module.exports = router
