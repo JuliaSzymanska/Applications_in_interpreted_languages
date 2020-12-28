@@ -5,6 +5,7 @@ const indexController = require('../controllers/IndexController');
 const categoriesController = require('../controllers/CategoriesController');
 const productsController = require('../controllers/ProductsController');
 const ordersController = require('../controllers/OrdersController');
+const statesController = require('../controllers/StatesController');
 
 router.get('/', indexController.home);
 
@@ -25,6 +26,9 @@ router.get('/orders/:name', ordersController.findByName);
 router.put('/orders/:id/:status', ordersController.update);
 router.post('/orders', ordersController.create);
 router.get('/orders/:status', ordersController.findByStatus);
+
+//States
+router.get('/status', statesController.findAll);
 
 
 

@@ -71,6 +71,8 @@ exports.update = (req, res) => {
         });
 };
 
+
+//TODO: dodawanie produktow zamowionych
 exports.create = (req, res) => {
     if (!req.body.buyer_login || !req.body.buyer_email || !req.body.status_id) {
         res.status(400).send({
