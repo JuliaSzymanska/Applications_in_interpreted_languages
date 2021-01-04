@@ -1,5 +1,6 @@
 const db = require("../data/dataIndex");
 const Products = db.products;
+const Category = db.categories;
 
 exports.findAll = (req, res) => {
     Products.findAll().then(data => {
@@ -49,6 +50,36 @@ exports.create = (req, res) => {
         return;
     }
 
+    if (!product.unit_price || product.unit_price <= 0) {
+        res.status(400).send({
+            message: "Product price can not be empty and has to be a positive number"
+        });
+        return;
+    }
+
+    if (!product.unit_weight || product.unit_weight <= 0) {
+        res.status(400).send({
+            message: "Product weight can not be empty and has to be a positive number"
+        });
+        return;
+    }
+
+    let allCategories = Category.findAll()
+
+    let categoryExists = false;
+
+    for (const key in allCategories) {
+        if (key.category_id === product.category_id) {
+            categoryExists = true;
+        }
+    }
+
+    if (!product.category_id || !categoryExists) {
+        res.status(400).send({
+            message: "Product category can not be empty and has to reffer to an existing category"
+        });
+        return;
+    }
 
     Products.create(product).then(data => {
         res.send(data);
@@ -64,8 +95,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Products.update(req.body, {
-            where: { product_id: id }
-        })
+        where: { product_id: id }
+    })
         .then(num => {
             if (num == 1) {
                 res.send({
