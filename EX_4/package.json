@@ -13,6 +13,7 @@
         "cookie-parser": "^1.4.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "log-to-file": "^2.0.2",
         "mssql": "^6.2.3",
         "nodemon": "^2.0.6",
         "sequelize": "^6.3.5",

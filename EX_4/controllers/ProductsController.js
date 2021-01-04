@@ -64,20 +64,32 @@ exports.create = (req, res) => {
         return;
     }
 
-    if (!product.category_id || Category.findByPk(product.category_id) === null) {
+    // const log = require('log-to-file');
+    // log(Category.findByPk(1), "myLogs.log");
+    // log(Category.findByPk(product.category_id), "myLogs.log");
+    if (!product.category_id) {
         res.status(400).send({
-            message: "Product category can not be empty and has to reffer to an existing category"
+            message: "Product category can not be empty"
         });
         return;
     }
 
-    Products.create(product).then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Error ocurred while creating the Category."
-        });
-    });
+    Category.findByPk(product.category_id)
+        .then(data => {
+            if (data === null) {
+                res.status(400).send({
+                    message: "Product category has to reffer to an existing category"
+                });
+            } else {
+                Products.create(product).then(data => {
+                    res.send(data);
+                }).catch(err => {
+                    res.status(500).send({
+                        message: err.message || "Error ocurred while creating the Category."
+                    });
+                });
+            }
+        })
 };
 
 //TODO: nie dziala chyba wiec poprawic
@@ -85,8 +97,8 @@ exports.update = (req, res) => {
     const id = req.params.id;
 
     Products.update(req.body, {
-        where: { product_id: id }
-    })
+            where: { product_id: id }
+        })
         .then(num => {
             if (num == 1) {
                 res.send({
