@@ -103,28 +103,64 @@ exports.update = (req, res) => {
         category_id: req.body.category_id,
     };
 
-    Products.update(
-        product, {
-            where: {
-                product_id: req.params.id
-            }
-        }
-    )
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Products was updated successfully."
+    if (product.product_name == "") {
+        res.status(400).send({
+            message: "Product name can not be empty!"
+        });
+        return;
+    }
+
+    if (product.description == "") {
+        res.status(400).send({
+            message: "Product description can not be empty!"
+        });
+        return;
+    }
+
+    if (product.unit_price <= 0) {
+        res.status(400).send({
+            message: "Product price has to be a positive number"
+        });
+        return;
+    }
+
+    if (product.unit_weight <= 0) {
+        res.status(400).send({
+            message: "Product weight has to be a positive number"
+        });
+        return;
+    }
+
+    Category.findByPk(product.category_id)
+        .then(data => {
+            if (data === null) {
+                res.status(400).send({
+                    message: "Product category has to reffer to an existing category"
                 });
-            } else if (num < 1) {
-                res.send({
-                    message: `Cannot update Products with id=${id}. Maybe Products was not found or req.body is empty!`
-                });
+            } else {
+                Products.update(
+                    product, {
+                    where: {
+                        product_id: req.params.id
+                    }
+                }
+                )
+                    .then(num => {
+                        if (num == 1) {
+                            res.status(200).send({
+                                message: "Products was updated successfully."
+                            });
+                        } else if (num < 1) {
+                            res.status(200).send({
+                                message: `Cannot update Products with id=${id}. Maybe Products was not found or req.body is empty!`
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        res.status(500).send({
+                            message: "Error updating Products with id=" + id
+                        });
+                    });
             }
         })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Products with id=" + id
-            });
-        });
-
 };
