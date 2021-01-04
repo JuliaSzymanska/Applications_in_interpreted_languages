@@ -139,19 +139,19 @@ exports.update = (req, res) => {
                 });
             } else {
                 Products.update(
-                    product, {
-                    where: {
-                        product_id: req.params.id
-                    }
-                }
-                )
+                        product, {
+                            where: {
+                                product_id: req.params.id
+                            }
+                        }
+                    )
                     .then(num => {
                         if (num == 1) {
                             res.status(200).send({
                                 message: "Products was updated successfully."
                             });
                         } else if (num < 1) {
-                            res.status(200).send({
+                            res.status(404).send({
                                 message: `Cannot update Products with id=${id}. Maybe Products was not found or req.body is empty!`
                             });
                         }
