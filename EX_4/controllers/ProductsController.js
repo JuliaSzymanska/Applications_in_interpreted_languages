@@ -131,6 +131,13 @@ exports.update = (req, res) => {
         return;
     }
 
+    if (!req.params.id) {
+        res.status(400).send({
+            message: "Product id is mandatory"
+        });
+        return;
+    }
+
     Category.findByPk(product.category_id)
         .then(data => {
             if (data === null) {
