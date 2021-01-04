@@ -26,6 +26,7 @@ exports.findById = (req, res) => {
         });
 };
 
+
 exports.create = (req, res) => {
     const product = {
         product_name: req.body.product_name,
@@ -34,7 +35,6 @@ exports.create = (req, res) => {
         unit_weight: req.body.unit_weight,
         category_id: req.body.category_id,
     };
-
 
     if (!product.product_name || product.product_name === "") {
         res.status(400).send({
@@ -94,11 +94,22 @@ exports.create = (req, res) => {
 
 //TODO: nie dziala chyba wiec poprawic
 exports.update = (req, res) => {
-    const id = req.params.id;
 
-    Products.update(req.body, {
-            where: { product_id: id }
-        })
+    const product = {
+        product_name: req.body.product_name,
+        description: req.body.description,
+        unit_price: req.body.unit_price,
+        unit_weight: req.body.unit_weight,
+        category_id: req.body.category_id,
+    };
+
+    Products.update(
+        product, {
+            where: {
+                product_id: req.params.id
+            }
+        }
+    )
         .then(num => {
             if (num == 1) {
                 res.send({
@@ -115,4 +126,5 @@ exports.update = (req, res) => {
                 message: "Error updating Products with id=" + id
             });
         });
+
 };
