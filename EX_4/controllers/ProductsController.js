@@ -37,14 +37,14 @@ exports.create = (req, res) => {
 
     if (!product.product_name || product.product_name === "") {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Product name can not be empty!"
         });
         return;
     }
 
     if (!product.description || product.description === "") {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "Product description can not be empty!"
         });
         return;
     }
