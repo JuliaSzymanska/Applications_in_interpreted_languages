@@ -26,13 +26,6 @@ exports.findById = (req, res) => {
 };
 
 exports.create = (req, res) => {
-    if (!req.body.product_name) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
-
     const product = {
         product_name: req.body.product_name,
         description: req.body.description,
@@ -40,6 +33,22 @@ exports.create = (req, res) => {
         unit_weight: req.body.unit_weight,
         category_id: req.body.category_id,
     };
+
+
+    if (!product.product_name || product.product_name === "") {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+
+    if (!product.description || product.description === "") {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+
 
     Products.create(product).then(data => {
         res.send(data);
