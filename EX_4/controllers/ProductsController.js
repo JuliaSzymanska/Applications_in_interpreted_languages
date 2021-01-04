@@ -64,17 +64,7 @@ exports.create = (req, res) => {
         return;
     }
 
-    let allCategories = Category.findAll()
-
-    let categoryExists = false;
-
-    for (const key in allCategories) {
-        if (key.category_id === product.category_id) {
-            categoryExists = true;
-        }
-    }
-
-    if (!product.category_id || !categoryExists) {
+    if (!product.category_id || Category.findByPk(product.category_id) === null) {
         res.status(400).send({
             message: "Product category can not be empty and has to reffer to an existing category"
         });
