@@ -67,7 +67,6 @@ exports.create = (req, res) => {
 
     // const log = require('log-to-file');
     // log(Category.findByPk(1), "myLogs.log");
-    // log(Category.findByPk(product.category_id), "myLogs.log");
     if (!product.category_id) {
         res.status(400).send({
             message: "Product category can not be empty"

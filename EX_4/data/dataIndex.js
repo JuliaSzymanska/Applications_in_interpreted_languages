@@ -19,6 +19,15 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+sequelize.query('SELECT * FROM categories').then((tableObj) => {
+        const log = require('log-to-file');
+        log(JSON.stringify(tableObj), "myLogs.log");
+    })
+    .catch((err) => {
+        log('showAllSchemas ERROR' + err, "myLogs.log");
+    });
+
+
 // db.categories = require("./createTableCategories.js")(sequelize, Sequelize);
 // db.products = require("./createTableProducts.js")(sequelize, Sequelize);
 // db.products.belongsTo(db.categories, { foreignKey: 'category_id' });
