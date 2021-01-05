@@ -4,7 +4,7 @@ const db = require("../data/dataIndex");
 exports.findAll = (req, res) => {
 
     db.sequelize.query('SELECT * FROM CATEGORIES').then(data => {
-        res.send(data);
+        res.send(JSON.stringify(data));
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Error ocurred while getting all the Category."
