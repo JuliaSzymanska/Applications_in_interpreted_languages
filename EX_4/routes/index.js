@@ -14,7 +14,6 @@ router.get('/', indexController.home);
 router.get('/products', productsController.findAll);
 router.get('/products/:id', productsController.findById);
 router.post('/products', productsController.create);
-//TODO: to nie dziala chyba
 router.put('/products/:id', productsController.update);
 
 //Categories
@@ -33,4 +32,4 @@ router.get('/status', statesController.findAll);
 
 
 
-module.exports = router
+module.exports = router;
