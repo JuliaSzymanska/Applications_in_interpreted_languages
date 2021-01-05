@@ -92,7 +92,7 @@ exports.update = (req, res) => {
             value = JSON.stringify(value[0][0].status_id);
             // const log = require('log-to-file');
             // log(value, "myLogs.log");
-            if (value >= req.params.status) {
+            if (value == 2 || value >= req.params.status) {
                 res.status(400).send({
                     message: "Unable to set this status"
                 });
