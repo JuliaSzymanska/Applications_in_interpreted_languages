@@ -154,17 +154,25 @@ exports.create = (req, res) => {
 
     db.sequelize.query(`INSERT INTO orders 
     (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
-    values('${order.approval_date}', ${order.status_id}, '${order.buyer_login}', '${order.buyer_email}', '${order.buyer_phone_number}')`)
+    values( '${order.approval_date}', 
+             ${order.status_id}, 
+            '${order.buyer_login}', 
+            '${order.buyer_email}', 
+            '${order.buyer_phone_number}')`)
         .then(data => {
             db.sequelize.query(`SELECT @@IDENTITY`).then(data2 => {
                 const log = require('log-to-file');
-                let insertedOrderId = JSON.stringify(data2[0][0][""]);
-                log(insertedOrderId, "myLogs.log");
-            }).catch(err2 => {
+                // let insertedOrderId = JSON.stringify(data2[0][0][""]);
+                // log(insertedOrderId, "myLogs.log");
+                for (const i in order.products) {
+                    db.sequelize.query(`INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+                    values( ${insertedOrderId}, 
+                            ${order.products[i].productId},
+                            ${order.products[i].numberOfItems})`);
 
+                }
             });
-
-            res.send({ message: "Orders was created successfully." });
+            res.send({ message: "Order was created successfully." });
         }).catch(err => {
             res.status(400).send({
                 message: err.message || "Error ocurred while creating the Category."
