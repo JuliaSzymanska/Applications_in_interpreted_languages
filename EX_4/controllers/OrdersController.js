@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+const { or } = require("sequelize");
 const db = require("../data/dataIndex");
 
 exports.findAll = (req, res) => {
@@ -122,7 +123,7 @@ exports.update = (req, res) => {
 
 //TODO: dodawanie produktow zamowionych
 exports.create = (req, res) => {
-    if (!req.body.buyer_login || !req.body.buyer_email || !req.body.status_id || !req.body.buyer_phone_number || !req.body.approval_date ||
+    if (!req.body.buyer_login || !req.body.buyer_email || !req.body.status_id || !req.body.buyer_phone_number || !req.body.approval_date || !req.body.products ||
         req.body.buyer_login == "" || req.body.buyer_email == "" || req.body.status_id == "" || req.body.buyer_phone_number == "" || req.body.buyer_phone_number == "") {
         res.status(400).send({
             message: "Contents can not be empty!"
@@ -138,13 +139,30 @@ exports.create = (req, res) => {
         buyer_email: req.body.buyer_email,
         buyer_phone_number: req.body.buyer_phone_number,
         status_id: req.body.status_id,
+        products: req.body.products
     };
 
+    for (const i in order.products) {
+        if (order.products[i].numberOfItems <= 0) {
+            res.status(400).send({
+                message: "Product amount must be greater than 0"
+            });
+        }
+    }
+    // db.sequelize.query(`INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+    // values (${})`)
 
     db.sequelize.query(`INSERT INTO orders 
     (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
     values('${order.approval_date}', ${order.status_id}, '${order.buyer_login}', '${order.buyer_email}', '${order.buyer_phone_number}')`)
         .then(data => {
+            db.sequelize.query(`SELECT @@IDENTITY`).then(data2 => {
+                const log = require('log-to-file');
+                log(JSON.stringify(data2), "myLogs.log");
+            }).catch(err2 => {
+
+            });
+            
             res.send({ message: "Orders was created successfully." });
         }).catch(err => {
             res.status(400).send({
