@@ -12,11 +12,17 @@ exports.findAll = (req, res) => {
                     const log = require("log-to-file");
                     log(JSON.stringify(products), "myLogs.log");
                     log(JSON.stringify(orders), "myLogs.log");
-                })
+                    for (const product in products[0]) {
+                        newJSON[0][products[0][product].order_id].product = products[0][product];
+
+                    }
+                    res.send(newJSON);
+                }
+                )
                 .catch((e) => {
-                    // res.status(400).send({
-                    //     message: "Error adding products to order",
-                    // });
+                    res.status(400).send({
+                        message: "Error adding products to order",
+                    });
                 });
             // res.send(newJSON);
         })
