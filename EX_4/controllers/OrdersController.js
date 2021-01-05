@@ -69,7 +69,6 @@ exports.findByStatus = (req, res) => {
         });
 };
 
-//TODO: z walidacją poprawności zmiany, np. nie można zrealizować anulowanego zamówienia i pewnie update tez nie dziala
 exports.update = (req, res) => {
     const id = req.params.id;
 
@@ -90,8 +89,8 @@ exports.update = (req, res) => {
     db.sequelize.query(`SELECT s.status_id from orders s where s.order_id = ${id}`).then(
         value => {
             value = JSON.stringify(value[0][0].status_id);
-            const log = require('log-to-file');
-            log(JSON.stringify(value[0][0].status_id), "myLogs.log");
+            // const log = require('log-to-file');
+            // log(value, "myLogs.log");
             if (value >= req.params.status) {
                 res.status(400).send({
                     message: "Unable to set this status"
@@ -118,8 +117,6 @@ exports.update = (req, res) => {
             }
         }
     );
-
-
 };
 
 
