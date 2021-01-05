@@ -3,6 +3,12 @@
 --CREATE DATABASE Shop
 --GO
 
+DROP TABLE if EXISTS Shop..products_for_orders;
+DROP TABLE IF EXISTS Shop..orders;
+DROP TABLE IF EXISTS Shop..states;
+DROP TABLE IF EXISTS Shop..products;
+DROP TABLE IF EXISTS Shop..categories;
+
 CREATE TABLE Shop..categories (
 	category_id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	category_name VARCHAR(50) NOT NULL,
