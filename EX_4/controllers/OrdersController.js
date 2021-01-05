@@ -82,6 +82,17 @@ exports.update = (req, res) => {
         return;
     }
 
+    db.sequelize.query(`SELECT s.status_id from orders s where s.order_id = ${id}`).then(
+        value => {
+            if (value[0] >= req.params.status) {
+                res.status(400).send({
+                    message: "Unable to set this status"
+                });
+                return;
+            }
+        }
+    )
+
     db.sequelize.query(`UPDATE orders SET status_id = ${req.params.status} where order_id = ${id}`)
         .then(num => {
             if (num == 1) {
