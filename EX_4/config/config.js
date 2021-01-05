@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 module.exports = {
     "username": "loggin",
     "password": "1234",

@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 module.exports = (sequelize, Sequelize) => {
     const State = sequelize.define("state", {
         status_id: {
