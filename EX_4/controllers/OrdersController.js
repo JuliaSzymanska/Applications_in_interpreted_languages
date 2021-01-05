@@ -126,7 +126,7 @@ exports.create = (req, res) => {
 
     db.sequelize.query(`INSERT INTO orders 
     (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
-    values(${order.approval_date}, ${order.status_id}, ${order.buyer_login}, ${order.buyer_email}, ${order.buyer_phone_number})`)
+    values('${order.approval_date}', ${order.status_id}, '${order.buyer_login}', '${order.buyer_email}', '${order.buyer_phone_number}')`)
         .then(data => {
             res.send(data);
         }).catch(err => {
@@ -139,7 +139,7 @@ exports.create = (req, res) => {
 exports.findByStatus = (req, res) => {
     const status = req.params.status;
 
-    db.sequelize.query(`SELECT * FROM orders o where o.status_id = ${status}`)
+    db.sequelize.query(`SELECT * FROM orders o where o.status_id = '${status}'`)
         .then(data => {
             res.send(data);
         })
