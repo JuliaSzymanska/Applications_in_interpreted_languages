@@ -1,5 +1,3 @@
-//ADD CONSTRAINT number_of_items_greater CHECK(number_of_items > 0),
-/*jshint esversion: 6 */
 module.exports = (sequelize, Sequelize) => {
     const Products_for_order = sequelize.define("products_for_order", {
         order_id: {

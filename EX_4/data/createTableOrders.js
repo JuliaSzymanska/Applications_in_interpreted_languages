@@ -1,5 +1,3 @@
-//ADD CONSTRIANT weight price grater than 0
-/*jshint esversion: 6 */
 module.exports = (sequelize, Sequelize) => {
     const Order = sequelize.define("order", {
         order_id: {
@@ -20,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        byuer_phone_number: {
+        buyer_phone_number: {
             type: Sequelize.STRING,
             allowNull: true,
         },
@@ -31,11 +29,6 @@ module.exports = (sequelize, Sequelize) => {
     }, {
         timestamps: false
     });
-
-    const log = require('log-to-file');
-    sequelize.query('select * from order').then(data => {
-        log(sequelize.query('select * from order'), "myLogs.log")
-    })
 
     return Order;
 };

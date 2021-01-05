@@ -90,6 +90,10 @@ exports.create = (req, res) => {
                     });
                 });
             }
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Error ocurred while finding by pk in category create."
+            });
         });
 };
 
@@ -170,5 +174,9 @@ exports.update = (req, res) => {
                         });
                     });
             }
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Error ocurred while finding pk for catgory in product controler update"
+            });
         });
 };

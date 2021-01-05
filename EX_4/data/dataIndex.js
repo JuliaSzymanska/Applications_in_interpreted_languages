@@ -19,14 +19,14 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.categories = require("./createTableCategories.js")(sequelize, Sequelize);
-db.products = require("./createTableProducts.js")(sequelize, Sequelize);
-db.products.belongsTo(db.categories, { foreignKey: 'category_id' });
-db.states = require("./createTableStates.js")(sequelize, Sequelize);
-db.orders = require("./createTableOrders.js")(sequelize, Sequelize);
-db.orders.belongsTo(db.states, { foreignKey: 'status_id' });
-db.products_for_orders = require("./createTableProductsForOrders.js")(sequelize, Sequelize);
-db.products_for_orders.belongsTo(db.orders, { foreignKey: 'order_id' });
-db.products_for_orders.belongsTo(db.products, { foreignKey: 'product_id' });
+// db.categories = require("./createTableCategories.js")(sequelize, Sequelize);
+// db.products = require("./createTableProducts.js")(sequelize, Sequelize);
+// db.products.belongsTo(db.categories, { foreignKey: 'category_id' });
+// db.states = require("./createTableStates.js")(sequelize, Sequelize);
+// db.orders = require("./createTableOrders.js")(sequelize, Sequelize);
+// db.orders.belongsTo(db.states, { foreignKey: 'status_id' });
+// db.products_for_orders = require("./createTableProductsForOrders.js")(sequelize, Sequelize);
+// db.products_for_orders.belongsTo(db.orders, { foreignKey: 'order_id' });
+// db.products_for_orders.belongsTo(db.products, { foreignKey: 'product_id' });
 
 module.exports = db;

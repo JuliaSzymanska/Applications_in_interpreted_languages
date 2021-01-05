@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 module.exports = (sequelize, Sequelize) => {
     const Category = sequelize.define("category", {
         category_id: {

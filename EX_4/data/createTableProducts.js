@@ -1,5 +1,3 @@
-//ADD CONSTRIANT weight price grater than 0
-/*jshint esversion: 6 */
 module.exports = (sequelize, Sequelize) => {
     const Product = sequelize.define("product", {
         product_id: {
