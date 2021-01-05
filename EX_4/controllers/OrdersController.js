@@ -128,7 +128,7 @@ exports.create = (req, res) => {
     (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
     values('${order.approval_date}', ${order.status_id}, '${order.buyer_login}', '${order.buyer_email}', '${order.buyer_phone_number}')`)
         .then(data => {
-            res.send(data);
+            res.send({ message: "Orders was created successfully." });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Error ocurred while creating the Category."
