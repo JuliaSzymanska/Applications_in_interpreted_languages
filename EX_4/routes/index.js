@@ -22,7 +22,7 @@ router.get('/categories', categoriesController.findAll);
 //Orders
 router.get('/orders', ordersController.findAll);
 router.get('/orders/:id', ordersController.findById);
-router.get('/name/:buyer_login', ordersController.findByName);
+router.get('/orders/name/:buyer_login', ordersController.findByName);
 router.put('/orders/:id/:status', ordersController.update);
 router.post('/orders', ordersController.create);
 router.get('/orders/status/:status', ordersController.findByStatus);
