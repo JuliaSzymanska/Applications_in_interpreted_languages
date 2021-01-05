@@ -13,12 +13,12 @@ exports.findAll = (req, res) => {
                     // log(JSON.stringify(products), "myLogs.log");
                     // log(JSON.stringify(orders), "myLogs.log");
                     for (const product in products[0]) {
-                        log(product + ", Srodek: " + JSON.stringify(products[0][product].order_id), "myLogs.log");
-                        log(product + ", Caly: " + JSON.stringify(newJSON[0][products[0][product].order_id]), "myLogs.log");
+                        log(product + ", Srodek: " + JSON.stringify(products[0][product]), "myLogs.log");
+                        log(product + ", Caly: " + JSON.stringify(newJSON[0][products[0][0].order_id]), "myLogs.log");
                     //  for (const i in orders[0]) {
                     //      if(newJSON[0][i][])
                     //  }
-                        newJSON[0][products[0][product].order_id][produkt] = products[0][product];
+                        newJSON[0][products[0][product].order_id][produktt] = products[0][product];
                     }
                     res.send(newJSON);
                 }
