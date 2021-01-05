@@ -84,11 +84,11 @@ exports.update = (req, res) => {
 
     db.sequelize.query(`UPDATE orders SET status_id = ${req.params.status} where order_id = ${id}`)
         .then(num => {
-            if (num == 1) {
+            if (num[1] == 1) {
                 res.send({
                     message: "Orders was updated successfully."
                 });
-            } else if (num < 1) {
+            } else {
                 res.send({
                     message: `
                     Cannot update Orders with id = $ { id }.Maybe Orders was not found or req.body is empty!`
