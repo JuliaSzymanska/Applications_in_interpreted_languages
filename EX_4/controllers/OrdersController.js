@@ -158,11 +158,12 @@ exports.create = (req, res) => {
         .then(data => {
             db.sequelize.query(`SELECT @@IDENTITY`).then(data2 => {
                 const log = require('log-to-file');
-                log(JSON.stringify(data2), "myLogs.log");
+                let insertedOrderId = JSON.stringify(data2[0][0][""]);
+                log(insertedOrderId, "myLogs.log");
             }).catch(err2 => {
 
             });
-            
+
             res.send({ message: "Orders was created successfully." });
         }).catch(err => {
             res.status(400).send({
