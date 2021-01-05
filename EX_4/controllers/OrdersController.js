@@ -12,10 +12,10 @@ exports.findAll = (req, res) => {
 
 };
 
-sequelize.query('SELECT * FROM categories').then((tableObj) => {
-    const log = require('log-to-file');
-    log(JSON.stringify(tableObj), "myLogs.log");
-})
+db.sequelize.query('SELECT * FROM categories').then((tableObj) => {
+        const log = require('log-to-file');
+        log(JSON.stringify(tableObj), "myLogs.log");
+    })
     .catch((err) => {
         log('showAllSchemas ERROR' + err, "myLogs.log");
     });
@@ -53,7 +53,7 @@ exports.findByName = (req, res) => {
     }
 
 
-    db.sequelize.query(`SELECT * FROM orders o where o.buyer_login = ${buyer_login}`)
+    db.sequelize.query(`SELECT * FROM orders o where o.buyer_login = '${buyer_login}'`)
         .then(data => {
             res.send(data);
         })

@@ -19,22 +19,22 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-sequelize.query('SELECT * FROM categories').then((tableObj) => {
-    const log = require('log-to-file');
-    log(JSON.stringify(tableObj), "myLogs.log");
-})
-    .catch((err) => {
-        log('showAllSchemas ERROR' + err, "myLogs.log");
-    });
+// sequelize.query('SELECT * FROM categories').then((tableObj) => {
+//     const log = require('log-to-file');
+//     log(JSON.stringify(tableObj), "myLogs.log");
+// })
+//     .catch((err) => {
+//         log('showAllSchemas ERROR' + err, "myLogs.log");
+//     });
 
 
-db.sequelize.query(`SELECT * FROM orders o where o.order_id = ${id}`).then((tableObj) => {
-    const log = require('log-to-file');
-    log(JSON.stringify(tableObj), "myLogs.log");
-})
-    .catch((err) => {
-        log('showAllSchemas ERROR' + err, "myLogs.log");
-    });
+// db.sequelize.query(`SELECT * FROM orders o where o.order_id = ${id}`).then((tableObj) => {
+//     const log = require('log-to-file');
+//     log(JSON.stringify(tableObj), "myLogs.log");
+// })
+//     .catch((err) => {
+//         log('showAllSchemas ERROR' + err, "myLogs.log");
+//     });
 
 
 // db.categories = require("./createTableCategories.js")(sequelize, Sequelize);
