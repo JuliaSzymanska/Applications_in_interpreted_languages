@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const db = require("../data/dataIndex");
 const Orders = db.orders;
 const Op = db.Sequelize.Op;

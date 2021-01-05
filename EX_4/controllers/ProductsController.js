@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const db = require("../data/dataIndex");
 const Products = db.products;
 const Category = db.categories;

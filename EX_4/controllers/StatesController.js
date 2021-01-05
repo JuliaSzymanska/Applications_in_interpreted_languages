@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const db = require("../data/dataIndex");
 const States = db.states;
 const Op = db.Sequelize.Op;
