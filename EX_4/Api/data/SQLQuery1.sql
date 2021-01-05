@@ -27,3 +27,6 @@ SELECT * FROM products
 SELECT * FROM states
 SELECT * FROM orders
 SELECT * FROM products_for_orders
+
+
+SELECT * FROM orders o, products_for_orders p WHERE o.order_id = p.order_id
