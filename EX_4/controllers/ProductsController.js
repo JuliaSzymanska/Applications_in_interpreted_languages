@@ -7,7 +7,7 @@ exports.findAll = (req, res) => {
     db.sequelize.query('SELECT * FROM products').then(data => {
         res.send(data);
     }).catch(err => {
-        res.status(500).send({
+        res.status(400).send({
             message: err.message || "Error ocurred while getting all the Products."
         });
     });
@@ -20,7 +20,7 @@ exports.findById = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
+            res.status(400).send({
                 message: "Error retrieving Products with id=" + id
             });
         });
@@ -89,7 +89,7 @@ exports.create = (req, res) => {
                 });
             }
         }).catch(err => {
-            res.status(500).send({
+            res.status(400).send({
                 message: err.message || "Error ocurred while finding by pk in category create."
             });
         });
@@ -167,7 +167,7 @@ exports.update = (req, res) => {
                         }
                     })
                     .catch(err => {
-                        res.status(500).send({
+                        res.status(400).send({
                             message: "Error updating Products with id=" + id
                         });
                     });
