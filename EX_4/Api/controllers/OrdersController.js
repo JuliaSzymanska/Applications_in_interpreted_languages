@@ -6,34 +6,33 @@ exports.findAll = (req, res) => {
     db.sequelize
         .query("SELECT * FROM orders")
         .then((orders) => {
-            let newJSON = orders;
+            let newJSON = orders[0];
             db.sequelize.query(`SELECT * FROM products_for_orders `)
                 .then((products) => {
-                    const log = require("log-to-file");
-                    // log(JSON.stringify(products), "myLogs.log");
-                    // log(JSON.stringify(orders), "myLogs.log");
-                    for (const product in products[0]) {
-                        log(product + ", Srodek: " + JSON.stringify(products[0][product]), "myLogs.log");
-                        log(product + ", Caly: " + JSON.stringify(newJSON[0][products[0][0].order_id]), "myLogs.log");
-                    //  for (const i in orders[0]) {
-                    //      if(newJSON[0][i][])
-                    //  }
-                        newJSON[0][products[0][product].order_id][produktt] = products[0][product];
+                    let newProducts = products[0];
+                    for (const i in newJSON) {
+                        newJSON[i]["products"] = []
+                    }
+                    for (const product in newProducts) {
+                        for (const i in newJSON) {
+                            if (newJSON[i].order_id === newProducts[product].order_id) {
+                                newJSON[i]["products"].push(newProducts[product]);
+                            }
+                        }
                     }
                     res.send(newJSON);
                 }
                 )
                 .catch((e) => {
                     res.status(400).send({
-                        message: "Error adding products to order",
+                        message: e + "Error adding products to order",
                     });
                 });
-            // res.send(newJSON);
         })
         .catch((err) => {
-            // res.status(400).send({
-            //     message: err.message || "Error ocurred while getting all the Orders.",
-            // });
+            res.status(400).send({
+                message: err.message || "Error ocurred while getting all the Orders.",
+            });
         });
 };
 
@@ -49,13 +48,34 @@ exports.findById = (req, res) => {
     }
 
     db.sequelize
-        .query(`SELECT * FROM orders o where o.order_id = $ { id }`)
-        .then((data) => {
-            res.send(data);
+        .query(`SELECT * FROM orders o where o.order_id = ${id}`)
+        .then((orders) => {
+            let newJSON = orders[0];
+            db.sequelize.query(`SELECT * FROM products_for_orders `)
+                .then((products) => {
+                    let newProducts = products[0];
+                    for (const i in newJSON) {
+                        newJSON[i]["products"] = []
+                    }
+                    for (const product in newProducts) {
+                        for (const i in newJSON) {
+                            if (newJSON[i].order_id === newProducts[product].order_id) {
+                                newJSON[i]["products"].push(newProducts[product]);
+                            }
+                        }
+                    }
+                    res.send(newJSON);
+                }
+                )
+                .catch((e) => {
+                    res.status(400).send({
+                        message: e + "Error adding products to order",
+                    });
+                });
         })
         .catch((err) => {
             res.status(400).send({
-                message: "Error retrieving Orders with id=" + id,
+                message: err + " Error retrieving Orders with id=" + id,
             });
         });
 };
@@ -72,8 +92,29 @@ exports.findByName = (req, res) => {
 
     db.sequelize
         .query(`SELECT * FROM orders o where o.buyer_login = '${buyer_login}'`)
-        .then((data) => {
-            res.send(data);
+        .then((orders) => {
+            let newJSON = orders[0];
+            db.sequelize.query(`SELECT * FROM products_for_orders `)
+                .then((products) => {
+                    let newProducts = products[0];
+                    for (const i in newJSON) {
+                        newJSON[i]["products"] = []
+                    }
+                    for (const product in newProducts) {
+                        for (const i in newJSON) {
+                            if (newJSON[i].order_id === newProducts[product].order_id) {
+                                newJSON[i]["products"].push(newProducts[product]);
+                            }
+                        }
+                    }
+                    res.send(newJSON);
+                }
+                )
+                .catch((e) => {
+                    res.status(400).send({
+                        message: e + "Error adding products to order",
+                    });
+                });
         })
         .catch((err) => {
             res.status(400).send({
@@ -87,8 +128,29 @@ exports.findByStatus = (req, res) => {
 
     db.sequelize
         .query(`SELECT * FROM orders o where o.status_id = '${status}'`)
-        .then((data) => {
-            res.send(data);
+        .then((orders) => {
+            let newJSON = orders[0];
+            db.sequelize.query(`SELECT * FROM products_for_orders `)
+                .then((products) => {
+                    let newProducts = products[0];
+                    for (const i in newJSON) {
+                        newJSON[i]["products"] = []
+                    }
+                    for (const product in newProducts) {
+                        for (const i in newJSON) {
+                            if (newJSON[i].order_id === newProducts[product].order_id) {
+                                newJSON[i]["products"].push(newProducts[product]);
+                            }
+                        }
+                    }
+                    res.send(newJSON);
+                }
+                )
+                .catch((e) => {
+                    res.status(400).send({
+                        message: e + "Error adding products to order",
+                    });
+                });
         })
         .catch((err) => {
             res.status(400).send({
