@@ -7,18 +7,16 @@ exports.findAll = (req, res) => {
         .query("SELECT * FROM orders")
         .then((orders) => {
             let newJSON = orders;
-            getProductsForOrder(orders, newJSON)
-                .then((data) => {
-                    // const log = require("log-to-file");
-                    // log(data, "myLogs.log");
-                    // res.send({ message: "Order was created successfully." });
+            db.sequelize.query(`SELECT * FROM products_for_orders `)
+                .then((products) => {
+                    const log = require("log-to-file");
+                    log(JSON.stringify(products), "myLogs.log");
                 })
                 .catch((e) => {
                     // res.status(400).send({
                     //     message: "Error adding products to order",
                     // });
                 });
-
             // res.send(newJSON);
         })
         .catch((err) => {
@@ -28,25 +26,6 @@ exports.findAll = (req, res) => {
         });
 };
 
-function getProductsForOrder(orders, newJSON) {
-    const promises = [];
-
-    for (const order in orders) {
-        promises.push(
-            db.sequelize
-                .query(
-                    `SELECT * FROM products_for_orders `
-                )
-                // WHERE order_id=${orders[0][order].order_id}
-                .then((products) => {
-                    // newJSON[0][order].products = products;
-                    const log = require("log-to-file");
-                    log(JSON.stringify(products), "myLogs.log");
-                })
-        );
-    }
-    return Promise.all(promises);
-}
 
 exports.findById = (req, res) => {
     const id = req.params.id;
