@@ -27,18 +27,3 @@ SELECT * FROM products
 SELECT * FROM states
 SELECT * FROM orders
 SELECT * FROM products_for_orders
-
-SELECT * FROM orders o where o.buyer_login = 'everybody'
-
- UPDATE orders SET status_id = 1 where order_id = 2
-
-CREATE TABLE Shop..prod
-(
-	product_id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	product_name VARCHAR(50) NOT NULL,
-	description VARCHAR(150),
-	unit_price FLOAT NOT NULL,
-	unit_weight FLOAT NOT NULL,
-	category_id INT NOT NULL,
-);
-GO
