@@ -10,11 +10,15 @@ exports.findAll = (req, res) => {
             db.sequelize.query(`SELECT * FROM products_for_orders `)
                 .then((products) => {
                     const log = require("log-to-file");
-                    log(JSON.stringify(products), "myLogs.log");
-                    log(JSON.stringify(orders), "myLogs.log");
+                    // log(JSON.stringify(products), "myLogs.log");
+                    // log(JSON.stringify(orders), "myLogs.log");
                     for (const product in products[0]) {
-                        newJSON[0][products[0][product].order_id].product = products[0][product];
-
+                        log(product + ", Srodek: " + JSON.stringify(products[0][product].order_id), "myLogs.log");
+                        log(product + ", Caly: " + JSON.stringify(newJSON[0][products[0][product].order_id]), "myLogs.log");
+                    //  for (const i in orders[0]) {
+                    //      if(newJSON[0][i][])
+                    //  }
+                        newJSON[0][products[0][product].order_id][produkt] = products[0][product];
                     }
                     res.send(newJSON);
                 }
