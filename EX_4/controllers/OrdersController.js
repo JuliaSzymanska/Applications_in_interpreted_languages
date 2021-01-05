@@ -13,9 +13,9 @@ exports.findAll = (req, res) => {
 };
 
 db.sequelize.query('SELECT * FROM categories').then((tableObj) => {
-        const log = require('log-to-file');
-        log(JSON.stringify(tableObj), "myLogs.log");
-    })
+    const log = require('log-to-file');
+    log(JSON.stringify(tableObj), "myLogs.log");
+})
     .catch((err) => {
         log('showAllSchemas ERROR' + err, "myLogs.log");
     });
@@ -84,33 +84,36 @@ exports.update = (req, res) => {
 
     db.sequelize.query(`SELECT s.status_id from orders s where s.order_id = ${id}`).then(
         value => {
+            const log = require('log-to-file');
+            log(value, "myLogs.log");
             if (value[0] >= req.params.status) {
                 res.status(400).send({
                     message: "Unable to set this status"
                 });
-                return;
+            } else {
+                db.sequelize.query(`UPDATE orders SET status_id = ${req.params.status} where order_id = ${id}`)
+                    .then(num => {
+                        if (num[1] == 1) {
+                            res.send({
+                                message: "Orders was updated successfully."
+                            });
+                        } else {
+                            res.send({
+                                message: `
+                            Cannot update Orders with id = $ { id }.Maybe Orders was not found or req.body is empty!`
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        res.status(500).send({
+                            message: "Error updating Orders with id=" + id
+                        });
+                    });
             }
         }
-    )
+    );
 
-    db.sequelize.query(`UPDATE orders SET status_id = ${req.params.status} where order_id = ${id}`)
-        .then(num => {
-            if (num[1] == 1) {
-                res.send({
-                    message: "Orders was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `
-                    Cannot update Orders with id = $ { id }.Maybe Orders was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Orders with id=" + id
-            });
-        });
+
 };
 
 
