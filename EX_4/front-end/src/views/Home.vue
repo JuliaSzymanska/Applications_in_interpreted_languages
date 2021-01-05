@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 <template>
-  <div class=".container-fluid">
+  <!-- <div class=".container-fluid"> -->
     <p>HEJKA NAKLEJKA</p>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
   font-size: 16px;
 }
 body {
-  background: #00abb7;
+  background: #9dc7ca;
 }
 .container-fluid * {
   width: 100%;
