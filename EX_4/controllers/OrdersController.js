@@ -5,7 +5,7 @@ exports.findAll = (req, res) => {
     db.sequelize.query('SELECT * FROM orders').then(data => {
         res.send(data);
     }).catch(err => {
-        res.status(500).send({
+        res.status(400).send({
             message: err.message || "Error ocurred while getting all the Orders."
         });
     });
@@ -27,7 +27,7 @@ exports.findById = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
+            res.status(400).send({
                 message: "Error retrieving Orders with id=" + id
             });
         });
@@ -49,8 +49,8 @@ exports.findByName = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving tutorials."
+            res.status(400).send({
+                message: err.message || "Error retrieving order by buyer login"
             });
         });
 };
@@ -63,8 +63,8 @@ exports.findByStatus = (req, res) => {
             res.send(data);
         })
         .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving tutorials."
+            res.status(400).send({
+                message: err.message || "Some error occurred while retrieving order by status."
             });
         });
 };
@@ -110,7 +110,7 @@ exports.update = (req, res) => {
                         }
                     })
                     .catch(err => {
-                        res.status(500).send({
+                        res.status(400).send({
                             message: "Error updating Orders with id=" + id
                         });
                     });
@@ -147,7 +147,7 @@ exports.create = (req, res) => {
         .then(data => {
             res.send({ message: "Orders was created successfully." });
         }).catch(err => {
-            res.status(500).send({
+            res.status(400).send({
                 message: err.message || "Error ocurred while creating the Category."
             });
         });
