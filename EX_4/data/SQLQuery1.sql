@@ -11,8 +11,8 @@ INSERT INTO products (product_name, unit_price, unit_weight, category_id) VALUES
 ('laptop drugi', 2.0, 2.3, 1)
 
 INSERT INTO states (status_name) VALUES ('Not approved')
-INSERT INTO states (status_name) VALUES ('Approved')
 INSERT INTO states (status_name) VALUES ('Canceled')
+INSERT INTO states (status_name) VALUES ('Approved')
 INSERT INTO states (status_name) VALUES ('Completed')
 
 INSERT INTO orders (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
