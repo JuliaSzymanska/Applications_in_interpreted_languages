@@ -31,5 +31,4 @@ router.get('/orders/:status', ordersController.findByStatus);
 router.get('/status', statesController.findAll);
 
 
-
 module.exports = router;

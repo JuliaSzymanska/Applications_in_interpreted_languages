@@ -90,7 +90,7 @@ exports.create = (req, res) => {
                     });
                 });
             }
-        })
+        });
 };
 
 //TODO: nie dziala chyba wiec poprawic
@@ -170,5 +170,5 @@ exports.update = (req, res) => {
                         });
                     });
             }
-        })
+        });
 };
