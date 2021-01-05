@@ -6,7 +6,7 @@ exports.findAll = (req, res) => {
     db.sequelize.query('SELECT * FROM orders').then(orders => {
         let newJSON = JSON.stringify(orders);
         for (const order in orders[0]) {
-            db.sequelize.query(`SELECT * FROM products_for_orders WHERE order_id=${orders[0][order][order_id]}`)
+            db.sequelize.query(`SELECT * FROM products_for_orders WHERE order_id=${orders[0][order].order_id}`)
                 .then(products => {
                     newJSON[0][order].products = products;
                 });
