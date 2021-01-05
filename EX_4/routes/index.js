@@ -28,7 +28,7 @@ router.post('/orders', ordersController.create);
 router.get('/orders/status/:status', ordersController.findByStatus);
 
 //States
-router.get('/status', statesController.findAll);
+router.get('/states', statesController.findAll);
 
 
 module.exports = router;
