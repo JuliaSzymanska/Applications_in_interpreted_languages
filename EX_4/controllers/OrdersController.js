@@ -11,6 +11,7 @@ exports.findAll = (req, res) => {
                 .then((products) => {
                     const log = require("log-to-file");
                     log(JSON.stringify(products), "myLogs.log");
+                    log(JSON.stringify(orders), "myLogs.log");
                 })
                 .catch((e) => {
                     // res.status(400).send({
