@@ -4,19 +4,18 @@ const Products = db.products;
 const Category = db.categories;
 
 exports.findAll = (req, res) => {
-    Products.findAll().then(data => {
+    db.sequelize.query('SELECT * FROM products').then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Error ocurred while getting all the Products."
         });
     });
-
 };
 
 exports.findById = (req, res) => {
     const id = req.params.id;
-    Products.findByPk(id)
+    db.sequelize.query(`SELECT * FROM products p where p.product_id = ${id}`)
         .then(data => {
             res.send(data);
         })
@@ -96,7 +95,7 @@ exports.create = (req, res) => {
         });
 };
 
-//TODO: nie dziala chyba wiec poprawic
+
 exports.update = (req, res) => {
 
     const product = {

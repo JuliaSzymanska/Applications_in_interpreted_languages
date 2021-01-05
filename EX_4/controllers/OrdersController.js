@@ -13,9 +13,9 @@ exports.findAll = (req, res) => {
 };
 
 db.sequelize.query('SELECT * FROM categories').then((tableObj) => {
-    const log = require('log-to-file');
-    log(JSON.stringify(tableObj), "myLogs.log");
-})
+        const log = require('log-to-file');
+        log(JSON.stringify(tableObj), "myLogs.log");
+    })
     .catch((err) => {
         log('showAllSchemas ERROR' + err, "myLogs.log");
     });
@@ -64,6 +64,20 @@ exports.findByName = (req, res) => {
         });
 };
 
+exports.findByStatus = (req, res) => {
+    const status = req.params.status;
+
+    db.sequelize.query(`SELECT * FROM orders o where o.status_id = '${status}'`)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tutorials."
+            });
+        });
+};
+
 //TODO: z walidacją poprawności zmiany, np. nie można zrealizować anulowanego zamówienia i pewnie update tez nie dziala
 exports.update = (req, res) => {
     const id = req.params.id;
@@ -85,7 +99,7 @@ exports.update = (req, res) => {
     db.sequelize.query(`SELECT s.status_id from orders s where s.order_id = ${id}`).then(
         value => {
             const log = require('log-to-file');
-            log(value, "myLogs.log");
+            log(value[0].status_id, "myLogs.log");
             if (value[0] >= req.params.status) {
                 res.status(400).send({
                     message: "Unable to set this status"
@@ -146,20 +160,6 @@ exports.create = (req, res) => {
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Error ocurred while creating the Category."
-            });
-        });
-};
-
-exports.findByStatus = (req, res) => {
-    const status = req.params.status;
-
-    db.sequelize.query(`SELECT * FROM orders o where o.status_id = '${status}'`)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving tutorials."
             });
         });
 };

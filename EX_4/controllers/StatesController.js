@@ -4,7 +4,7 @@ const States = db.states;
 const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
-    States.findAll().then(data => {
+    db.sequelize.query('SELECT * FROM states').then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
