@@ -33,7 +33,9 @@ module.exports = (sequelize, Sequelize) => {
     });
 
     const log = require('log-to-file');
-    log(sequelize.query('select * from order'), "myLogs.log")
+    sequelize.query('select * from order').then(data => {
+        log(sequelize.query('select * from order'), "myLogs.log")
+    })
 
     return Order;
 };
