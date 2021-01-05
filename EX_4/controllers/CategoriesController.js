@@ -1,10 +1,9 @@
 /*jshint esversion: 6 */
 const db = require("../data/dataIndex");
-const Category = db.categories;
 
 exports.findAll = (req, res) => {
 
-    Category.findAll().then(data => {
+    db.sequelize.query('SELECT * FROM CATEGORIES').then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
