@@ -3,8 +3,15 @@ const { or } = require("sequelize");
 const db = require("../data/dataIndex");
 
 exports.findAll = (req, res) => {
-    db.sequelize.query('SELECT * FROM orders').then(data => {
-        res.send(data);
+    db.sequelize.query('SELECT * FROM orders').then(orders => {
+        let newJSON = JSON.stringify(orders);
+        for (const order in orders[0]) {
+            db.sequelize.query(`SELECT * FROM products_for_orders WHERE order_id=${orders[0][order][order_id]}`)
+                .then(products => {
+                    newJSON[0][order].products = products;
+                });
+        }
+        res.send(orders);
     }).catch(err => {
         res.status(400).send({
             message: err.message || "Error ocurred while getting all the Orders."
@@ -23,7 +30,9 @@ exports.findById = (req, res) => {
         return;
     }
 
-    db.sequelize.query(`SELECT * FROM orders o where o.order_id = ${id}`)
+    db.sequelize.query(`
+                            SELECT * FROM orders o where o.order_id = $ { id }
+                            `)
         .then(data => {
             res.send(data);
         })
@@ -45,7 +54,9 @@ exports.findByName = (req, res) => {
     }
 
 
-    db.sequelize.query(`SELECT * FROM orders o where o.buyer_login = '${buyer_login}'`)
+    db.sequelize.query(`
+                            SELECT * FROM orders o where o.buyer_login = '${buyer_login}'
+                            `)
         .then(data => {
             res.send(data);
         })
@@ -59,7 +70,9 @@ exports.findByName = (req, res) => {
 exports.findByStatus = (req, res) => {
     const status = req.params.status;
 
-    db.sequelize.query(`SELECT * FROM orders o where o.status_id = '${status}'`)
+    db.sequelize.query(`
+                            SELECT * FROM orders o where o.status_id = '${status}'
+                            `)
         .then(data => {
             res.send(data);
         })
@@ -87,7 +100,9 @@ exports.update = (req, res) => {
         return;
     }
 
-    db.sequelize.query(`SELECT s.status_id from orders s where s.order_id = ${id}`).then(
+    db.sequelize.query(`
+                            SELECT s.status_id from orders s where s.order_id = $ { id }
+                            `).then(
         value => {
             value = JSON.stringify(value[0][0].status_id);
             // const log = require('log-to-file');
@@ -97,7 +112,10 @@ exports.update = (req, res) => {
                     message: "Unable to set this status"
                 });
             } else {
-                db.sequelize.query(`UPDATE orders SET status_id = ${req.params.status} where order_id = ${id}`)
+                db.sequelize.query(`
+                            UPDATE orders SET status_id = $ { req.params.status }
+                            where order_id = $ { id }
+                            `)
                     .then(num => {
                         if (num[1] == 1) {
                             res.send({
@@ -149,8 +167,6 @@ exports.create = (req, res) => {
             });
         }
     }
-    // db.sequelize.query(`INSERT INTO products_for_orders (order_id, product_id, number_of_items)
-    // values (${})`)
 
     db.sequelize.query(`INSERT INTO orders 
     (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
