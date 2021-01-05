@@ -162,20 +162,37 @@ exports.create = (req, res) => {
         .then(data => {
             db.sequelize.query(`SELECT @@IDENTITY`).then(data2 => {
                 const log = require('log-to-file');
-                // let insertedOrderId = JSON.stringify(data2[0][0][""]);
+                let insertedOrderId = JSON.stringify(data2[0][0][""]);
                 // log(insertedOrderId, "myLogs.log");
-                for (const i in order.products) {
-                    db.sequelize.query(`INSERT INTO products_for_orders (order_id, product_id, number_of_items)
-                    values( ${insertedOrderId}, 
-                            ${order.products[i].productId},
-                            ${order.products[i].numberOfItems})`);
 
-                }
+                productsToInsertLoop(insertedOrderId, order)
+                    .then(() => {
+                        res.send({ message: "Order was created successfully." });
+                    })
+                    .catch((e) => {
+                        res.status(400).send({
+                            message: "Error adding products to order"
+                        });
+                    });
+
+
             });
-            res.send({ message: "Order was created successfully." });
-        }).catch(err => {
+        }).catch((e) => {
             res.status(400).send({
-                message: err.message || "Error ocurred while creating the Category."
+                message: "Error creating order"
             });
         });
 };
+
+function productsToInsertLoop(insertedOrderId, order) {
+    const promises = [];
+
+    for (const i in order.products) {
+        promises.push(db.sequelize.query(`INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+        values( ${insertedOrderId}, 
+                ${order.products[i].productId},
+                ${order.products[i].numberOfItems})`));
+    }
+
+    return Promise.all(promises);
+}
