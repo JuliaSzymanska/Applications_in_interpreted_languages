@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <p>HEJKA NAKKK</p>
-    <router-view />
-  </div>
+  <router-view/>
 </template>
 
 <style>

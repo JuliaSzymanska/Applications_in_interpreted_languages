@@ -1,19 +1,16 @@
 <template>
-  <!-- <div class=".container-fluid"> -->
-  <div>
-    <p>HEJKA NAKLEJKA</p>
+  <div class=".container-fluid">
+    <p>HEJKA</p>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
-// import ChatsList from "../components/ChatsList";
 export default {
   name: "Home",
-    components: {
-  //     ChatsList
-    },
-  data() {},
+  components: {},
+  data() {
+    return {};
+  },
   methods: {},
 };
 </script>
@@ -29,7 +26,7 @@ export default {
   font-size: 16px;
 }
 body {
-  background: #9dc7ca;
+  background: #00abb7;
 }
 .container-fluid * {
   width: 100%;

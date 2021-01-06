@@ -1,9 +1,16 @@
 <template>
-  <div>
-    <p>HEJKA NAKKK</p>
-    <router-view />
-  </div>
+  <LoginForm  class="justify-center"/>
 </template>
+
+<script>
+import LoginForm from "../components/LoginForm";
+export default {
+  name: 'Login',
+  components: {
+    LoginForm
+  }
+}
+</script>
 
 <style>
 #app {
@@ -12,18 +19,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  margin-top: 60px;
 }
 </style>
