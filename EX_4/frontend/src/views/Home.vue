@@ -1,16 +1,19 @@
 <template>
   <div class=".container-fluid">
-     <TableWithProducts  class="justify-center"/>
+     <SearchProducts class="justify-center" />
+    <TableWithProducts class="justify-center" />
   </div>
 </template>
 
 <script>
 import TableWithProducts from "../components/TableWithProducts";
+import SearchProducts from "../components/SearchProducts";
 
 export default {
   name: "Home",
   components: {
     TableWithProducts,
+    SearchProducts,
   },
   data() {
     return {};

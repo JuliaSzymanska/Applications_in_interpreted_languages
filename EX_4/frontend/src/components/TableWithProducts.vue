@@ -13,7 +13,7 @@
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
           <td class="col-md-2">{{ product.product_name }}</td>
-          <td class="col-md-2">{{ product.category_id }}</td>
+          <td class="col-md-2">{{ product.category_name }}</td>
           <td class="col-md-2">{{ product.unit_weight }}</td>
           <td class="col-md-2">{{ product.unit_price }}</td>
           <td>
@@ -99,11 +99,12 @@ export default {
                 self.products[i].category_id ===
                 self.categories[cat].category_id
               ) {
-                self.products[i].category_id =
+                self.products[i]["category_name"] =
                   self.categories[cat].category_name;
               }
             }
           }
+          console.log(self.products);
           //   self.$emit("search-event", self.dataToReturn);
         })
         .catch(function(error) {
