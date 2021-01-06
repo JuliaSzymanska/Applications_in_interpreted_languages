@@ -16,6 +16,7 @@
     "vue": "^3.0.0",
     "vue-resource": "^1.5.1",
     "vue-router": "^4.0.0-rc.5",
+    "vue-select": "^3.11.2",
     "vuex": "^4.0.0-rc.2",
     "yup": "^0.32.8"
   },

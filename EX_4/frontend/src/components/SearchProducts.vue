@@ -35,17 +35,17 @@
         />
       </div>
     </div>
-    <!-- <div class="form-group row">
-      <label for="inputCast" class="col-sm-2 col-form-label">Cast: </label>
-      <div class="col-sm-10">
-        <input
-          v-model="inputCast"
-          id="inputCast"
-          class="form-control"
-          placeholder="Name and surname"
-        />
-      </div>
-    </div> -->
+    <div class="form-group row">
+      <!-- <v-combobox
+        v-model="select"
+        :items="categoriesName"
+        label="Category"
+        outlined
+        multiple
+        dense
+      ></v-combobox> -->
+      <!-- <v-select :options="categoriesName"></v-select> -->
+    </div>
     <div>
       <button
         type="button"
@@ -68,6 +68,8 @@ export default {
     return {
       products: [],
       categories: [],
+      categoriesName: [],
+      select: [""],
       inputName: "",
       inputCategory: "",
       inputPriceFrom: "",
@@ -88,6 +90,10 @@ export default {
         .get(process.env.VUE_APP_BACKEND_URL + "/categories")
         .then(function(response) {
           self.categories = response.data[0];
+
+          for (const cat in self.categories) {
+            self.categoriesName.push(self.categories[cat].category_name);
+          }
         })
         .catch(function(error) {
           console.log(error);
