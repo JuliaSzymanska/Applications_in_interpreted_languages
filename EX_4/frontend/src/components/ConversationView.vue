@@ -59,6 +59,7 @@ export default {
       this.getChatMessages();
     },
   },
+  
 
   methods: {
     sortArrays(arrays) {

@@ -1,13 +1,17 @@
 <template>
   <div class=".container-fluid">
-    <p>HEJKA</p>
+     <TableWithProducts  class="justify-center"/>
   </div>
 </template>
 
 <script>
+import TableWithProducts from "../components/TableWithProducts";
+
 export default {
   name: "Home",
-  components: {},
+  components: {
+    TableWithProducts,
+  },
   data() {
     return {};
   },
