@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.Products" :key="key">
+        <tr v-for="(product, index, key) in this.products" :key="key">
           <td class="col-md-2">{{ product.product_name }}</td>
           <td class="col-md-2">{{ product.category_name }}</td>
           <td class="col-md-2">{{ product.unit_weight }}</td>
@@ -51,7 +51,7 @@ export default {
   },
 
   props: {
-    Products: Array,
+    products: Array,
   },
 
   methods: {},

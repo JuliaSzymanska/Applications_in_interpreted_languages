@@ -1,7 +1,7 @@
 <template>
   <div class=".container-fluid">
     <SearchProducts class="justify-center" @search-event="handleAppEvent"/>
-    <TableWithProducts class="justify-center" :dataFromEvent='eventData'/>
+    <TableWithProducts class="justify-center" :products='serachedProducts'/>
   </div>
 </template>
 

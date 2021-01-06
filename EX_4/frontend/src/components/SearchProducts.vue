@@ -79,7 +79,6 @@ export default {
   created: function() {
     this.getCategories();
     this.getProducts();
-    this.search();
   },
 
   methods: {
@@ -123,7 +122,7 @@ export default {
 
     search: function() {
       let self = this;
-      self.listEmitted = _.filter(self.Products, function(product) {
+      self.listEmitted = _.filter(self.products, function(product) {
         if (
           (self.inputName === "" ||
             product.product_name
