@@ -11,10 +11,10 @@
       </thead>
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
-          <td class="col-md-2">{{ film.product_name }}</td>
-          <td class="col-md-2">{{ film.category_id }}</td>
-          <td class="col-md-2">{{ film.unit_weight }}</td>
-          <td class="col-md-2">{{ film.unit_price }}</td>
+          <td class="col-md-2">{{ product.product_name }}</td>
+          <td class="col-md-2">{{ product.category_id }}</td>
+          <td class="col-md-2">{{ product.unit_weight }}</td>
+          <td class="col-md-2">{{ product.unit_price }}</td>
           <td>
             <button
               type="button"
@@ -76,7 +76,7 @@ export default {
       axios
         .get(process.env.VUE_APP_BACKEND_URL + "/products")
         .then(function(response) {
-          self.products = JSON.parse(response.data[0]);
+          self.products = response.data[0];
           console.log(typeof self.products);
           //   for (var i = 0; i < self.chats.length; i++) {
           //     self.chats[i].lastMessageDate = new Date(
