@@ -31,7 +31,7 @@
           v-model="inputPriceTo"
           id="inputPriceTo"
           class="form-control"
-       placeholder="A positive number"
+          placeholder="A positive number"
         />
       </div>
     </div>
@@ -66,7 +66,8 @@ export default {
   name: "Forms",
   data: function() {
     return {
-      Products: [],
+      products: [],
+      categories: [],
       inputName: "",
       inputCategory: "",
       inputPriceFrom: "",
@@ -78,6 +79,7 @@ export default {
   created: function() {
     this.getCategories();
     this.getProducts();
+    this.search();
   },
 
   methods: {
@@ -111,7 +113,8 @@ export default {
               }
             }
           }
-          console.log(self.products);
+          self.$emit("search-event", self.products);
+          console.log("event with all emitted");
         })
         .catch(function(error) {
           console.log(error);
@@ -144,7 +147,7 @@ export default {
         }
         return false;
       });
-      this.$emit("search-event", self.listEmitted);
+      self.$emit("search-event", self.listEmitted);
     },
   },
 };

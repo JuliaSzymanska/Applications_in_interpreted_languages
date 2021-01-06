@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.products" :key="key">
+        <tr v-for="(product, index, key) in this.Products" :key="key">
           <td class="col-md-2">{{ product.product_name }}</td>
           <td class="col-md-2">{{ product.category_name }}</td>
           <td class="col-md-2">{{ product.unit_weight }}</td>
@@ -43,75 +43,18 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   name: "TableWithProducts",
   data() {
-    return {
-      products: [],
-      categories: [],
-    };
+    return {};
   },
 
-  //   props: {
-  //     dataFromEvent: Array,
-  //   },
-
-  created: function() {
-    this.getCategories();
-    this.getProducts();
+  props: {
+    Products: Array,
   },
 
-  methods: {
-    // searchevents: function() {
-    //   let products = this.dataFromEvent;
-    //   return products.slice(0, this.n);
-    // return this.dataFromEvent;
-    // },
-    // increaseLimit: function() {
-    //   this.n += this.numberOfMovies;
-    // },
-
-    getCategories: function() {
-      let self = this;
-      axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/categories")
-        .then(function(response) {
-          self.categories = response.data[0];
-          // console.log(self.categories.length);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-
-    getProducts: function() {
-      let self = this;
-
-      axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/products")
-        .then(function(response) {
-          self.products = response.data[0];
-          for (const i in self.products) {
-            for (const cat in self.categories) {
-              if (
-                self.products[i].category_id ===
-                self.categories[cat].category_id
-              ) {
-                self.products[i]["category_name"] =
-                  self.categories[cat].category_name;
-              }
-            }
-          }
-          console.log(self.products);
-          //   self.$emit("search-event", self.dataToReturn);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    },
-  },
+  methods: {},
 };
 </script>
 

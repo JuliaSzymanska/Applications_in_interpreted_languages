@@ -1,7 +1,7 @@
 <template>
   <div class=".container-fluid">
-     <SearchProducts class="justify-center" />
-    <TableWithProducts class="justify-center" />
+    <SearchProducts class="justify-center" @search-event="handleAppEvent"/>
+    <TableWithProducts class="justify-center" :dataFromEvent='eventData'/>
   </div>
 </template>
 
@@ -15,10 +15,16 @@ export default {
     TableWithProducts,
     SearchProducts,
   },
-  data() {
-    return {};
+data: function(){
+    return {
+      serachedProducts: Array
+    }
   },
-  methods: {},
+  methods: {
+    handleAppEvent: function(data) {
+      this.serachedProducts = data;
+    },
+  },
 };
 </script>
 
