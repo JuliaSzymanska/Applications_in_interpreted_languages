@@ -8,7 +8,7 @@ INSERT INTO products (product_name, unit_price, unit_weight, category_id) VALUES
 ('laptop', 1.0, 1.3, 1)
 
 INSERT INTO products (product_name, unit_price, unit_weight, category_id) VALUES 
-('laptop drugi', 2.0, 2.3, 1)
+('laptop drugi', 2.0, 2.3, 2)
 
 INSERT INTO states (status_name) VALUES ('Not approved')
 INSERT INTO states (status_name) VALUES ('Canceled')
