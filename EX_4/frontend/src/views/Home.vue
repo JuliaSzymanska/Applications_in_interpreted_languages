@@ -30,7 +30,7 @@ export default {
   font-size: 16px;
 }
 body {
-  background: #00abb7;
+  background: #c9dddf;
 }
 .container-fluid * {
   width: 100%;

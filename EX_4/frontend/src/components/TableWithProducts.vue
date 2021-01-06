@@ -7,6 +7,7 @@
           <th class="col-md-2" scope="col">Category</th>
           <th class="col-md-2" scope="col">Unit weight</th>
           <th class="col-md-2" scope="col">Unit price</th>
+          <th class="col-md-2" scope="col">Add to cart</th>
         </tr>
       </thead>
       <tbody>
@@ -49,6 +50,7 @@ export default {
   data() {
     return {
       products: [],
+      categories: [],
     };
   },
 
@@ -57,6 +59,7 @@ export default {
   //   },
 
   created: function() {
+    this.getCategories();
     this.getProducts();
   },
 
@@ -70,6 +73,19 @@ export default {
     //   this.n += this.numberOfMovies;
     // },
 
+    getCategories: function() {
+      let self = this;
+      axios
+        .get(process.env.VUE_APP_BACKEND_URL + "/categories")
+        .then(function(response) {
+          self.categories = response.data[0];
+          // console.log(self.categories.length);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
     getProducts: function() {
       let self = this;
 
@@ -77,15 +93,18 @@ export default {
         .get(process.env.VUE_APP_BACKEND_URL + "/products")
         .then(function(response) {
           self.products = response.data[0];
-          console.log(typeof self.products);
-          //   for (var i = 0; i < self.chats.length; i++) {
-          //     self.chats[i].lastMessageDate = new Date(
-          //       self.chats[i].lastMessageDate
-          //     );
-          //   }
-          console.log(self.products);
+          for (const i in self.products) {
+            for (const cat in self.categories) {
+              if (
+                self.products[i].category_id ===
+                self.categories[cat].category_id
+              ) {
+                self.products[i].category_id =
+                  self.categories[cat].category_name;
+              }
+            }
+          }
           //   self.$emit("search-event", self.dataToReturn);
-          console.log("event with all emitted");
         })
         .catch(function(error) {
           console.log(error);
@@ -99,5 +118,7 @@ export default {
 #tableProducts {
   padding-top: 30px;
   border-collapse: collapse;
+  width: 70%;
+  margin: auto;
 }
 </style>
