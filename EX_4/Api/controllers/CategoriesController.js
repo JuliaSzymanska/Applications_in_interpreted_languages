@@ -10,5 +10,4 @@ exports.findAll = (req, res) => {
             message: err.message || "Error ocurred while getting all the Category."
         });
     });
-
 };

@@ -1,16 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+/*jshint esversion: 6 */
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
 
 const routes = [
   // {
   //   path: '/registration',
   //   name: 'Registration',
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/Registration.vue')
+  //   component: () => import('../views/Registration.vue')
   // },
   // {
   //   path: '/login',
   //   name: 'Login',
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  //   component: () => import('../views/Login.vue')
   // },
   {
     path: '/home',
@@ -19,23 +20,20 @@ const routes = [
   },
   {
     path: '/',
-     redirect: {
-       name: 'Home'
-      },
+    redirect: {
+      name: 'Home'
+    },
   },
   {
     path: "/:catchAll(.*)",
-    name: "NotFound", 
-    // TODO: add page not found page
+    name: "NotFound",
     redirect: '/'
   }
-]
-
-
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;
