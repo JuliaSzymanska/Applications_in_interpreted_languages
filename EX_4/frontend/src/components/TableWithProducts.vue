@@ -17,66 +17,18 @@
           <td class="col-md-2">{{ product.unit_weight }}</td>
           <td class="col-md-2">{{ product.unit_price }}</td>
           <td>
-            <tr>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-lg btn-block"
-                  id="increaseNumber"
-                  @click="addToCart(product.product_id)"
-                >
-                  +
-                </button>
-              </td>
-              <td></td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-lg btn-block"
-                  id="decreaseNumber"
-                  @click="addToCart(product.product_id)"
-                >
-                  -
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-lg btn-block"
-                  id="addToCart"
-                  @click="addToCart(product.product_id)"
-                >
-                  Add
-                </button>
-              </td>
-            </tr>
-          </td>
-
-          <!-- <td>
             <button
               type="button"
               class="btn btn-primary btn-lg btn-block"
               id="addToCart"
-              @click="addToCart(product.product_id)"
+              @click="addToCart(product.product_id, product.number_in_cart)"
             >
               Add
             </button>
-          </td> -->
+          </td>
         </tr>
       </tbody>
     </table>
-    <!-- <div>
-      <button
-        type="button"
-        class="btn btn-primary btn-lg btn-block"
-        id="wiecej"
-        @click="this.increaseLimit"
-      >
-        More
-      </button>
-    </div> -->
   </div>
 </template>
 
@@ -97,7 +49,6 @@ export default {
     addToCart: function(id) {
       let product = [];
       product.push(id);
-      product.push(1);
       this.productsInCart.push(product);
       this.$emit("cart-event", this.productsInCart);
     },
