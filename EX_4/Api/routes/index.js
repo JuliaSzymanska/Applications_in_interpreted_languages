@@ -15,6 +15,7 @@ router.get('/products', productsController.findAll);
 router.get('/products/:id', productsController.findById);
 router.post('/products', productsController.create);
 router.put('/products/:id', productsController.update);
+router.get('/products/category/:category', productsController.findByCategory);
 
 //* Categories
 router.get('/categories', categoriesController.findAll);

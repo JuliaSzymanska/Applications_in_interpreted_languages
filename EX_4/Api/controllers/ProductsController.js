@@ -26,6 +26,19 @@ exports.findById = (req, res) => {
         });
 };
 
+exports.findByCategory = (req, res) => {
+    const category = req.params.category;
+    db.sequelize.query(`SELECT * FROM products p where p.category_id = ${category}`)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(400).send({
+                message: "Error retrieving Products with id=" + id
+            });
+        });
+};
+
 
 exports.create = (req, res) => {
     const product = {

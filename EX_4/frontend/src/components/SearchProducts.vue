@@ -75,36 +75,83 @@ export default {
       inputPriceFrom: "",
       inputPriceTo: "",
       listEmitted: [],
+      isFinished: false,
     };
   },
 
   created: function() {
     this.getCategories();
-    this.getProducts();
+    // .then(this.search());
+    // while (!this.isFinished) {
+    //   this.products = [];
+    //   console.log(this.isFinished);
+    // }
+    this.search();
+    // this.getProducts();
+    // this.emitEvent();
   },
 
   methods: {
     getCategories: function() {
       let self = this;
-      axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/categories")
-        .then(function(response) {
-          self.categories = response.data[0];
+      return new Promise((resolve, reject) => {
+        axios
+          .get(process.env.VUE_APP_BACKEND_URL + "/categories")
+          .then(function(response) {
+            self.categories = response.data[0];
 
-          for (const cat in self.categories) {
-            self.categoriesName.push(self.categories[cat].category_name);
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+            for (const cat in self.categories) {
+              self.categoriesName.push(self.categories[cat].category_name);
+            }
+            resolve();
+          })
+          .catch(function(error) {
+            console.log(error);
+            reject(error);
+          });
+      });
     },
 
     getProducts: function() {
       let self = this;
+      return new Promise((resolve, reject) => {
+        axios
+          .get(process.env.VUE_APP_BACKEND_URL + "/products")
+          .then(function(response) {
+            self.products = response.data[0];
+            for (const i in self.products) {
+              for (const cat in self.categories) {
+                if (
+                  self.products[i].category_id ===
+                  self.categories[cat].category_id
+                ) {
+                  self.products[i]["category_name"] =
+                    self.categories[cat].category_name;
+                }
+              }
+            }
+            resolve();
+          })
+          .catch(function(error) {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
+
+    emitEvent() {
+      this.$emit("search-event", this.products);
+    },
+
+    getProductsByCategory() {
+      const params = new URLSearchParams({
+        category: self.inputCategory,
+      }).toString();
 
       axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/products")
+        .get(
+          process.env.VUE_APP_BACKEND_URL + "/products/category" + "?" + params
+        )
         .then(function(response) {
           self.products = response.data[0];
           for (const i in self.products) {
@@ -118,8 +165,6 @@ export default {
               }
             }
           }
-          self.$emit("search-event", self.products);
-          console.log("event with all emitted");
         })
         .catch(function(error) {
           console.log(error);
@@ -128,6 +173,11 @@ export default {
 
     search: function() {
       let self = this;
+      if (!self.inputCategory === "") {
+        self.getProductsByCategory();
+      } else {
+        self.getProducts();
+      }
       self.listEmitted = _.filter(self.products, function(product) {
         if (
           (self.inputName === "" ||
@@ -138,17 +188,7 @@ export default {
             self.inputPriceFrom === "") &&
           (product.unit_price <= self.inputPriceTo || self.inputPriceTo === "")
         ) {
-          //   if (self.inputCast === "") {
-          //     return true;
-          //   } else {
-          //   for (let i = 0; i < product.cast.length; i++) {
-          //     if (
-          //       product.cast[i].toLowerCase() === self.inputCast.toLowerCase()
-          //     ) {
           return true;
-          // }
-          //   }
-          //   }
         }
         return false;
       });
