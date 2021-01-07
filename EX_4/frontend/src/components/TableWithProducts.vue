@@ -21,8 +21,8 @@
               type="button"
               class="btn btn-primary btn-lg btn-block"
               id="addToCart"
+              @click="addToCart(product.product_id)"
             >
-              <!-- @click="addToCart(index)" -->
               Add
             </button>
           </td>
@@ -43,18 +43,27 @@
 </template>
 
 <script>
-
 export default {
   name: "TableWithProducts",
   data() {
-    return {};
+    return {
+      productsInCart: [],
+    };
   },
 
   props: {
     products: Array,
   },
 
-  methods: {},
+  methods: {
+    addToCart: function(id) {
+      let product = [];
+      product.push(id);
+      product.push(1);
+      this.productsInCart.push(product);
+      self.$emit("cart-event", this.productsInCart);
+    },
+  },
 };
 </script>
 
