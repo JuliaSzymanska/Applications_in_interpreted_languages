@@ -1,8 +1,27 @@
 <template>
   <div class=".container-fluid">
-    <h1>SHOP</h1>
+    <div class="row">
+      <div class="col-sm" />
+      <div class="col-7">
+        <h1>SHOP</h1>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+          id="openCart"
+          @click="this.$router.push('/cart')"
+        >
+          Cart
+        </button>
+      </div>
+    </div>
     <SearchProducts class="justify-center" @search-event="handleAppEvent" />
-    <TableWithProducts class="justify-center" :products="serachedProducts" @cart-event="handleCartEvent" />
+    <TableWithProducts
+      class="justify-center"
+      :products="serachedProducts"
+      @cart-event="handleCartEvent"
+    />
   </div>
 </template>
 
@@ -26,11 +45,10 @@ export default {
     handleAppEvent: function(data) {
       this.serachedProducts = data;
     },
-    handleCartEvent: function(data){
+    handleCartEvent: function(data) {
       this.ProductsInCart = data;
-    }
+    },
   },
-
 };
 </script>
 
@@ -50,5 +68,9 @@ body {
 .container-fluid * {
   width: 100%;
   table-layout: fixed;
+}
+#openCart {
+  width: 80px;
+  float: left;
 }
 </style>

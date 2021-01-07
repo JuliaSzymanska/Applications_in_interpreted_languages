@@ -1,17 +1,17 @@
 <template>
   <div class=".container-fluid">
     <h1>CART</h1>
-    <TableWithProducts class="justify-center" />
+    <TableWithOrders class="justify-center" />
   </div>
 </template>
 
 <script>
-import TableWithProducts from "../components/TableWithProducts";
+import TableWithOrders from "../components/TableWithOrders";
 
 export default {
   name: "Cart",
   components: {
-    TableWithProducts,
+    TableWithOrders,
   },
   data: function() {
     return {};

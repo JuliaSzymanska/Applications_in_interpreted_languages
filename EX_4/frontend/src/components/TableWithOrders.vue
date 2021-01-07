@@ -9,21 +9,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.productsInCart" :key="key">
+        <tr v-for="(product, index, key) in this.getProducts" :key="key">
           <td class="col-md-2">{{ product.product_name }}</td>
-          <td class="col-md-2">{{ product.category_name }}</td>
-          <td class="col-md-2">{{ product.unit_weight }}</td>
-          <td class="col-md-2">{{ product.unit_price }}</td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary btn-lg btn-block"
-              id="addToCart"
-              @click="addToCart(product.product_id, product.number_in_cart)"
-            >
-              Add
-            </button>
-          </td>
+          <td class="col-md-2">{{ product.amount }}</td>
+          <td class="col-md-2">{{ product.unit_price * product.amount }}</td>
         </tr>
       </tbody>
     </table>
@@ -34,7 +23,7 @@
 import axios from "axios";
 
 export default {
-  name: "TableWithProducts",
+  name: "TableWithOrders",
   data() {
     return {
       productsInCartFromOtherView: [],
@@ -53,6 +42,7 @@ export default {
           )
         );
       }
+      return products;
     },
   },
 
