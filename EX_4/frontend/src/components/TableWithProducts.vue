@@ -49,6 +49,7 @@ export default {
     addToCart: function(id) {
       let product = [];
       product.push(id);
+      product.push(1);
       this.productsInCart.push(product);
       this.$emit("cart-event", this.productsInCart);
     },
