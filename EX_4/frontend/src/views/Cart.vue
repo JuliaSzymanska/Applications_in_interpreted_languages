@@ -1,20 +1,24 @@
 <template>
   <div class=".container-fluid">
     <h1>CART</h1>
+    
     <TableWithOrders class="justify-center" />
     <ContactForms class="justify-center" />
+    <OrderSummary class="justify-center" />
   </div>
 </template>
 
 <script>
 import TableWithOrders from "../components/TableWithOrders";
 import ContactForms from "../components/ContactForms";
+import OrderSummary from "../components/OrderSummary";
 
 export default {
   name: "Cart",
   components: {
     TableWithOrders,
     ContactForms,
+    OrderSummary,
   },
   data: function() {
     return {};

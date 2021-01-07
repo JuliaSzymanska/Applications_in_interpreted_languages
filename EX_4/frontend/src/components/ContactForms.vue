@@ -26,26 +26,6 @@
         />
       </div>
     </div>
-    <div class="form-group row">
-      <!-- <v-combobox
-        v-model="select"
-        :items="categoriesName"
-        label="Category"
-        outlined
-        multiple
-        dense
-      ></v-combobox> -->
-      <!-- <v-select :options="categoriesName"></v-select> -->
-    </div>
-    <div>
-      <button
-        type="button"
-        class="btn btn-primary btn-lg btn-block"
-        v-on:click="search"
-      >
-        Search
-      </button>
-    </div>
   </form>
 </template>
 

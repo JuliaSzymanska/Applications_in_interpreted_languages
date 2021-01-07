@@ -27,7 +27,7 @@
 import axios from "axios";
 
 export default {
-  name: "TableWithOrders",
+  name: "OrderSummary",
   data() {
     return {
       productsInCartFromOtherView: [],
