@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.products" :key="key">
+        <tr v-for="(product, index, key) in this.getProducts" :key="key">
           <td class="col-md-3">{{ product.product_name }}</td>
           <td class="col-md-3">{{ product.amount }}</td>
           <td class="col-md-3">{{ product.unit_price }}</td>
@@ -28,6 +28,7 @@ export default {
   name: "TableWithOrders",
   data() {
     return {
+      categoriesName: [],
       productsInCartFromOtherView: [],
       products: [],
       price: 0,
@@ -35,53 +36,73 @@ export default {
   },
 
   created: function() {
-    this.productsInCartFromOtherView = this.$route.query.products;
-    console.log(this.productsInCartFromOtherView);
+    this.getCategories();
+    this.productsInCartFromOtherView = JSON.parse(this.$route.query.products);
     this.getProducts();
   },
 
   methods: {
+    getCategories: function() {
+      let self = this;
+      return new Promise((resolve, reject) => {
+        axios
+          .get(process.env.VUE_APP_BACKEND_URL + "/categories")
+          .then(function(response) {
+            self.categories = response.data[0];
+
+            for (const cat in self.categories) {
+              self.categoriesName.push(self.categories[cat].category_name);
+            }
+            resolve();
+          })
+          .catch(function(error) {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
+
     getProducts: function() {
       let self = this;
+      self.products = new Array(0);
       for (const i in self.productsInCartFromOtherView) {
-        let item = self.getProductById(
-          self.productsInCartFromOtherView[i].id,
-          self.productsInCartFromOtherView[i].amount
-        );
+        let item = self.getProductById(i);
         self.products.push(item);
+        return self.products;
       }
-      return self.products;
     },
-  },
 
-  getProductById(id, amount) {
-    let self = this;
-    const params = new URLSearchParams({
-      id: id,
-    }).toString();
+    getProductById: function(index) {
+      let self = this;
 
-    axios
-      .get(process.env.VUE_APP_BACKEND_URL + "/products/" + "?" + params)
-      .then(function(response) {
-        let product = response.data[0];
-        for (const cat in self.categories) {
-          if (product.category_id === self.categories[cat].category_id) {
-            product["category_name"] = self.categories[cat].category_name;
+      axios
+        .get(
+          process.env.VUE_APP_BACKEND_URL +
+            "/products/" +
+            self.productsInCartFromOtherView[index].id.toString()
+        )
+        .then(function(response) {
+          let product = response.data[0][0];
+          for (const cat in self.categories) {
+            if (product.category_id === self.categories[cat].category_id) {
+              product["category_name"] = self.categories[cat].category_name;
+            }
           }
-        }
-        product["amount_in_cart"] = amount;
-        return product;
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  },
+          product["amount_in_cart"] =
+            self.productsInCartFromOtherView[index].amount;
+          return product;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
 
-  getPrice() {
-    for (const i in this.products) {
-      this.price +=
-        this.products[i].amount_in_cart * this.products[i].unit_price;
-    }
+    getPrice: function() {
+      for (const i in this.products) {
+        this.price +=
+          this.products[i].amount_in_cart * this.products[i].unit_price;
+      }
+    },
   },
 };
 </script>

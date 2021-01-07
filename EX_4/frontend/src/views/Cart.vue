@@ -34,7 +34,6 @@ export default {
   },
   created: function() {
     this.productsInCart = this.$route.query.products;
-    console.log(this.productsInCart);
   },
   methods: {},
 };
