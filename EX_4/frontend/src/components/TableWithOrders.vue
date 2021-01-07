@@ -10,11 +10,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.getProducts" :key="key">
+        <tr v-for="(product, index, key) in this.products" :key="key">
           <td class="col-md-3">{{ product.product_name }}</td>
-          <td class="col-md-3">{{ product.amount }}</td>
+          <td class="col-md-3">{{ product.amount_in_cart }}</td>
           <td class="col-md-3">{{ product.unit_price }}</td>
-          <td class="col-md-3">{{ product.unit_price * product.amount }}</td>
+          <td class="col-md-3">
+            {{ product.unit_price * product.amount_in_cart }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -31,6 +33,7 @@ export default {
       categoriesName: [],
       productsInCartFromOtherView: [],
       products: [],
+      item: "",
       price: 0,
     };
   },
@@ -66,35 +69,39 @@ export default {
       let self = this;
       self.products = new Array(0);
       for (const i in self.productsInCartFromOtherView) {
-        let item = self.getProductById(i);
-        self.products.push(item);
-        return self.products;
+        self.getProductById(i);
       }
+      console.log(self.products);
     },
 
     getProductById: function(index) {
       let self = this;
-
-      axios
-        .get(
-          process.env.VUE_APP_BACKEND_URL +
-            "/products/" +
-            self.productsInCartFromOtherView[index].id.toString()
-        )
-        .then(function(response) {
-          let product = response.data[0][0];
-          for (const cat in self.categories) {
-            if (product.category_id === self.categories[cat].category_id) {
-              product["category_name"] = self.categories[cat].category_name;
+      let product;
+      new Promise((resolve) => {
+        axios
+          .get(
+            process.env.VUE_APP_BACKEND_URL +
+              "/products/" +
+              self.productsInCartFromOtherView[index].id.toString()
+          )
+          .then(function(response) {
+            product = response.data[0][0];
+            for (const cat in self.categories) {
+              if (product.category_id === self.categories[cat].category_id) {
+                product["category_name"] = self.categories[cat].category_name;
+              }
             }
-          }
-          product["amount_in_cart"] =
-            self.productsInCartFromOtherView[index].amount;
-          return product;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+            product["amount_in_cart"] =
+              self.productsInCartFromOtherView[index].amount;
+            resolve();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }).then(() => {
+        self.item = product;
+        self.products[index] = product;
+      });
     },
 
     getPrice: function() {
