@@ -12,7 +12,33 @@
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
           <td class="col-md-3">{{ product.product_name }}</td>
-          <td class="col-md-3">{{ product.amount_in_cart }}</td>
+
+          <td>
+            <tr>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg btn-block"
+                  id="increaseNumber"
+                  @click="increaseAmount(product.product_id, true)"
+                >
+                  +
+                </button>
+              </td>
+              <td class="col-md-3">{{ product.amount_in_cart }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg btn-block"
+                  id="decreaseNumber"
+                  @click="increaseAmount(product.product_id, false)"
+                >
+                  -
+                </button>
+              </td>
+            </tr>
+          </td>
+
           <td class="col-md-3">{{ product.unit_price }}</td>
           <td class="col-md-3">
             {{ product.unit_price * product.amount_in_cart }}
@@ -42,6 +68,7 @@ export default {
     this.getCategories();
     this.productsInCartFromOtherView = JSON.parse(this.$route.query.products);
     this.getProducts();
+    this.getPrice();
   },
 
   methods: {
@@ -108,6 +135,22 @@ export default {
       for (const i in this.products) {
         this.price +=
           this.products[i].amount_in_cart * this.products[i].unit_price;
+      }
+    },
+
+    increaseAmount: function(id, shouldIncrease) {
+      for (const i in this.products) {
+        if (this.products[i].product_id === id) {
+          if (shouldIncrease) {
+            this.products[i].amount_in_cart++;
+          } else {
+            if (this.products[i].amount_in_cart - 1 < 0) {
+              this.products[i].amount_in_cart = 0;
+            } else {
+              this.products[i].amount_in_cart--;
+            }
+          }
+        }
       }
     },
   },

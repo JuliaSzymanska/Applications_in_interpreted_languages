@@ -5,7 +5,7 @@
         <h1>CART</h1>
       </div>
       <div class="col-md-8" id="firstColumn">
-        <TableWithOrders class="justify-center" />
+        <TableInCart class="justify-center" />
       </div>
       <div class="col-md-4" id="secondColumn">
         <OrderSummary class="justify-center" />
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import TableWithOrders from "../components/TableWithOrders";
+import TableInCart from "../components/TableInCart";
 import ContactForms from "../components/ContactForms";
 import OrderSummary from "../components/OrderSummary";
 
 export default {
   name: "Cart",
   components: {
-    TableWithOrders,
+    TableInCart,
     ContactForms,
     OrderSummary,
   },
