@@ -46,7 +46,11 @@
 export default {
   name: "ContactForms",
   data: function() {
-    return {};
+    return {
+      inputLogin: "",
+      inputEmail: "",
+      inputPhoneNumber: "",
+    };
   },
 
   methods: {},

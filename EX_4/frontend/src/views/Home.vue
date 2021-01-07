@@ -10,7 +10,12 @@
           type="button"
           class="btn btn-primary btn-lg btn-block"
           id="openCart"
-          @click="this.$router.push('/cart')"
+          @click="
+            this.$router.push({
+              path: '/cart',
+              query: { products: this.ProductsInCart },
+            })
+          "
         >
           Cart
         </button>

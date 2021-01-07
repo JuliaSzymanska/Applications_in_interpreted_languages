@@ -1,8 +1,9 @@
 <template>
   <div class=".container-fluid">
-    <h1>CART</h1>
-
     <div class="row">
+      <div class="col-md-8" id="firstColumn">
+        <h1>CART</h1>
+      </div>
       <div class="col-md-8" id="firstColumn">
         <TableWithOrders class="justify-center" />
       </div>
@@ -27,7 +28,13 @@ export default {
     OrderSummary,
   },
   data: function() {
-    return {};
+    return {
+      productsInCart: [],
+    };
+  },
+  created: function() {
+    this.productsInCart = this.$route.query.products;
+    console.log(this.productsInCart);
   },
   methods: {},
 };
@@ -50,5 +57,4 @@ body {
   width: 100%;
   table-layout: fixed;
 }
-
 </style>

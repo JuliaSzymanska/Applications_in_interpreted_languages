@@ -3,18 +3,18 @@
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th class="col-md-2" scope="col">Name</th>
-          <th class="col-md-2" scope="col">Amount</th>
-          <th class="col-md-2" scope="col">Unit price</th>
-          <th class="col-md-2" scope="col">Price</th>
+          <th class="col-md-3" scope="col">Name</th>
+          <th class="col-md-3" scope="col">Amount</th>
+          <th class="col-md-3" scope="col">Unit price</th>
+          <th class="col-md-3" scope="col">Price</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.getProducts" :key="key">
-          <td class="col-md-2">{{ product.product_name }}</td>
-          <td class="col-md-2">{{ product.amount }}</td>
-          <td class="col-md-2">{{ product.unit_price }}</td>
-          <td class="col-md-2">{{ product.unit_price * product.amount }}</td>
+        <tr v-for="(product, index, key) in this.products" :key="key">
+          <td class="col-md-3">{{ product.product_name }}</td>
+          <td class="col-md-3">{{ product.amount }}</td>
+          <td class="col-md-3">{{ product.unit_price }}</td>
+          <td class="col-md-3">{{ product.unit_price * product.amount }}</td>
         </tr>
       </tbody>
     </table>
@@ -34,16 +34,21 @@ export default {
     };
   },
 
+  created: function() {
+    this.productsInCartFromOtherView = this.$route.query.products;
+    console.log(this.productsInCartFromOtherView);
+    this.getProducts();
+  },
+
   methods: {
     getProducts: function() {
       let self = this;
       for (const i in self.productsInCartFromOtherView) {
-        self.products.push(
-          self.getProductById(
-            self.productsInCartFromOtherView[i][0],
-            self.productsInCartFromOtherView[i][1]
-          )
+        let item = self.getProductById(
+          self.productsInCartFromOtherView[i].id,
+          self.productsInCartFromOtherView[i].amount
         );
+        self.products.push(item);
       }
       return self.products;
     },
