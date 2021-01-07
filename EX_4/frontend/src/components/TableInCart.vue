@@ -12,20 +12,8 @@
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
           <td class="col-md-3">{{ product.product_name }}</td>
-
           <td>
             <tr>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-lg btn-block"
-                  id="increaseNumber"
-                  @click="increaseAmount(product.product_id, true)"
-                >
-                  +
-                </button>
-              </td>
-              <td class="col-md-3">{{ product.amount_in_cart }}</td>
               <td>
                 <button
                   type="button"
@@ -34,6 +22,17 @@
                   @click="increaseAmount(product.product_id, false)"
                 >
                   -
+                </button>
+              </td>
+              <td class="col-md-3">{{ product.amount_in_cart }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg btn-block"
+                  id="increaseNumber"
+                  @click="increaseAmount(product.product_id, true)"
+                >
+                  +
                 </button>
               </td>
             </tr>
@@ -144,6 +143,7 @@ export default {
           }
         }
       }
+      this.$emit("cart-products-event", this.products);
     },
   },
 };

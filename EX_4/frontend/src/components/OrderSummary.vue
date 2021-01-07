@@ -42,11 +42,11 @@ export default {
     products: Array,
   },
 
-  // watch: {
-  //   products: function() {
-  //     this.getPrice();
-  //   },
-  // },
+  watch: {
+    products: function() {
+      this.getPrice();
+    },
+  },
 
   created: function() {
     this.getPrice();
@@ -54,9 +54,8 @@ export default {
 
   methods: {
     getPrice: function() {
+      this.totalPrice = 0;
       for (const i in this.products) {
-        // console.log("Amount " + i + " " + this.products[i].amount_in_cart);
-        // console.log("Price " + i + " " + this.products[i].unit_price);
         this.totalPrice +=
           this.products[i].amount_in_cart * this.products[i].unit_price;
       }
@@ -64,7 +63,6 @@ export default {
 
     submitOrder: function() {
       let parsedProducts = this.getParseProducts();
-      console.log(parsedProducts);
       axios({
         method: "post",
         url: process.env.VUE_APP_BACKEND_URL + "/orders",
@@ -86,14 +84,13 @@ export default {
       let parsedProducts = [];
       for (const i in this.products) {
         let str =
-          '{ "productId": ' +
+          '{"productId":' +
           this.products[i].product_id +
-          ', "numberOfItems": ' +
+          ',"numberOfItems":' +
           this.products[i].amount_in_cart +
           "}";
         parsedProducts.push(JSON.parse(str));
       }
-      parsedProducts = JSON.stringify(parsedProducts);
       return parsedProducts;
     },
   },

@@ -215,6 +215,8 @@ exports.update = (req, res) => {
 
 //TODO: dodawanie produktow zamowionych
 exports.create = (req, res) => {
+    const log = require('log-to-file');
+    log(JSON.stringify(req.body), "myLogs.log");
     if (
         !req.body.buyer_login ||
         !req.body.buyer_email ||
