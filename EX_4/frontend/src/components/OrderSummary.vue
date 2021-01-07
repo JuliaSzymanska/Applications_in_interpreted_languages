@@ -9,7 +9,8 @@
       <tbody>
         <tr>
           <td class="col-md-4">
-          {{totalPrice}}</td>
+            {{ totalPrice }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -18,6 +19,7 @@
         type="button"
         class="btn btn-primary btn-lg btn-block"
         id="submitOrder"
+        v-on:click="submitOrder"
       >
         Submit order
       </button>
@@ -26,6 +28,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "OrderSummary",
   data() {
@@ -38,6 +42,12 @@ export default {
     products: Array,
   },
 
+  // watch: {
+  //   products: function() {
+  //     this.getPrice();
+  //   },
+  // },
+
   created: function() {
     this.getPrice();
   },
@@ -45,9 +55,46 @@ export default {
   methods: {
     getPrice: function() {
       for (const i in this.products) {
+        // console.log("Amount " + i + " " + this.products[i].amount_in_cart);
+        // console.log("Price " + i + " " + this.products[i].unit_price);
         this.totalPrice +=
           this.products[i].amount_in_cart * this.products[i].unit_price;
       }
+    },
+
+    submitOrder: function() {
+      let parsedProducts = this.getParseProducts();
+      console.log(parsedProducts);
+      axios({
+        method: "post",
+        url: process.env.VUE_APP_BACKEND_URL + "/orders",
+        headers: {},
+        data: {
+          buyer_login: "Vue login",
+          buyer_email: "Vue@email.pl",
+          buyer_phone_number: "123432132",
+          approval_date: new Date(),
+          status_id: 1,
+          products: parsedProducts,
+        },
+      }).catch(function(error) {
+        console.log(error);
+      });
+    },
+
+    getParseProducts: function() {
+      let parsedProducts = [];
+      for (const i in this.products) {
+        let str =
+          '{ "productId": ' +
+          this.products[i].product_id +
+          ', "numberOfItems": ' +
+          this.products[i].amount_in_cart +
+          "}";
+        parsedProducts.push(JSON.parse(str));
+      }
+      parsedProducts = JSON.stringify(parsedProducts);
+      return parsedProducts;
     },
   },
 };
