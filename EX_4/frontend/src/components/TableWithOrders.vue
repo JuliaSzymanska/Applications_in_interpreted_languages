@@ -5,6 +5,7 @@
         <tr>
           <th class="col-md-2" scope="col">Name</th>
           <th class="col-md-2" scope="col">Amount</th>
+          <th class="col-md-2" scope="col">Unit price</th>
           <th class="col-md-2" scope="col">Price</th>
         </tr>
       </thead>
@@ -12,11 +13,8 @@
         <tr v-for="(product, index, key) in this.getProducts" :key="key">
           <td class="col-md-2">{{ product.product_name }}</td>
           <td class="col-md-2">{{ product.amount }}</td>
+          <td class="col-md-2">{{ product.unit_price }}</td>
           <td class="col-md-2">{{ product.unit_price * product.amount }}</td>
-        </tr>
-        <tr>
-          <td class="col-md-8">Total price:</td>
-          <td class="col-md-4"></td>
         </tr>
       </tbody>
     </table>
@@ -80,7 +78,6 @@ export default {
         this.products[i].amount_in_cart * this.products[i].unit_price;
     }
   },
-
 };
 </script>
 

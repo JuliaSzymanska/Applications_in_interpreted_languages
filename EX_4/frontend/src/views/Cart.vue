@@ -1,10 +1,16 @@
 <template>
   <div class=".container-fluid">
     <h1>CART</h1>
-    
-    <TableWithOrders class="justify-center" />
-    <ContactForms class="justify-center" />
-    <OrderSummary class="justify-center" />
+
+    <div class="row">
+      <div class="col-md-8" id="firstColumn">
+        <TableWithOrders class="justify-center" />
+      </div>
+      <div class="col-md-4" id="secondColumn">
+        <OrderSummary class="justify-center" />
+        <ContactForms class="justify-center" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,4 +50,5 @@ body {
   width: 100%;
   table-layout: fixed;
 }
+
 </style>

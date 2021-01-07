@@ -1,7 +1,7 @@
 <template>
   <form id="forms">
     <div class="form-group row">
-      <div class="col-sm-4">
+      <div class="col-sm">
         <input
           v-model="inputLogin"
           id="inputLogin"
@@ -9,7 +9,9 @@
           placeholder="Enter your login"
         />
       </div>
-      <div class="col-sm-4">
+    </div>
+    <div class="form-group row">
+      <div class="col-sm">
         <input
           v-model="inputEmail"
           id="inputPriceFrom"
@@ -17,7 +19,9 @@
           placeholder="Enter your email"
         />
       </div>
-      <div class="col-sm-4">
+    </div>
+    <div class="form-group row">
+      <div class="col-sm">
         <input
           v-model="inputPhoneNumber"
           id="inputPhoneNumber"
@@ -25,6 +29,15 @@
           placeholder="Enter your phone number"
         />
       </div>
+    </div>
+    <div class="form-group row">
+      <button
+        type="button"
+        class="btn btn-primary btn-lg btn-block"
+        id="submitOrder"
+      >
+        Submit order
+      </button>
     </div>
   </form>
 </template>
@@ -42,7 +55,7 @@ export default {
 
 <style scoped>
 #forms {
-  padding-top: 30px;
+  padding-top: 10px;
   width: 70%;
   margin: auto;
 }
