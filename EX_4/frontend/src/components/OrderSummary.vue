@@ -40,6 +40,7 @@ export default {
 
   props: {
     products: Array,
+    userData: Array,
   },
 
   watch: {
@@ -63,14 +64,16 @@ export default {
 
     submitOrder: function() {
       let parsedProducts = this.getParseProducts();
+      let self = this;
+      // console.log(self.userData[0]);
       axios({
         method: "post",
         url: process.env.VUE_APP_BACKEND_URL + "/orders",
         headers: {},
         data: {
-          buyer_login: "Vue login",
-          buyer_email: "Vue@email.pl",
-          buyer_phone_number: "123432132",
+          buyer_login: self.userData[0],
+          buyer_email: self.userData[1],
+          buyer_phone_number: self.userData[2],
           approval_date: new Date(),
           status_id: 1,
           products: parsedProducts,

@@ -11,8 +11,15 @@
         />
       </div>
       <div class="col-md-4" id="secondColumn">
-        <ContactForms class="justify-center" />
-        <OrderSummary class="justify-center" :products="productsToSummary" />
+        <ContactForms
+          class="justify-center"
+          @user-data-event="handleUserDataEvent"
+        />
+        <OrderSummary
+          class="justify-center"
+          :products="productsToSummary"
+          :userData="userData"
+        />
       </div>
     </div>
   </div>
@@ -34,6 +41,7 @@ export default {
     return {
       productsInCart: [],
       productsToSummary: Array,
+      userData: Array,
     };
   },
   created: function() {
@@ -42,6 +50,10 @@ export default {
   methods: {
     handleAppEvent: function(data) {
       this.productsToSummary = data;
+    },
+    handleUserDataEvent: function(data) {
+      console.log(data);
+      this.userData = data;
     },
   },
 };

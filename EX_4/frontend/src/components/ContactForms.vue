@@ -44,7 +44,27 @@ export default {
     };
   },
 
-  methods: {},
+  watch: {
+    inputLogin: function() {
+      this.emitUserData();
+    },
+    inputEmail: function() {
+      this.emitUserData();
+    },
+    inputPhoneNumber: function() {
+      this.emitUserData();
+    },
+  },
+
+  methods: {
+    emitUserData: function() {
+      let userData = [];
+      userData.push(this.inputLogin);
+      userData.push(this.inputEmail);
+      userData.push(this.inputPhoneNumber);
+      this.$emit("user-data-event", userData);
+    },
+  },
 };
 </script>
 
