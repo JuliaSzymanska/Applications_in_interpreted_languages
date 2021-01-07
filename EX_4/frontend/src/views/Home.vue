@@ -1,7 +1,8 @@
 <template>
   <div class=".container-fluid">
-    <SearchProducts class="justify-center" @search-event="handleAppEvent"/>
-    <TableWithProducts class="justify-center" :products='serachedProducts'/>
+    <h1>SHOP</h1>
+    <SearchProducts class="justify-center" @search-event="handleAppEvent" />
+    <TableWithProducts class="justify-center" :products="serachedProducts" @cart-event="handleCartEvent" />
   </div>
 </template>
 
@@ -15,16 +16,21 @@ export default {
     TableWithProducts,
     SearchProducts,
   },
-data: function(){
+  data: function() {
     return {
-      serachedProducts: Array
-    }
+      serachedProducts: Array,
+      ProductsInCart: Array,
+    };
   },
   methods: {
     handleAppEvent: function(data) {
       this.serachedProducts = data;
     },
+    handleCartEvent: function(data){
+      this.ProductsInCart = data;
+    }
   },
+
 };
 </script>
 
