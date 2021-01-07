@@ -2,16 +2,19 @@
   <div class=".container-fluid">
     <h1>CART</h1>
     <TableWithOrders class="justify-center" />
+    <ContactForms class="justify-center" />
   </div>
 </template>
 
 <script>
 import TableWithOrders from "../components/TableWithOrders";
+import ContactForms from "../components/ContactForms";
 
 export default {
   name: "Cart",
   components: {
     TableWithOrders,
+    ContactForms,
   },
   data: function() {
     return {};
