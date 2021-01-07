@@ -8,22 +8,48 @@
       </thead>
       <tbody>
         <tr>
-          <td class="col-md-4"></td>
+          <td class="col-md-4">
+          {{totalPrice}}</td>
         </tr>
       </tbody>
     </table>
+    <div class="form-group row">
+      <button
+        type="button"
+        class="btn btn-primary btn-lg btn-block"
+        id="submitOrder"
+      >
+        Submit order
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "OrderSummary",
   data() {
-    return {};
+    return {
+      totalPrice: 0,
+    };
   },
 
-  methods: {},
+  props: {
+    products: Array,
+  },
+
+  created: function() {
+    this.getPrice();
+  },
+
+  methods: {
+    getPrice: function() {
+      for (const i in this.products) {
+        this.totalPrice +=
+          this.products[i].amount_in_cart * this.products[i].unit_price;
+      }
+    },
+  },
 };
 </script>
 

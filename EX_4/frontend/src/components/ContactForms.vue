@@ -30,15 +30,6 @@
         />
       </div>
     </div>
-    <div class="form-group row">
-      <button
-        type="button"
-        class="btn btn-primary btn-lg btn-block"
-        id="submitOrder"
-      >
-        Submit order
-      </button>
-    </div>
   </form>
 </template>
 

@@ -5,11 +5,14 @@
         <h1>CART</h1>
       </div>
       <div class="col-md-8" id="firstColumn">
-        <TableInCart class="justify-center" />
+        <TableInCart
+          class="justify-center"
+          @cart-products-event="handleAppEvent"
+        />
       </div>
       <div class="col-md-4" id="secondColumn">
-        <OrderSummary class="justify-center" />
         <ContactForms class="justify-center" />
+        <OrderSummary class="justify-center" :products="productsToSummary" />
       </div>
     </div>
   </div>
@@ -30,12 +33,17 @@ export default {
   data: function() {
     return {
       productsInCart: [],
+      productsToSummary: Array,
     };
   },
   created: function() {
     this.productsInCart = this.$route.query.products;
   },
-  methods: {},
+  methods: {
+    handleAppEvent: function(data) {
+      this.productsToSummary = data;
+    },
+  },
 };
 </script>
 

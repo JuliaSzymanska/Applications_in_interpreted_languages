@@ -68,7 +68,6 @@ export default {
     this.getCategories();
     this.productsInCartFromOtherView = JSON.parse(this.$route.query.products);
     this.getProducts();
-    this.getPrice();
   },
 
   methods: {
@@ -98,7 +97,7 @@ export default {
       for (const i in self.productsInCartFromOtherView) {
         self.getProductById(i);
       }
-      console.log(self.products);
+      this.$emit("cart-products-event", this.products);
     },
 
     getProductById: function(index) {
@@ -129,13 +128,6 @@ export default {
         self.item = product;
         self.products[index] = product;
       });
-    },
-
-    getPrice: function() {
-      for (const i in this.products) {
-        this.price +=
-          this.products[i].amount_in_cart * this.products[i].unit_price;
-      }
     },
 
     increaseAmount: function(id, shouldIncrease) {
