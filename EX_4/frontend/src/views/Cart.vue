@@ -52,7 +52,6 @@ export default {
       this.productsToSummary = data;
     },
     handleUserDataEvent: function(data) {
-      console.log(data);
       this.userData = data;
     },
   },

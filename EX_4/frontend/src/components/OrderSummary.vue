@@ -65,7 +65,6 @@ export default {
     submitOrder: function() {
       let parsedProducts = this.getParseProducts();
       let self = this;
-      // console.log(self.userData[0]);
       axios({
         method: "post",
         url: process.env.VUE_APP_BACKEND_URL + "/orders",
