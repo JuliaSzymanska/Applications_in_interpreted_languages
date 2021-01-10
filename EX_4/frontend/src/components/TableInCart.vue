@@ -107,7 +107,7 @@ export default {
           .get(
             process.env.VUE_APP_BACKEND_URL +
               "/products/" +
-              self.productsInCartFromOtherView[index].id.toString()
+              self.productsInCartFromOtherView[index].id
           )
           .then(function(response) {
             product = response.data[0][0];
@@ -135,8 +135,16 @@ export default {
           if (shouldIncrease) {
             this.products[i].amount_in_cart++;
           } else {
-            if (this.products[i].amount_in_cart - 1 < 0) {
-              this.products[i].amount_in_cart = 0;
+            if (this.products[i].amount_in_cart - 1 <= 0) {
+              let temp = [];
+              for (const prod in this.products) {
+                if (prod === i) {
+                  continue;
+                } else {
+                  temp.push(this.products[prod]);
+                }
+              }
+              this.products = temp;
             } else {
               this.products[i].amount_in_cart--;
             }
