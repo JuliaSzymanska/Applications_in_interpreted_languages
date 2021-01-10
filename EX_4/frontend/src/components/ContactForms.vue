@@ -46,13 +46,13 @@ export default {
 
   watch: {
     inputLogin: function() {
-      this.emitUserData();
+        this.emitUserData();
     },
     inputEmail: function() {
-      this.emitUserData();
+        this.emitUserData();
     },
     inputPhoneNumber: function() {
-      this.emitUserData();
+        this.emitUserData();
     },
   },
 

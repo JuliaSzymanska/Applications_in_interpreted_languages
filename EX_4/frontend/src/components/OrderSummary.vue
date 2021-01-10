@@ -14,12 +14,18 @@
         </tr>
       </tbody>
     </table>
+    
     <div class="form-group row">
+          <p v-if="errors.length">
+        <ul>
+          <li v-for="(error, index, key) in this.errors" :key="key">{{ error }}</li>
+        </ul>
+      </p>
       <button
         type="button"
         class="btn btn-primary btn-lg btn-block"
         id="submitOrder"
-        v-on:click="submitOrder"
+        v-on:click="checkInputs"
       >
         Submit order
       </button>
@@ -35,6 +41,7 @@ export default {
   data() {
     return {
       totalPrice: 0,
+      errors: [],
     };
   },
 
@@ -44,17 +51,17 @@ export default {
   },
 
   watch: {
-    products: function() {
+    products: function () {
       this.getPrice();
     },
   },
 
-  created: function() {
+  created: function () {
     this.getPrice();
   },
 
   methods: {
-    getPrice: function() {
+    getPrice: function () {
       this.totalPrice = 0;
       for (const i in this.products) {
         this.totalPrice +=
@@ -62,7 +69,27 @@ export default {
       }
     },
 
-    submitOrder: function() {
+    checkInputs: function () {
+      this.errors = [];
+      if (!this.userData[0]) {
+        this.errors.push("Login required");
+      }
+      if (!this.userData[1]) {
+        this.errors.push("Email required");
+      }
+      console.log(this.userData[2].length);
+      if (
+        (this.userData[2].length < 9 || this.userData[2].length > 9) ||
+        !/^\d+$/.test(this.userData[2])
+      ) {
+        this.errors.push("Phone number should contains 9 digits.");
+      }
+      if (this.errors.length === 0) {
+        this.submitOrder();
+      }
+    },
+
+    submitOrder: function () {
       let parsedProducts = this.getParseProducts();
       let self = this;
       axios({
@@ -77,12 +104,12 @@ export default {
           status_id: 1,
           products: parsedProducts,
         },
-      }).catch(function(error) {
+      }).catch(function (error) {
         console.log(error);
       });
     },
 
-    getParseProducts: function() {
+    getParseProducts: function () {
       let parsedProducts = [];
       for (const i in this.products) {
         let str =
