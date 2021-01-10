@@ -72,10 +72,10 @@ export default {
     checkInputs: function () {
       this.errors = [];
       if (!this.userData[0]) {
-        this.errors.push("Login required");
+        this.errors.push("Login not provided");
       }
-      if (!this.userData[1]) {
-        this.errors.push("Email required");
+      if (!this.userData[1] || this.userData[1].indexOf("@") === -1 || this.userData[1].indexOf(".") === -1) {
+        this.errors.push("Email not provided or invalid value");
       }
       console.log(this.userData[2].length);
       if (
