@@ -2,13 +2,21 @@
   <form id="forms">
     <div class="form-group row">
       <label for="inputTitle" class="col-sm-2 col-form-label">Name: </label>
-      <div class="col-sm-10">
+      <div class="col-sm-4">
         <input
           v-model="inputName"
           id="inputName"
           class="form-control"
           placeholder="Enter name of a product"
         />
+      </div>
+      <label for="inputCategory" class="col-sm-2 col-form-label"
+        >Category:
+      </label>
+      <div class="col-sm-4">
+        <select class="form-control">
+            <option v-for="(category, index, key) in this.categoriesName" :key="key">{{ category }}</option>
+        </select>
       </div>
     </div>
     <div class="form-group row">
@@ -35,22 +43,11 @@
         />
       </div>
     </div>
-    <div class="form-group row">
-      <!-- <v-combobox
-        v-model="select"
-        :items="categoriesName"
-        label="Category"
-        outlined
-        multiple
-        dense
-      ></v-combobox> -->
-      <!-- <v-select :options="categoriesName"></v-select> -->
-    </div>
     <div>
       <button
         type="button"
         class="btn btn-primary btn-lg btn-block"
-        v-on:click="search"
+        v-on:click="loadProducts"
       >
         Search
       </button>
@@ -79,16 +76,21 @@ export default {
     };
   },
 
+  watch: {
+    products: function() {
+      this.search();
+    },
+  },
+
   created: function() {
-    this.getCategories();
-    // .then(this.search());
-    // while (!this.isFinished) {
-    //   this.products = [];
-    //   console.log(this.isFinished);
-    // }
-    this.search();
-    // this.getProducts();
-    // this.emitEvent();
+    let self = this;
+    new Promise((resolve) => {
+      this.getCategories();
+      this.loadProducts();
+      resolve();
+    }).then(() => {
+      console.log(self.categoriesName);
+    });
   },
 
   methods: {
@@ -171,13 +173,17 @@ export default {
         });
     },
 
-    search: function() {
+    loadProducts: function() {
       let self = this;
       if (!self.inputCategory === "") {
         self.getProductsByCategory();
       } else {
         self.getProducts();
       }
+    },
+
+    search: function() {
+      let self = this;
       self.listEmitted = _.filter(self.products, function(product) {
         if (
           (self.inputName === "" ||

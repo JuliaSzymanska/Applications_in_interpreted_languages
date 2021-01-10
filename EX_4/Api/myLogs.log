@@ -10,3 +10,4 @@
 2021.01.07, 23:26:43.0851 UTC -> {"approval_date":"2021-01-07T23:26:43.845Z","status_id":1,"products":[]}
 2021.01.07, 23:26:48.0067 UTC -> {"approval_date":"2021-01-07T23:26:48.063Z","status_id":1,"products":[]}
 2021.01.07, 23:28:53.0911 UTC -> {"buyer_login":"loggginggn","buyer_email":"f@f.pl","buyer_phone_number":"123456789","approval_date":"2021-01-07T23:28:53.905Z","status_id":1,"products":[{"productId":2,"numberOfItems":1},{"productId":4,"numberOfItems":1},{"productId":5,"numberOfItems":1}]}
+2021.01.07, 23:45:17.0615 UTC -> {"buyer_login":"","buyer_email":"","buyer_phone_number":"","approval_date":"2021-01-07T23:45:17.605Z","status_id":1,"products":[{"productId":4,"numberOfItems":4}]}
