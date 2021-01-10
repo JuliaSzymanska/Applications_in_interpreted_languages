@@ -14,8 +14,13 @@
         >Category:
       </label>
       <div class="col-sm-4">
-        <select class="form-control">
-            <option v-for="(category, index, key) in this.categoriesName" :key="key">{{ category }}</option>
+        <select v-model="inputCategory" class="form-control" id="inputCategory">
+          <option></option>
+          <option
+            v-for="(category, index, key) in this.categoriesName"
+            :key="key"
+            >{{ category }}</option
+          >
         </select>
       </div>
     </div>
@@ -83,14 +88,8 @@ export default {
   },
 
   created: function() {
-    let self = this;
-    new Promise((resolve) => {
-      this.getCategories();
-      this.loadProducts();
-      resolve();
-    }).then(() => {
-      console.log(self.categoriesName);
-    });
+    this.getCategories();
+    this.loadProducts();
   },
 
   methods: {
@@ -146,13 +145,20 @@ export default {
     },
 
     getProductsByCategory() {
-      const params = new URLSearchParams({
-        category: self.inputCategory,
-      }).toString();
+      let id = 0;
+      for (const cat in this.categories) {
+        if (this.categories[cat].category_name === this.inputCategory) {
+          id = this.categories[cat].category_id;
+        }
+      }
+
+      let self = this;
 
       axios
         .get(
-          process.env.VUE_APP_BACKEND_URL + "/products/category" + "?" + params
+          process.env.VUE_APP_BACKEND_URL +
+            "/products/category/" +
+            id.toString()
         )
         .then(function(response) {
           self.products = response.data[0];
@@ -167,6 +173,7 @@ export default {
               }
             }
           }
+          console.log(self.products);
         })
         .catch(function(error) {
           console.log(error);
@@ -175,10 +182,10 @@ export default {
 
     loadProducts: function() {
       let self = this;
-      if (!self.inputCategory === "") {
-        self.getProductsByCategory();
-      } else {
+      if (self.inputCategory === "") {
         self.getProducts();
+      } else {
+        self.getProductsByCategory();
       }
     },
 
