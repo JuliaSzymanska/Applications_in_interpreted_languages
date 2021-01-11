@@ -68,7 +68,6 @@ export default {
       orders: [],
       states: [],
       statesName: [],
-      selected: [],
       inputLogin: "",
       inputStatus: "",
       inputDateFrom: "",
@@ -147,18 +146,6 @@ export default {
             self.orders[i]["status_name"] = self.states[stat].status_name;
           }
         }
-
-        //   self.availableStatesName[i] = [];
-        //   for (
-        //     let index = self.orders[i].status_id - 1;
-        //     index < self.states.length;
-        //     index++
-        //   ) {
-        //     if (self.orders[i].status_id != 2 || index === 1) {
-        //       self.availableStatesName[i].push(self.statesName[index]);
-        //     }
-        //   }
-        self.selected[i] = self.orders[i].status_name;
       }
     },
 
@@ -212,7 +199,9 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            process.env.VUE_APP_BACKEND_URL + "/orders/name/" + this.inputLogin.toString()
+            process.env.VUE_APP_BACKEND_URL +
+              "/orders/name/" +
+              this.inputLogin.toString()
           )
           .then(function (response) {
             self.orders = response.data;
@@ -229,7 +218,6 @@ export default {
     loadOrders: function () {
       let self = this;
       if (self.inputStatus === "" && self.inputLogin === "") {
-        console.log("Wszystkie");
         self.getOrders().then(function () {
           self.emitEvent();
         });

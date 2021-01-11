@@ -8,16 +8,14 @@
       <div class="col-sm">
         <button
           type="button"
-          class="btn btn-primary btn-lg btn-block"
-          id="openCart"
-        >
-          <!-- @click="
+          class="btn btn-primary"
+          @click="
             this.$router.push({
-              path: '/cart',
-              query: { products: this.ProductsInCart },
+              path: '/',
             })
-          " -->
-          Cart
+          "
+        >
+          HOME
         </button>
       </div>
     </div>
@@ -65,9 +63,5 @@ body {
 .container-fluid * {
   width: 100%;
   table-layout: fixed;
-}
-#openCart {
-  width: 80px;
-  float: left;
 }
 </style>
