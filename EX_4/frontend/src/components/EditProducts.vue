@@ -133,6 +133,24 @@ export default {
           });
       });
     },
+
+    updateProduct: function (product) {
+      let temp = product;
+      delete temp["product_id"];
+      console.log(temp);
+      axios({
+        method: "put",
+        url:
+          process.env.VUE_APP_BACKEND_URL + "/products/" + product.product_id,
+        headers: {},
+        data: {
+          temp,
+        },
+      }).catch(function (error) {
+        console.log(error);
+        alert(error);
+      });
+    },
   },
 };
 </script>
