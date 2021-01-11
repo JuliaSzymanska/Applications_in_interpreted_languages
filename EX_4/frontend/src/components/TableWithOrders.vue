@@ -85,6 +85,10 @@ export default {
           .then(function (response) {
             self.orders = response.data;
             for (const i in self.orders) {
+              self.orders[i].approval_date =
+                self.orders[i].approval_date.slice(0, 10) +
+                " " +
+                self.orders[i].approval_date.slice(11, 16);
               for (const stat in self.states) {
                 if (self.orders[i].status_id === self.states[stat].status_id) {
                   self.orders[i]["status_name"] = self.states[stat].status_name;
@@ -101,33 +105,6 @@ export default {
       });
     },
 
-    // addZero: function (i) {
-    //   if (i < 10) {
-    //     i = "0" + i;
-    //   }
-    //   return i;
-    // },
-    // getOrderTime(chat) {
-    //   let h = this.addZero(chat.getHours());
-    //   let m = this.addZero(chat.getMinutes());
-    //   let time = h + ":" + m;
-    //   return time;
-    // },
-    // getOrderDate(chat) {
-    //   let d = this.addZero(chat.getDay());
-    //   let m = this.addZero(chat.getMonth());
-    //   let y = this.addZero(chat.getYear()) + 1900;
-    //   let date = d + "-" + m + "-" + y;
-    //   return date;
-    // },
-    // getDateForOrder(chat) {
-    //   if (
-    //     this.getLastMessageDate(chat) === this.getLastMessageDate(new Date())
-    //   ) {
-    //     return this.getLastMessageTime(chat);
-    //   }
-    //   return this.getLastMessageDate(chat);
-    // },
   },
 };
 </script>
