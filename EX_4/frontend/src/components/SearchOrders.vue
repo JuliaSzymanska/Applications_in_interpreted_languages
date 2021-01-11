@@ -15,34 +15,11 @@
       <label for="inputStatus" class="col-sm-2 col-form-label">Status: </label>
       <div class="col-sm-4">
         <select v-model="inputStatus" class="form-control" id="inputStatus">
+        <option/>
           <option v-for="(name, i, key) in this.statesName" :key="key">
             {{ name }}
           </option>
         </select>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputDateFrom" class="col-sm-2 col-form-label"
-        >Date from:
-      </label>
-      <div class="col-sm-4">
-        <input
-          v-model="inputDateFrom"
-          id="inputDateFrom"
-          type="number"
-          class="form-control"
-          placeholder="A positive number"
-        />
-      </div>
-      <label for="inputDateTo" class="col-sm-2 col-form-label">Date to: </label>
-      <div class="col-sm-4">
-        <input
-          v-model="inputDateTo"
-          id="inputDateTo"
-          type="number"
-          class="form-control"
-          placeholder="A positive number"
-        />
       </div>
     </div>
     <div>
