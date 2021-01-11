@@ -113,21 +113,24 @@ exports.update = (req, res) => {
         unit_price: req.body.unit_price,
         unit_weight: req.body.unit_weight,
         category_id: req.body.category_id,
+        id: req.params.id
     };
+
+    const promises = [];
 
     if (product.product_name == "") {
         res.status(400).send({
             message: "Product name can not be empty!"
         });
         return;
-    }
+    } 
 
     if (product.description == "") {
         res.status(400).send({
             message: "Product description can not be empty!"
         });
         return;
-    }
+    } 
 
     if (product.unit_price <= 0) {
         res.status(400).send({
@@ -150,40 +153,30 @@ exports.update = (req, res) => {
         return;
     }
 
-    Category.findByPk(product.category_id)
-        .then(data => {
-            if (data === null) {
-                res.status(400).send({
-                    message: "Product category has to reffer to an existing category"
-                });
-            } else {
-                Products.update(
-                        product, {
-                            where: {
-                                product_id: req.params.id
-                            }
-                        }
-                    )
-                    .then(num => {
-                        if (num == 1) {
-                            res.status(200).send({
-                                message: "Products was updated successfully."
-                            });
-                        } else if (num < 1) {
-                            res.status(404).send({
-                                message: `Cannot update Products with id=${id}. Maybe Products was not found or req.body is empty!`
-                            });
-                        }
-                    })
-                    .catch(err => {
-                        res.status(400).send({
-                            message: "Error updating Products with id=" + id
-                        });
-                    });
-            }
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || "Error ocurred while finding pk for catgory in product controler update"
-            });
+    if (product.category_id != "") {
+        promises.push(db.sequelize.query(`UPDATE products set category_id = ${product.category_id} where product_id = ${product.product_id}`));
+    }
+
+    promises.push(db.sequelize.query(`UPDATE products set product_name = ${product.product_name} where product_id = ${product.product_id}`));
+    promises.push(db.sequelize.query(`UPDATE products set description = ${product.description} where product_id = ${product.product_id}`));
+
+    if (product.unit_price !== "") {
+        promises.push(db.sequelize.query(`UPDATE products set unit_price = ${product.unit_price} where product_id = ${product.product_id}`));
+    }
+
+    if (product.unit_weight !== "") {
+        promises.push(db.sequelize.query(`UPDATE products set unit_weight = ${product.unit_weight} where product_id = ${product.product_id}`));
+    }
+
+    
+    Promise.all(promises).then(() => {
+        res.send({ message: "Product was modified successfully." });
+    })
+    .catch((e) => {
+        res.status(400).send({
+            message: "Error modyfying product",
         });
+    });
+
+   
 };
