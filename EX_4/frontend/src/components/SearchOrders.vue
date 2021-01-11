@@ -49,7 +49,7 @@
       <button
         type="button"
         class="btn btn-primary btn-lg btn-block"
-        v-on:click="loadProducts"
+        v-on:click="loadOrders"
       >
         Search
       </button>
@@ -85,7 +85,7 @@ export default {
 
   created: function () {
     this.getStates();
-    this.loadProducts();
+    this.loadOrders();
   },
 
   methods: {
@@ -180,7 +180,7 @@ export default {
       this.$emit("search-event", this.orders);
     },
 
-    getProductsByStatus() {
+    getOrdersByStatus() {
       let id = 0;
       for (const stat in this.states) {
         if (this.states[stat].status_name === this.inputStatus) {
@@ -203,7 +203,7 @@ export default {
         });
     },
 
-    getProductsByLogin() {
+    getOrdersByLogin() {
       let self = this;
 
       axios
@@ -219,7 +219,7 @@ export default {
         });
     },
 
-    loadProducts: function () {
+    loadOrders: function () {
       let self = this;
       if (self.inputStatus === "" && self.inputLogin === "") {
           console.log("Wszystkie");
