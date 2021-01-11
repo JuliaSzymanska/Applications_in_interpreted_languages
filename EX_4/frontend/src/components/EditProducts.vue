@@ -56,6 +56,7 @@
               type="button"
               class="btn btn-primary btn-lg btn-block"
               id="addToCart"
+              v-on:click="updateProduct(product)"
             >
               Admit
             </button>
