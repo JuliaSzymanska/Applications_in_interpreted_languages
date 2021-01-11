@@ -91,13 +91,13 @@ exports.create = (req, res) => {
             `INSERT INTO products 
     (product_name, description, unit_price, unit_weight, category_id)
     values( '${product.product_name}', 
-             ${product.description}, 
-            '${product.unit_price}', 
-            '${product.unit_weight}', 
-            '${product.category_id}')`
+             '${product.description}', 
+            ${product.unit_price}, 
+            ${product.unit_weight}, 
+            ${product.category_id})`
         ).then(() => {
             res.send({ message: "product was created successfully." });
-        }).error(err => {
+        }).catch(err => {
             res.status(400).send({
                 message: "Error creating product",
             });
@@ -116,6 +116,9 @@ exports.update = (req, res) => {
         id: req.params.id
     };
 
+    const log = require('log-to-file');
+    log( req.body.product_name, "myLogs.log");
+
     const promises = [];
 
     if (product.product_name == "") {
@@ -123,14 +126,14 @@ exports.update = (req, res) => {
             message: "Product name can not be empty!"
         });
         return;
-    } 
+    }
 
     if (product.description == "") {
         res.status(400).send({
             message: "Product description can not be empty!"
         });
         return;
-    } 
+    }
 
     if (product.unit_price <= 0) {
         res.status(400).send({
@@ -154,29 +157,29 @@ exports.update = (req, res) => {
     }
 
     if (product.category_id != "") {
-        promises.push(db.sequelize.query(`UPDATE products set category_id = ${product.category_id} where product_id = ${product.product_id}`));
+        promises.push(db.sequelize.query(`UPDATE products set category_id = ${product.category_id} where product_id = ${product.id}`));
     }
 
-    promises.push(db.sequelize.query(`UPDATE products set product_name = ${product.product_name} where product_id = ${product.product_id}`));
-    promises.push(db.sequelize.query(`UPDATE products set description = ${product.description} where product_id = ${product.product_id}`));
+    promises.push(db.sequelize.query(`UPDATE products set product_name = '${product.product_name}' where product_id = ${product.id}`));
+    promises.push(db.sequelize.query(`UPDATE products set description = '${product.description}' where product_id = ${product.id}`));
 
     if (product.unit_price !== "") {
-        promises.push(db.sequelize.query(`UPDATE products set unit_price = ${product.unit_price} where product_id = ${product.product_id}`));
+        promises.push(db.sequelize.query(`UPDATE products set unit_price = ${product.unit_price} where product_id = ${product.id}`));
     }
 
     if (product.unit_weight !== "") {
-        promises.push(db.sequelize.query(`UPDATE products set unit_weight = ${product.unit_weight} where product_id = ${product.product_id}`));
+        promises.push(db.sequelize.query(`UPDATE products set unit_weight = ${product.unit_weight} where product_id = ${product.id}`));
     }
 
-    
+
     Promise.all(promises).then(() => {
         res.send({ message: "Product was modified successfully." });
     })
-    .catch((e) => {
-        res.status(400).send({
-            message: "Error modyfying product",
+        .catch((e) => {
+            res.status(400).send({
+                message: "Error modyfying product",
+            });
         });
-    });
 
-   
+
 };

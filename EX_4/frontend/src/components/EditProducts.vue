@@ -135,16 +135,20 @@ export default {
     },
 
     updateProduct: function (product) {
+      let id = product.product_id;
       let temp = product;
-      delete temp["product_id"];
       console.log(temp);
+      delete temp["product_id"];
       axios({
         method: "put",
-        url:
-          process.env.VUE_APP_BACKEND_URL + "/products/" + product.product_id,
+        url: process.env.VUE_APP_BACKEND_URL + "/products/" + id,
         headers: {},
         data: {
-          temp,
+          product_name: product.product_name,
+          description: product.description,
+          unit_price: product.unit_price,
+          unit_weight: product.unit_weight,
+          category_id: product.category_id,
         },
       }).catch(function (error) {
         console.log(error);
