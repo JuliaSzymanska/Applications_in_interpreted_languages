@@ -181,8 +181,8 @@ exports.update = (req, res) => {
     db.sequelize
         .query(`SELECT s.status_id from orders s where s.order_id = ${id}`)
         .then((value) => {
-            value = JSON.stringify(value[0][0].status_id);
-            const log = require('log-to-file');
+            // value = JSON.stringify(value[0][0].status_id);
+            // const log = require('log-to-file');
             log(value, "myLogs.log");
             if (value == 2 || value >= req.params.status) {
                 res.status(400).send({
@@ -191,7 +191,7 @@ exports.update = (req, res) => {
             } else {
                 db.sequelize
                     .query(`UPDATE orders SET status_id = ${req.params.status}
-                            where order_id = ${ id }`)
+                            where order_id = ${id}`)
                     .then((num) => {
                         if (num[1] == 1) {
                             res.send({
@@ -200,7 +200,7 @@ exports.update = (req, res) => {
                         } else {
                             res.send({
                                 message: `
-                            Cannot update Orders with id = ${ id }.Maybe Orders was not found or req.body is empty!`,
+                            Cannot update Orders with id = ${id}.Maybe Orders was not found or req.body is empty!`,
                             });
                         }
                     })
