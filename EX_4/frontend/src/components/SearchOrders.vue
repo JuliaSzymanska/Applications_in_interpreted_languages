@@ -229,7 +229,7 @@ export default {
       } else {
         self.getOrdersByStatus();
       }
-      self.emitEvent();
+      self.emitEvent()
     },
 
     // search: function() {
