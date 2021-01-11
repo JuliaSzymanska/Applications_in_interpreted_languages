@@ -181,9 +181,9 @@ exports.update = (req, res) => {
     db.sequelize
         .query(`SELECT s.status_id from orders s where s.order_id = ${id}`)
         .then((value) => {
-            // value = JSON.stringify(value[0][0].status_id);
+            value = JSON.stringify(value[0][0].status_id);
             // const log = require('log-to-file');
-            log(value, "myLogs.log");
+            // log(value, "myLogs.log");
             if (value == 2 || value >= req.params.status) {
                 res.status(400).send({
                     message: "Unable to set this status",
@@ -213,10 +213,7 @@ exports.update = (req, res) => {
         });
 };
 
-//TODO: dodawanie produktow zamowionych
 exports.create = (req, res) => {
-    const log = require('log-to-file');
-    log(JSON.stringify(req.body), "myLogs.log");
     if (
         !req.body.buyer_login ||
         !req.body.buyer_email ||
@@ -235,8 +232,6 @@ exports.create = (req, res) => {
         });
         return;
     }
-
-    // TODO cos mi tu nie pasuje
 
     const order = {
         approval_date: req.body.approval_date,
@@ -267,9 +262,7 @@ exports.create = (req, res) => {
         )
         .then((data) => {
             db.sequelize.query(`SELECT @@IDENTITY`).then((data2) => {
-                const log = require("log-to-file");
                 let insertedOrderId = JSON.stringify(data2[0][0][""]);
-                // log(insertedOrderId, "myLogs.log");
 
                 productsToInsertLoop(insertedOrderId, order)
                     .then(() => {

@@ -13,7 +13,6 @@
       </thead>
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
-          <!-- <td class="col-md-2">{{ product.product_name }}</td> -->
           <td>
             <input
               v-model="product.product_name"
@@ -21,7 +20,6 @@
               class="form-control"
             />
           </td>
-          <!-- <td class="col-md-2">{{ product.description }}</td> -->
           <td>
             <input
               v-model="product.description"
@@ -30,7 +28,6 @@
             />
           </td>
 
-          <!-- <td class="col-md-2">{{ categoriesForProducts[index] }}</td>-->
           <td>
             <input
               v-model="categoriesForProducts[index]"
@@ -39,7 +36,6 @@
             />
           </td>
 
-          <!-- <td class="col-md-2">{{ product.unit_weight }}</td> -->
           <td>
             <input
               v-model="product.unit_weight"
@@ -48,7 +44,6 @@
             />
           </td>
 
-          <!-- <td class="col-md-2">{{ product.unit_price }}</td> -->
           <td>
             <input
               v-model="product.unit_price"
@@ -61,6 +56,7 @@
               type="button"
               class="btn btn-primary btn-lg btn-block"
               id="addToCart"
+              v-on:click="updateProduct(product)"
             >
               Admit
             </button>
