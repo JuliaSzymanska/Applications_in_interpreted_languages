@@ -32,6 +32,7 @@
         <input
           v-model="inputPriceFrom"
           id="inputPriceFrom"
+          type="number"
           class="form-control"
           placeholder="A positive number"
         />
@@ -43,6 +44,7 @@
         <input
           v-model="inputPriceTo"
           id="inputPriceTo"
+          type="number"
           class="form-control"
           placeholder="A positive number"
         />

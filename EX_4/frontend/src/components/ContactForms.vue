@@ -14,6 +14,7 @@
       <div class="col-sm">
         <input
           v-model="inputEmail"
+          type="email"
           id="inputPriceFrom"
           class="form-control"
           placeholder="Enter your email"

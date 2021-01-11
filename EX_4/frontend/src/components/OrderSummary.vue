@@ -54,6 +54,7 @@ export default {
     products: function () {
       this.getPrice();
     },
+    deep: true,
   },
 
   created: function () {
@@ -74,12 +75,16 @@ export default {
       if (!this.userData[0]) {
         this.errors.push("Login not provided");
       }
-      if (!this.userData[1] || this.userData[1].indexOf("@") === -1 || this.userData[1].indexOf(".") === -1) {
+      if (
+        !this.userData[1] ||
+        this.userData[1].indexOf("@") === -1 ||
+        this.userData[1].indexOf(".") === -1
+      ) {
         this.errors.push("Email not provided or invalid value");
       }
-      console.log(this.userData[2].length);
       if (
-        (this.userData[2].length < 9 || this.userData[2].length > 9) ||
+        this.userData[2].length < 9 ||
+        this.userData[2].length > 9 ||
         !/^\d+$/.test(this.userData[2])
       ) {
         this.errors.push("Phone number should contains 9 digits.");
