@@ -1,7 +1,7 @@
 <template>
   <form id="forms">
     <div class="form-group row">
-      <label for="inputTitle" class="col-sm-2 col-form-label">Name: </label>
+      <label for="inputName" class="col-sm-2 col-form-label">Name: </label>
       <div class="col-sm-4">
         <input
           v-model="inputName"
@@ -66,7 +66,7 @@ import _ from "lodash";
 import axios from "axios";
 
 export default {
-  name: "Forms",
+  name: "SearchProducts",
   data: function() {
     return {
       products: [],

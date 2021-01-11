@@ -21,23 +21,30 @@
         </button>
       </div>
     </div>
-    <SearchProducts class="justify-center" />
-    <TableWithOrders class="justify-center" />
+    <SearchOrders class="justify-center" @search-event="handleAppEvent" />
+    <TableWithOrders class="justify-center" :orders="serachedOrders" />
   </div>
 </template>
 
 <script>
 import TableWithOrders from "../components/TableWithOrders";
-import SearchProducts from "../components/SearchProducts";
+import SearchOrders from "../components/SearchOrders";
 
 export default {
   name: "Orders",
   components: {
     TableWithOrders,
-    SearchProducts,
+    SearchOrders,
   },
   data: function () {
-    return {};
+    return {
+      serachedOrders: Array,
+    };
+  },
+  methods: {
+    handleAppEvent: function (data) {
+      this.serachedOrders = data;
+    },
   },
 };
 </script>
