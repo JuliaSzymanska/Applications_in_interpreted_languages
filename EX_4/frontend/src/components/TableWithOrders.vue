@@ -3,21 +3,30 @@
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th class="col-md-4" scope="col">Approval date</th>
-          <th class="col-md-4" scope="col">Buyer login</th>
-          <th class="col-md-4" scope="col">Status</th>
-          <!-- <th class="col-md-2" scope="col">Unit weight</th>
-          <th class="col-md-2" scope="col">Unit price</th>
-          <th class="col-md-2" scope="col">Add to cart</th> -->
+          <th class="col-md-2" scope="col">Approval date</th>
+          <th class="col-md-2" scope="col">Buyer login</th>
+          <th class="col-md-2" scope="col">Status</th>
+          <th class="col-md-2" scope="col">Products/ Amount</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.orders" :key="key">
-          <td class="col-md-4">{{ product.approval_date }}</td>
-          <td class="col-md-4">{{ product.buyer_login }}</td>
-          <td class="col-md-4">{{ product.status_name }}</td>
-          <!-- <td class="col-md-2">{{ product.unit_weight }}</td>
-          <td class="col-md-2">{{ product.unit_price }}</td> -->
+        <tr v-for="(order, index, key) in this.orders" :key="key">
+          <td class="col-md-2">{{ order.approval_date }}</td>
+          <td class="col-md-2">{{ order.buyer_login }}</td>
+          <td class="col-md-2">{{ order.status_name }}</td>
+          <td class="col-md-2">
+            <table class="table table-striped table-bordered">
+              <tbody>
+                <tr
+                  v-for="(product, index, key) in order.products"
+                  :key="key"
+                >
+                  <td class="col-md-2">{{ product.product_id }}</td>
+                   <td class="col-md-2">{{ product.number_of_items }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
           <!-- <td>
             <button
               type="button"
@@ -96,6 +105,7 @@ export default {
               }
             }
             console.log(self.orders);
+            console.log(self.orders[3].products);
             resolve();
           })
           .catch(function (error) {
@@ -104,7 +114,6 @@ export default {
           });
       });
     },
-
   },
 };
 </script>
