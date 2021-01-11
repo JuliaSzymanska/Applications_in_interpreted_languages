@@ -3,20 +3,20 @@
     <div class="row">
       <div class="col-sm" />
       <div class="col-7">
-        <h1>SHOP</h1>
+        <h1>ORDERS</h1>
       </div>
       <div class="col-sm">
         <button
           type="button"
           class="btn btn-primary btn-lg btn-block"
           id="openCart"
-          @click="
+        >
+          <!-- @click="
             this.$router.push({
               path: '/cart',
               query: { products: this.ProductsInCart },
             })
-          "
-        >
+          " -->
           Cart
         </button>
       </div>
