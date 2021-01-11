@@ -86,24 +86,20 @@ exports.create = (req, res) => {
         return;
     }
 
-    Category.findByPk(product.category_id)
-        .then(data => {
-            if (data === null) {
-                res.status(400).send({
-                    message: "Product category has to reffer to an existing category"
-                });
-            } else {
-                Products.create(product).then(data => {
-                    res.send(data);
-                }).catch(err => {
-                    res.status(500).send({
-                        message: err.message || "Error ocurred while creating the Category."
-                    });
-                });
-            }
-        }).catch(err => {
+    db.sequelize
+        .query(
+            `INSERT INTO products 
+    (product_name, description, unit_price, unit_weight, category_id)
+    values( '${product.product_name}', 
+             ${product.description}, 
+            '${product.unit_price}', 
+            '${product.unit_weight}', 
+            '${product.category_id}')`
+        ).then(() => {
+            res.send({ message: "product was created successfully." });
+        }).error(err => {
             res.status(400).send({
-                message: err.message || "Error ocurred while finding by pk in category create."
+                message: "Error creating product",
             });
         });
 };
