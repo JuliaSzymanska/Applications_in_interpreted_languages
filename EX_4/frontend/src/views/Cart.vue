@@ -46,6 +46,7 @@ export default {
   },
   created: function() {
     this.productsInCart = this.$route.query.products;
+    this.userData =  Array(3).join(".").split(".");
   },
   methods: {
     handleAppEvent: function(data) {

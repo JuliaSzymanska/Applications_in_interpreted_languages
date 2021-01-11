@@ -51,10 +51,12 @@ export default {
   },
 
   watch: {
-    products: function () {
-      this.getPrice();
+    products: {
+      handler: function () {
+        this.getPrice();
+      },
+      deep: true,
     },
-    deep: true,
   },
 
   created: function () {
