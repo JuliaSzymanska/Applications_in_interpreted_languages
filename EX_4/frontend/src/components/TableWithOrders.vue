@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(order, index, key) in this.orders" :key="key">
+        <tr v-for="(order, index, key) in this.formatedOrders" :key="key">
           <td>{{ order.buyer_login }}</td>
           <td>{{ order.approval_date }}</td>
           <td>
@@ -36,6 +36,15 @@
         </tr>
       </tbody>
     </table>
+    <div>
+      <button
+        type="button"
+        class="btn btn-primary btn-lg btn-block"
+        v-on:click="updateOrders"
+      >
+        Admit
+      </button>
+    </div>
   </div>
 </template>
 
@@ -51,6 +60,8 @@ export default {
       availableStatesName: [],
       selected: [],
       cos: "cos",
+      formatedOrders: [],
+      rawOrders: [],
     };
   },
 
@@ -66,6 +77,8 @@ export default {
   watch: {
     orders: {
       handler: function () {
+        this.formatedOrders = this.orders[0];
+        this.rawOrders = this.orders[1];
         this.getAvailableStates();
       },
       deep: true,
@@ -95,21 +108,46 @@ export default {
 
     getAvailableStates: function () {
       let self = this;
-      for (const i in self.orders) {
+      for (const i in self.formatedOrders) {
         self.availableStatesName[i] = [];
         for (
-          let index = self.orders[i].status_id - 1;
+          let index = self.formatedOrders[i].status_id - 1;
           index < self.states.length;
           index++
         ) {
-          if (self.orders[i].status_id != 2 || index === 1) {
+          if (self.formatedOrders[i].status_id != 2 || index === 1) {
             self.availableStatesName[i].push(self.statesName[index]);
           }
         }
-        self.selected[i] = self.orders[i].status_name;
+        self.selected[i] = self.formatedOrders[i].status_name;
       }
-      console.log(self.orders);
-      console.log(self.availableStatesName);
+    },
+
+    updateOrders: function () {
+      let self = this;
+      for (const i in self.formatedOrders) {
+        let id = 0;
+        if (self.selected[i] != self.formatedOrders[i].status_name) {
+          for (const s in self.states) {
+            if (self.selected[i] === self.states[s].status_name) {
+              id = self.states[s].status_id;
+            }
+          }
+          axios({
+            method: "put",
+            url:
+              process.env.VUE_APP_BACKEND_URL +
+              "/orders/" +
+              self.formatedOrders[i].order_id +
+              "/" +
+              id,
+            headers: {},
+            data: {},
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }
+      }
     },
   },
 };

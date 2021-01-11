@@ -66,6 +66,7 @@ export default {
   data: function () {
     return {
       orders: [],
+      rawOrders: [],
       states: [],
       statesName: [],
       inputLogin: "",
@@ -77,8 +78,11 @@ export default {
   },
 
   watch: {
-    products: function () {
-      this.search();
+    products: {
+      handler: function () {
+        this.search();
+      },
+      deep: true,
     },
   },
 
@@ -114,7 +118,7 @@ export default {
         axios
           .get(process.env.VUE_APP_BACKEND_URL + "/orders")
           .then(function (response) {
-            self.orders = response.data;
+            self.setOrders(response.data);
             self.formatOrders();
             resolve();
           })
@@ -164,8 +168,17 @@ export default {
       });
     },
 
+    setOrders(data) {
+      let self = this;
+      self.orders = data;
+      self.rawOrders = data;
+    },
+
     emitEvent() {
-      this.$emit("search-event", this.orders);
+      let temp = [];
+      temp[0] = this.orders;
+      temp[1] = this.rawOrders;
+      this.$emit("search-event", temp);
     },
 
     getOrdersByStatus() {
@@ -183,7 +196,7 @@ export default {
             process.env.VUE_APP_BACKEND_URL + "/orders/status/" + id.toString()
           )
           .then(function (response) {
-            self.orders = response.data;
+            self.setOrders(response.data);
             self.formatOrders();
             resolve();
           })
@@ -204,7 +217,7 @@ export default {
               this.inputLogin.toString()
           )
           .then(function (response) {
-            self.orders = response.data;
+            self.setOrders(response.data);
             self.formatOrders();
             resolve();
           })

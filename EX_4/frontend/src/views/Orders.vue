@@ -20,7 +20,7 @@
       </div>
     </div>
     <SearchOrders class="justify-center" @search-event="handleAppEvent" />
-    <TableWithOrders class="justify-center" :orders="serachedOrders" />
+    <TableWithOrders class="justify-center" :orders="orders" />
   </div>
 </template>
 
@@ -36,12 +36,12 @@ export default {
   },
   data: function () {
     return {
-      serachedOrders: Array,
+      orders: Array,
     };
   },
   methods: {
     handleAppEvent: function (data) {
-      this.serachedOrders = data;
+      this.orders = data;
     },
   },
 };
