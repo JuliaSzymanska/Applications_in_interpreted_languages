@@ -3,21 +3,59 @@
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
         <tr>
-          <th class="col-md-2" scope="col">Name</th>
-          <th class="col-md-2" scope="col">Description</th>
-          <th class="col-md-2" scope="col">Category</th>
-          <th class="col-md-2" scope="col">Unit weight</th>
-          <th class="col-md-2" scope="col">Unit price</th>
-          <th class="col-md-2" scope="col">Admit changes</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Unit weight</th>
+          <th scope="col">Unit price</th>
+          <th scope="col">Admit changes</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
-          <td class="col-md-2">{{ product.product_name }}</td>
-          <td class="col-md-2">{{ product.description }}</td>
-          <td class="col-md-2">{{ categoriesForProducts[index] }}</td>
-          <td class="col-md-2">{{ product.unit_weight }}</td>
-          <td class="col-md-2">{{ product.unit_price }}</td>
+          <!-- <td class="col-md-2">{{ product.product_name }}</td> -->
+          <td>
+            <input
+              v-model="product.product_name"
+              id="inputName"
+              class="form-control"
+            />
+          </td>
+          <!-- <td class="col-md-2">{{ product.description }}</td> -->
+          <td>
+            <input
+              v-model="product.description"
+              id="inputName"
+              class="form-control"
+            />
+          </td>
+
+          <!-- <td class="col-md-2">{{ categoriesForProducts[index] }}</td>-->
+          <td>
+            <input
+              v-model="categoriesForProducts[index]"
+              id="inputName"
+              class="form-control"
+            />
+          </td>
+
+          <!-- <td class="col-md-2">{{ product.unit_weight }}</td> -->
+          <td>
+            <input
+              v-model="product.unit_weight"
+              id="inputName"
+              class="form-control"
+            />
+          </td>
+
+          <!-- <td class="col-md-2">{{ product.unit_price }}</td> -->
+          <td>
+            <input
+              v-model="product.unit_price"
+              id="inputName"
+              class="form-control"
+            />
+          </td>
           <td>
             <button
               type="button"
@@ -47,7 +85,7 @@ export default {
     };
   },
 
-    created: function () {
+  created: function () {
     this.getCategories();
     this.getProducts();
   },
