@@ -77,11 +77,11 @@ export default {
     };
   },
 
-  //   watch: {
-  //     products: function() {
-  //       this.search();
-  //     },
-  //   },
+  watch: {
+    products: function () {
+      this.search();
+    },
+  },
 
   created: function () {
     this.getStates();
@@ -127,6 +127,7 @@ export default {
     },
 
     formatOrders() {
+      let self = this;
       for (const i in self.orders) {
         self.orders[i].approval_date =
           self.orders[i].approval_date.slice(0, 10) +
@@ -182,54 +183,65 @@ export default {
 
     getOrdersByStatus() {
       let id = 0;
-      for (const stat in this.states) {
-        if (this.states[stat].status_name === this.inputStatus) {
-          id = this.states[stat].status_id;
-        }
-      }
-
       let self = this;
+      return new Promise((resolve, reject) => {
+        for (const stat in this.states) {
+          if (this.states[stat].status_name === this.inputStatus) {
+            id = this.states[stat].status_id;
+          }
+        }
 
-      axios
-        .get(
-          process.env.VUE_APP_BACKEND_URL + "/orders/status/" + id.toString()
-        )
-        .then(function (response) {
-          self.orders = response.data[0];
-          self.formatOrders();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        axios
+          .get(
+            process.env.VUE_APP_BACKEND_URL + "/orders/status/" + id.toString()
+          )
+          .then(function (response) {
+            self.orders = response.data;
+            self.formatOrders();
+            resolve();
+          })
+          .catch(function (error) {
+            console.log(error);
+            reject();
+          });
+      });
     },
 
     getOrdersByLogin() {
       let self = this;
-
-      axios
-        .get(
-          process.env.VUE_APP_BACKEND_URL + "/orders/name/" + this.inputLogin
-        )
-        .then(function (response) {
-          self.orders = response.data[0];
-          self.formatOrders();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .get(
+            process.env.VUE_APP_BACKEND_URL + "/orders/name/" + this.inputLogin.toString()
+          )
+          .then(function (response) {
+            self.orders = response.data;
+            self.formatOrders();
+            resolve();
+          })
+          .catch(function (error) {
+            console.log(error);
+            reject();
+          });
+      });
     },
 
     loadOrders: function () {
       let self = this;
       if (self.inputStatus === "" && self.inputLogin === "") {
-          console.log("Wszystkie");
-        self.getOrders();
+        console.log("Wszystkie");
+        self.getOrders().then(function () {
+          self.emitEvent();
+        });
       } else if (self.inputStatus === "") {
-        self.getOrdersByLogin();
+        self.getOrdersByLogin().then(function () {
+          self.emitEvent();
+        });
       } else {
-        self.getOrdersByStatus();
+        self.getOrdersByStatus().then(function () {
+          self.emitEvent();
+        });
       }
-      self.emitEvent()
     },
 
     // search: function() {
