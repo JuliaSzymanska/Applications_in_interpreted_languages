@@ -22,6 +22,15 @@ VALUES ('2020/05/20 16:50:00', 2, 'everybody', 'b@b.b', '987654321')
 INSERT INTO orders (approval_date, status_id, buyer_login, buyer_email, buyer_phone_number)
 VALUES ('2020/12/16 16:50:00', 3, 'onemoretime', 'c@c.c', '154321789')
 
+INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+VALUES (1, 1, 4);
+INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+VALUES (1, 2, 3);
+INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+VALUES (2, 1, 1);
+INSERT INTO products_for_orders (order_id, product_id, number_of_items)
+VALUES (2, 2, 5);
+
 SELECT * FROM categories
 SELECT * FROM products
 SELECT * FROM states
