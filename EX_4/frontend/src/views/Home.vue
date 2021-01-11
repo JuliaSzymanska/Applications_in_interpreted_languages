@@ -1,11 +1,36 @@
 <template>
   <div class=".container-fluid">
     <div class="row">
-      <div class="col-sm" />
-      <div class="col-7">
-        <h1>SHOP</h1>
+      <div class="col-sm-7"></div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+          id="openOrders"
+          @click="
+            this.$router.push({
+              path: '/orders',
+            })
+          "
+        >
+          Orders
+        </button>
       </div>
       <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-block"
+          id="openEditor"
+          @click="
+            this.$router.push({
+              path: '/edit',
+            })
+          "
+        >
+          Edit
+        </button>
+      </div>
+            <div class="col-sm" v-if="this.isSomethingInCart">
         <button
           type="button"
           class="btn btn-primary btn-lg btn-block"
@@ -20,12 +45,15 @@
           Cart
         </button>
       </div>
+      <div class="col-sm" />
+      <div class="col-sm" />
     </div>
     <SearchProducts class="justify-center" @search-event="handleAppEvent" />
     <TableWithProducts
       class="justify-center"
-      :products="serachedProducts"
+      :products="searchedProducts"
       @cart-event="handleCartEvent"
+      @cart-event-boolean="handleCartEventBoolean"
     />
   </div>
 </template>
@@ -40,18 +68,27 @@ export default {
     TableWithProducts,
     SearchProducts,
   },
-  data: function() {
+  data: function () {
     return {
-      serachedProducts: Array,
+      searchedProducts: Array,
       ProductsInCart: Array,
+      isSomethingInCart: false,
     };
   },
+
+  created: function () {
+    this.searchedProducts = [];
+  },
+
   methods: {
-    handleAppEvent: function(data) {
-      this.serachedProducts = data;
+    handleAppEvent: function (data) {
+      this.searchedProducts = data;
     },
-    handleCartEvent: function(data) {
+    handleCartEvent: function (data) {
       this.ProductsInCart = data;
+    },
+    handleCartEventBoolean: function () {
+      this.isSomethingInCart = true;
     },
   },
 };
@@ -73,9 +110,5 @@ body {
 .container-fluid * {
   width: 100%;
   table-layout: fixed;
-}
-#openCart {
-  width: 80px;
-  float: left;
 }
 </style>

@@ -1,8 +1,22 @@
 <template>
   <div class=".container-fluid">
     <div class="row">
-      <div class="col-md-12" id="firstColumn">
+      <div class="col-sm" />
+      <div class="col-3">
         <h1>EDIT</h1>
+      </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="
+            this.$router.push({
+              path: '/',
+            })
+          "
+        >
+          HOME
+        </button>
       </div>
       <div class="col-md-12" id="firstColumn">
         <EditProducts class="justify-center" />

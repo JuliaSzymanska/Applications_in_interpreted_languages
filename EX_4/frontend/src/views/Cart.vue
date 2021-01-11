@@ -4,6 +4,20 @@
       <div class="col-md-8" id="firstColumn">
         <h1>CART</h1>
       </div>
+      <div class="col-sm">
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="
+            this.$router.push({
+              path: '/',
+            })
+          "
+        >
+          HOME
+        </button>
+      </div>
+      
       <div class="col-md-8" id="firstColumn">
         <TableInCart
           class="justify-center"
@@ -37,22 +51,22 @@ export default {
     ContactForms,
     OrderSummary,
   },
-  data: function() {
+  data: function () {
     return {
       productsInCart: [],
       productsToSummary: Array,
       userData: Array,
     };
   },
-  created: function() {
+  created: function () {
     this.productsInCart = this.$route.query.products;
-    this.userData =  Array(3).join(".").split(".");
+    this.userData = Array(3).join(".").split(".");
   },
   methods: {
-    handleAppEvent: function(data) {
+    handleAppEvent: function (data) {
       this.productsToSummary = data;
     },
-    handleUserDataEvent: function(data) {
+    handleUserDataEvent: function (data) {
       this.userData = data;
     },
   },

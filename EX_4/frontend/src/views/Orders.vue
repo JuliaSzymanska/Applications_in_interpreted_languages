@@ -2,7 +2,7 @@
   <div class=".container-fluid">
     <div class="row">
       <div class="col-sm" />
-      <div class="col-7">
+        <div class="col-3">
         <h1>ORDERS</h1>
       </div>
       <div class="col-sm">

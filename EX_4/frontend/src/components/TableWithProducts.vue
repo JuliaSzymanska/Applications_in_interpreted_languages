@@ -14,7 +14,7 @@
       <tbody>
         <tr v-for="(product, index, key) in this.products" :key="key">
           <td class="col-md-2">{{ product.product_name }}</td>
-           <td class="col-md-2">{{ product.description }}</td>
+          <td class="col-md-2">{{ product.description }}</td>
           <td class="col-md-2">{{ product.category_name }}</td>
           <td class="col-md-2">{{ product.unit_weight }}</td>
           <td class="col-md-2">{{ product.unit_price }}</td>
@@ -55,6 +55,7 @@ export default {
       };
       this.productsInCart.push(product);
       this.$emit("cart-event", JSON.stringify(this.productsInCart));
+      this.$emit("cart-event-boolean", true);
     },
   },
 };
