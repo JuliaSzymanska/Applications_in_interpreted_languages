@@ -174,7 +174,6 @@ export default {
               }
             }
           }
-          console.log(self.products);
         })
         .catch(function(error) {
           console.log(error);

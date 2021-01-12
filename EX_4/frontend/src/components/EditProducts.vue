@@ -16,14 +16,12 @@
           <td>
             <input
               v-model="product.product_name"
-              id="inputName"
               class="form-control"
             />
           </td>
           <td>
             <input
               v-model="product.description"
-              id="inputName"
               class="form-control"
             />
           </td>
@@ -31,7 +29,6 @@
           <td>
             <input
               v-model="categoriesForProducts[index]"
-              id="inputName"
               class="form-control"
             />
           </td>
@@ -39,7 +36,6 @@
           <td>
             <input
               v-model="product.unit_weight"
-              id="inputName"
               class="form-control"
             />
           </td>
@@ -47,7 +43,6 @@
           <td>
             <input
               v-model="product.unit_price"
-              id="inputName"
               class="form-control"
             />
           </td>

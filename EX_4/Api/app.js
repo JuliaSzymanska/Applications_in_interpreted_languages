@@ -8,7 +8,7 @@ var cors = require('cors');
 
 const app = express();
 app.use(cors({
-  origin: '*'
+  origin: 'http://localhost:8080'
 }));
 
 require("./data/dataIndex");
