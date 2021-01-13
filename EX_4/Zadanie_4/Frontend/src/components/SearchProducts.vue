@@ -15,7 +15,6 @@
       </label>
       <div class="col-sm-4">
         <select v-model="inputCategory" class="form-control" id="inputCategory">
-        <option/>
           <option
             v-for="(category, index, key) in this.categoriesName"
             :key="key"
