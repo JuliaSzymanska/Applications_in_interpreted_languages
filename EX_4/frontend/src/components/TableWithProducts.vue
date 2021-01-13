@@ -1,24 +1,25 @@
 <template>
+<div class="mr-auto">
   <div id="tableProducts" ref="table">
     <table class="table table-striped table-bordered">
       <thead class="thead-dark">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Category</th>
-          <th scope="col">Unit weight</th>
-          <th scope="col">Unit price</th>
-          <th scope="col">Add to cart</th>
+        <tr class="row">
+          <th class="col-md-2" scope="col">Name</th>
+          <th class="col-md-2" scope="col">Description</th>
+          <th class="col-md-2" scope="col">Category</th>
+          <th class="col-md-2" scope="col">Unit weight</th>
+          <th class="col-md-2" scope="col">Unit price</th>
+          <th class="col-md-2" scope="col">Add to cart</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, index, key) in this.products" :key="key">
-          <td>{{ product.product_name }}</td>
-          <td>{{ product.description }}</td>
-          <td>{{ product.category_name }}</td>
-          <td>{{ product.unit_weight }}</td>
-          <td>{{ product.unit_price }}</td>
-          <td>
+        <tr class="row" v-for="(product, index, key) in this.products" :key="key">
+          <td class="col-md-2">{{ product.product_name }}</td>
+          <td class="col-md-2">{{ product.description }}</td>
+          <td class="col-md-2">{{ product.category_name }}</td>
+          <td class="col-md-2">{{ product.unit_weight }}</td>
+          <td class="col-md-2">{{ product.unit_price }}</td>
+          <td class="col-md-2">
             <button
               type="button"
               class="btn btn-primary btn-lg btn-block"
@@ -32,6 +33,7 @@
       </tbody>
     </table>
   </div>
+</div>
 </template>
 
 <script>
