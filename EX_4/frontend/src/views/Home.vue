@@ -30,7 +30,7 @@
           Edit
         </button>
       </div>
-            <div class="col-sm" v-if="this.isSomethingInCart">
+      <div class="col-sm" v-if="this.isSomethingInCart">
         <button
           type="button"
           class="btn btn-primary btn-lg btn-block"
